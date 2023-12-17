@@ -1,11 +1,15 @@
 .homeDesign {
 
-    height: 15vh;
+    height: 90vh;
     width: 100vw;
 
-    background-color: brown;
-    
-    
-    
+    background-color: white;
+    background-image: url(../../images/columna-vertebral.jpg);
 
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    display: flex;
 }
+

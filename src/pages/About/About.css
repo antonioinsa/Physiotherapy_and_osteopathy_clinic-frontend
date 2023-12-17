@@ -1,0 +1,92 @@
+.aboutDesign {
+
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(198, 237, 235);
+    color: black;
+    font-weight: bold;
+}
+
+.header {
+
+    height: 10vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    margin-top: 3em;
+}
+
+.introduction {
+
+    height: 10vh;
+    width: 100vw;
+    justify-content: center;
+    flex-direction: column;
+    font-size: large;
+}
+
+.question {
+
+    height: 11vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-top: 1em;
+}
+
+.title {
+
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.pointOne {
+
+    height: 15vh;
+    width: 48vw;
+    display: flex;
+    justify-content: start;
+    font-size: large;
+    margin-left: 1em;
+    margin-right: 0.5em;
+}
+
+.pointTwo {
+    
+    height: 15vh;
+    width: 48vw;
+    display: flex;
+    justify-content: start;
+    font-size: large;
+    margin-left: 0.5em;
+    margin-right: 1em;
+}
+
+.space {
+
+    height: 7vh;
+}
+
+.total {
+
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+}
+
+.one {
+    
+    height: 49vh;
+    width: 50vw;
+}
+
+.two {
+   
+    height: 49vh;
+    width: 50vw;
+}
