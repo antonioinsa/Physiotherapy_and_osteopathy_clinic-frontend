@@ -25,6 +25,10 @@ export const Header = () => {
     navigate('/appointments')
   }
 
+  const newAppointment = () => {
+    navigate('/newAppointment')
+  }
+
   const manageWorkers = () => {
     navigate('/manageWorkers')
   }
@@ -49,12 +53,14 @@ export const Header = () => {
         <>
           {location.pathname !== '/manageWorkers' &&
             location.pathname !== '/manageClients' &&
-            location.pathname !== '/invoices' && (
+            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+            rdxCredentials.role !== 'admin' && (
               <div><LinkButton path={'/'} title={'Home'}></LinkButton></div>
             )}
           {location.pathname !== '/manageWorkers' &&
             location.pathname !== '/manageClients' &&
-            location.pathname !== '/invoices' && (
+            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+            rdxCredentials.role !== 'admin' && (
               <div><LinkButton path={'/about'} title={'About'}></LinkButton></div>
             )}
         </>
@@ -62,29 +68,40 @@ export const Header = () => {
           <>
             {location.pathname !== '/manageWorkers' &&
               location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && (
-                <div onClick={account}><LinkButton path={'/'} title={'Account'}></LinkButton></div>
+              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+              rdxCredentials.role !== 'admin' && (
+                <div onClick={account}><LinkButton path={'/account'} title={'Account'}></LinkButton></div>
               )}
             {location.pathname !== '/manageWorkers' &&
               location.pathname !== '/manageClients' &&
               location.pathname !== '/invoices' && (
-                <div onClick={appointments}><LinkButton path={'/'} title={'Appointments'}></LinkButton></div>
+                <div onClick={appointments}><LinkButton path={'/appointments'} title={'Appointments'}></LinkButton></div>
               )}
-            {location.pathname !== '/manageWorkers' &&
+              {location.pathname !== '/manageWorkers' &&
               location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && (
-                <div onClick={manageWorkers}><LinkButton path={'/'} title={'Manage Workers'}></LinkButton></div>
+              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+              rdxCredentials.role !== 'admin' && (
+                <div onClick={newAppointment}><LinkButton path={'/newAppointment'} title={'New appointment'}></LinkButton></div>
               )}
-            {location.pathname !== '/manageWorkers' &&
-              location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && (
-                <div onClick={manageClients}><LinkButton path={'/'} title={'Manage Clients'}></LinkButton></div>
-              )}
-            {location.pathname !== '/manageWorkers' &&
-              location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && (
-                <div onClick={invoices}><LinkButton path={'/'} title={'Invoices'}></LinkButton></div>
-              )}
+            {rdxCredentials.role === 'superAdmin' && (
+              <>
+                {location.pathname !== '/manageWorkers' &&
+                  location.pathname !== '/manageClients' &&
+                  location.pathname !== '/invoices' && (
+                    <div onClick={manageWorkers}><LinkButton path={'/manageWorkers'} title={'Manage Workers'}></LinkButton></div>
+                  )}
+                {location.pathname !== '/manageWorkers' &&
+                  location.pathname !== '/manageClients' &&
+                  location.pathname !== '/invoices' && (
+                    <div onClick={manageClients}><LinkButton path={'/manageClients'} title={'Manage Clients'}></LinkButton></div>
+                  )}
+                {location.pathname !== '/manageWorkers' &&
+                  location.pathname !== '/manageClients' &&
+                  location.pathname !== '/invoices' && (
+                    <div onClick={invoices}><LinkButton path={'/invoices'} title={'Invoices'}></LinkButton></div>
+                  )}
+              </>
+            )}
             <div onClick={logOut}><LinkButton path={'/'} title={'LogOut'}></LinkButton></div>
           </>
         ) : (
