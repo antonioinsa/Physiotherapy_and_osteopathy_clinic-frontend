@@ -1,7 +1,7 @@
 import React from 'react'
 import './CustomInput.css'
 
-export const CustomInput = ({ design, type, name, placeholder, functionProp, functionBlur, msgError, disabled, value }) => {
+export const CustomInput = ({ design, type, name, placeholder, functionProp, functionBlur, functionFocus, msgError, disabled, value }) => {
    return (
       <div>
          <input
@@ -13,6 +13,7 @@ export const CustomInput = ({ design, type, name, placeholder, functionProp, fun
             value={value || undefined}
             onChange={(e) => functionProp(e)}
             onBlur={(e) => functionBlur(e)}
+            onFocus={(e) => functionFocus(e)}
          />
          {msgError && <div className="errorMessageCustomInput">{errorMessage}</div>}
       </div>

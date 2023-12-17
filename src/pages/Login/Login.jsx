@@ -4,21 +4,30 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { loginUsers } from "../../services/apiCalls";
 import { useNavigate } from 'react-router-dom';
 import { validator } from "../../services/useful";
-import { Link } from 'react-router-dom';
-//import { useDispatch, useSelector } from "react-redux";
-import { login, role, userData } from "../userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { login, userData } from "../userSlice";
 import { jwtDecode } from "jwt-decode";
+import { LinkButton } from "../../common/LinkButton/LinkButton";
+
 
 export const Login = () => {
 
-  const navigate = useNavigate();
-  //const dispatch = useDispatch();
-  //const rdxUserData = useSelector(userData)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const rdxUserData = useSelector(userData)
 
   const [auth, setAuth] = useState({
     email: "",
     password: "",
   })
+
+
+  const [authError, setAuthError] = useState({
+    emailError: '',
+    passwordError: ''
+  })
+
+  const [errorMsg, setErrorMsg] = useState('')
 
   const functionHandler = (e) => {
     setAuth((prevState) => ({
@@ -27,47 +36,33 @@ export const Login = () => {
     }))
   }
 
-  const [authError, setAuthError] = useState({
-    email: '',
-    password: ''
-  })
-
   const errorCheck = (e) => {
     let error = "";
-    error = validator(e.target.name, e.target.value);
+    error = validator(e.target.name, e.target.value)
     setAuthError((prevState) => ({
       ...prevState,
       [e.target.name + 'Error']: error,
-    }));
+    }))
   }
 
-
-  // useEffect(() => {
-  //   if (rdxUserData.credentials) {
-  //     navigate("/")
-  //   }
-  // }, [rdxUserData])
+  const clearError = (e) => {
+    setAuthError((prevState) => ({
+      ...prevState,
+      [e.target.name + 'Error']: '',
+    }))
+  }
 
   const SendCredentials = () => {
-    for (let test1 in auth) {
-      if (auth[test1] === "") {
-        return;
-      }
-    }
-    for (let test in authError) {
-      if (authError[test] !== "") {
-        return;
-      }
-    }
-
     loginUsers(auth)
       .then(
         (response) => {
           if (response.error) {
-            setError("Invalid Email or Password")
+            setErrorMsg(response.data.message);
+            console.log(response.data.message);
           } else {
-            //dispatch(login({ credentials: response.data.token }))
+            dispatch(login({ credentials: response.data.token }))
             let decoded = jwtDecode(response.data.token)
+            console.log(decoded);
             dispatch(login({ role: decoded.role }))
 
             setTimeout(() => {
@@ -79,14 +74,13 @@ export const Login = () => {
                 navigate("/")
               }
 
-            }, 500);
+            }, 500)
           }
         }
       )
       .catch((error) => {
-        console.log(error);
-        setMsgError(error.message);
-      });
+        setErrorMsg(error.response.data.message)
+      })
   }
 
   return (
@@ -96,34 +90,35 @@ export const Login = () => {
           <div className="space"></div>
           <CustomInput
             disabled={false}
-            design={`inputDesign ${authError.emailError !== "" ? 'inputDesign' : ''}`}
+            design={"inputDesign"}
             type={"email"}
             name={"email"}
             placeholder={"example@example.com"}
             value={""}
             functionProp={functionHandler}
             functionBlur={errorCheck}
+            functionFocus={clearError}
           />
           <div className='MsgError'>{authError.emailError}</div>
           <CustomInput
             disabled={false}
-            design={`inputDesign ${authError.passwordError !== "" ? 'inputDesign' : ''}`}
+            design={"inputDesign"}
             type={"password"}
             name={"password"}
             placeholder={"PASSWORD"}
             value={""}
             functionProp={functionHandler}
             functionBlur={errorCheck}
+            functionFocus={clearError}
           />
           <div className='MsgError'>{authError.passwordError}</div>
-          <div className='registerButtonDesign'>
-            <Link to="/register"></Link>Are You registered?
-          </div>
+          <div className='errorMsg'>{errorMsg}</div>
           <div className='buttonSendCredentials' onClick={SendCredentials}>Login</div>
-
+          <div className='registerButtonDesign'>
+            <LinkButton path={'/register'} title={'Are You registered?'}></LinkButton>
+          </div>
         </div>
       </div>
     </div>
-
-  );
-};
+  )
+}
