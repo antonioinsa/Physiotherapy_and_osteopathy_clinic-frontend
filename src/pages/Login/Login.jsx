@@ -21,7 +21,6 @@ export const Login = () => {
     password: "",
   })
 
-
   const [authError, setAuthError] = useState({
     emailError: '',
     passwordError: ''
