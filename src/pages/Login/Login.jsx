@@ -1,81 +1,129 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { logUser } from "../../services/apiCalls";
+import { loginUsers } from "../../services/apiCalls";
 import { useNavigate } from 'react-router-dom';
-
-//Importo Rdx
-
-import { useDispatch } from "react-redux";  //useDispatch es necesario para emitir acciones
-import { login } from "../userSlice";
+import { validator } from "../../services/useful";
+import { Link } from 'react-router-dom';
+//import { useDispatch, useSelector } from "react-redux";
+import { login, role, userData } from "../userSlice";
+import { jwtDecode } from "jwt-decode";
 
 export const Login = () => {
 
   const navigate = useNavigate();
+  //const dispatch = useDispatch();
+  //const rdxUserData = useSelector(userData)
 
-  const dispatch = useDispatch();
-
-  const [credenciales, setCredenciales] = useState({
+  const [auth, setAuth] = useState({
     email: "",
     password: "",
-  });
-  const [msgError, setMsgError] = useState('');
+  })
+
   const functionHandler = (e) => {
-    setCredenciales((prevState) => ({
+    setAuth((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value
-    }));
-  };
-
-  const errorCheck = () => {
-    console.log("ha ha ha ha");
+    }))
   }
 
-//   useEffect(()=>{
-//     console.log(credenciales);
-//   },[credenciales]);
-  const logMe = () => {
-    logUser(credenciales)
-        .then(
-            resultado => {
-                console.log(resultado)
+  const [authError, setAuthError] = useState({
+    email: '',
+    password: ''
+  })
 
- //Aqui guardaría el token........en RDXXX
- dispatch(login({ credentials: resultado.data }))
+  const errorCheck = (e) => {
+    let error = "";
+    error = validator(e.target.name, e.target.value);
+    setAuthError((prevState) => ({
+      ...prevState,
+      [e.target.name + 'Error']: error,
+    }));
+  }
 
- //Una vez guardado el token....nos vamos a home....
- setTimeout(()=>{
-     navigate("/");
- },500);
-}
-)
-.catch(error => {
-console.log(error)
-setMsgError(error.message);
-});
-}
-return (
-<div className="loginDesign">
-<CustomInput
-design={"inputDesign"}
-type={"email"}
-name={"email"}
-placeholder={""}
-// value={}
-functionProp={functionHandler}
-functionBlur={errorCheck}
-/>
-<CustomInput
-  design={"inputDesign"}
-  type={"password"}
-  name={"password"}
-  placeholder={""}
-  // value={}
-  functionProp={functionHandler}
-  functionBlur={errorCheck}
-      />
-      <div className='buttonSubmit' onClick={logMe}>Log Me!</div>
-      <div>{msgError}</div>
+
+  // useEffect(() => {
+  //   if (rdxUserData.credentials) {
+  //     navigate("/")
+  //   }
+  // }, [rdxUserData])
+
+  const SendCredentials = () => {
+    for (let test1 in auth) {
+      if (auth[test1] === "") {
+        return;
+      }
+    }
+    for (let test in authError) {
+      if (authError[test] !== "") {
+        return;
+      }
+    }
+
+    loginUsers(auth)
+      .then(
+        (response) => {
+          if (response.error) {
+            setError("Invalid Email or Password")
+          } else {
+            //dispatch(login({ credentials: response.data.token }))
+            let decoded = jwtDecode(response.data.token)
+            dispatch(login({ role: decoded.role }))
+
+            setTimeout(() => {
+              if (decoded.role !== "superAdmin") {
+                navigate("/saProfile")
+              } else if (decoded.role !== "admin") {
+                navigate("/workerProfile")
+              } else {
+                navigate("/")
+              }
+
+            }, 500);
+          }
+        }
+      )
+      .catch((error) => {
+        console.log(error);
+        setMsgError(error.message);
+      });
+  }
+
+  return (
+    <div className="inputsDesign">
+      <div>
+        <div className="loginDesign">
+          <div className="space"></div>
+          <CustomInput
+            disabled={false}
+            design={`inputDesign ${authError.emailError !== "" ? 'inputDesign' : ''}`}
+            type={"email"}
+            name={"email"}
+            placeholder={"example@example.com"}
+            value={""}
+            functionProp={functionHandler}
+            functionBlur={errorCheck}
+          />
+          <div className='MsgError'>{authError.emailError}</div>
+          <CustomInput
+            disabled={false}
+            design={`inputDesign ${authError.passwordError !== "" ? 'inputDesign' : ''}`}
+            type={"password"}
+            name={"password"}
+            placeholder={"PASSWORD"}
+            value={""}
+            functionProp={functionHandler}
+            functionBlur={errorCheck}
+          />
+          <div className='MsgError'>{authError.passwordError}</div>
+          <div className='registerButtonDesign'>
+            <Link to="/register"></Link>Are You registered?
+          </div>
+          <div className='buttonSendCredentials' onClick={SendCredentials}>Login</div>
+
+        </div>
+      </div>
     </div>
+
   );
 };
