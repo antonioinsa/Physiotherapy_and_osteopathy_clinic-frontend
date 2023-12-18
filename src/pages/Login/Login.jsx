@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { loginUsers } from "../../services/apiCalls";
@@ -14,11 +14,11 @@ export const Login = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const rdxUserData = useSelector(userData)
+  const rdxCredentials = useSelector(userData)
 
   const [auth, setAuth] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   })
 
   const [authError, setAuthError] = useState({
@@ -36,7 +36,7 @@ export const Login = () => {
   }
 
   const errorCheck = (e) => {
-    let error = "";
+    let error = '';
     error = validator(e.target.name, e.target.value)
     setAuthError((prevState) => ({
       ...prevState,
@@ -52,12 +52,16 @@ export const Login = () => {
   }
 
   const SendCredentials = () => {
+
+    if (auth.email === '' || auth.password === '') {
+      return;
+    }
+
     loginUsers(auth)
       .then(
         (response) => {
           if (response.error) {
-            setErrorMsg(response.data.message);
-            console.log(response.data.message);
+            setErrorMsg(response.data.message)
           } else {
             dispatch(login({ credentials: response.data.token }))
             let decoded = jwtDecode(response.data.token)
@@ -65,12 +69,12 @@ export const Login = () => {
             dispatch(login({ role: decoded.role }))
 
             setTimeout(() => {
-              if (decoded.role !== "superAdmin") {
-                navigate("/saProfile")
-              } else if (decoded.role !== "admin") {
-                navigate("/workerProfile")
+              if (decoded.role !== 'superAdmin') {
+                navigate('/saProfile')
+              } else if (decoded.role !== 'admin') {
+                navigate('/workerProfile')
               } else {
-                navigate("/")
+                navigate('/')
               }
 
             }, 500)
@@ -83,17 +87,17 @@ export const Login = () => {
   }
 
   return (
-    <div className="inputsDesign">
+    <div className='inputsDesign'>
       <div>
-        <div className="loginDesign">
-          <div className="space"></div>
+        <div className='loginDesign'>
+          <div className='space'></div>
           <CustomInput
             disabled={false}
-            design={"inputDesign"}
-            type={"email"}
-            name={"email"}
-            placeholder={"example@example.com"}
-            value={""}
+            design={'inputDesign'}
+            type={'email'}
+            name={'email'}
+            placeholder={'example@example.com'}
+            value={''}
             functionProp={functionHandler}
             functionBlur={errorCheck}
             functionFocus={clearError}
@@ -101,11 +105,11 @@ export const Login = () => {
           <div className='MsgError'>{authError.emailError}</div>
           <CustomInput
             disabled={false}
-            design={"inputDesign"}
-            type={"password"}
-            name={"password"}
-            placeholder={"PASSWORD"}
-            value={""}
+            design={'inputDesign'}
+            type={'password'}
+            name={'password'}
+            placeholder={'PASSWORD'}
+            value={''}
             functionProp={functionHandler}
             functionBlur={errorCheck}
             functionFocus={clearError}
@@ -116,6 +120,7 @@ export const Login = () => {
           <div className='registerButtonDesign'>
             <LinkButton path={'/register'} title={'Are You registered?'}></LinkButton>
           </div>
+          <div>Do it in order to be able to login</div>
         </div>
       </div>
     </div>

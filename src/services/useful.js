@@ -110,8 +110,8 @@ export const validator = (type, value, confirmValue) => {
                 return 'Must provide a name';
             }
 
-            if (value.trim().length >= 50) {
-                return 'Maximum 50 characters';
+            if (value.trim().length < 3 || value.trim().length > 50) {
+                return 'Minimum 3 characters and Maximum 50 characters';
             }
 
             break;
@@ -189,8 +189,8 @@ export const validator = (type, value, confirmValue) => {
                 return 'Minimum 4 and Maximum 30 characters';
             }
 
-            if (/\s/.test(value)) {
-                return 'Cannot contain spaces';
+            if (/\s/.test(value) && /^\s|\s$/.test(value)) {
+                return 'Cannot contain spaces at the beginning or end';
             }
 
             if (!/^[a-zA-Z0-9\s']+$/g.test(value)) {
@@ -200,9 +200,31 @@ export const validator = (type, value, confirmValue) => {
             break;
 
         case 'zipCode':
-        case 'door':
             if (value.length !== 5) {
                 return 'Must have exactly 5 characters';
+            }
+
+            break;
+
+        case 'door':
+            if (value.length < 1 || value.length > 4) {
+                return 'Minimum 1 and Maximum 4 characters';
+            }
+
+            if (!/\d/.test(value)) {
+                return 'Must contain at least one number';
+            }
+
+            if (!/^[a-zA-Z0-9]{0,4}$/.test(value)) {
+                return 'Maximum 4 characters';
+            }
+
+            if (/\s/.test(value) && /^\s|\s$/.test(value)) {
+                return 'Cannot contain spaces at the beginning or end';
+            }
+
+            if (!/^[a-zA-Z0-9\s]*$/g.test(value)) {
+                return 'Cannot contain special characters';
             }
 
             break;
@@ -212,8 +234,8 @@ export const validator = (type, value, confirmValue) => {
                 return 'Minimum 4 and Maximum 100 characters';
             }
 
-            if (/\s/.test(value)) {
-                return 'Cannot contain spaces';
+            if (/\s/.test(value) && /^\s|\s$/.test(value)) {
+                return 'Cannot contain spaces at the beginning or end';
             }
 
             if (!/^[a-zA-Z0-9\s']+$/g.test(value)) {
@@ -221,8 +243,5 @@ export const validator = (type, value, confirmValue) => {
             }
 
             break;
-
-        default:
-            return 'Invalid validation type';
     }
 };

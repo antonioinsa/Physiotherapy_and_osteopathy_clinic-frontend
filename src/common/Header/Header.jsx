@@ -53,13 +53,13 @@ export const Header = () => {
         <>
           {location.pathname !== '/manageWorkers' &&
             location.pathname !== '/manageClients' &&
-            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
             rdxCredentials.role !== 'admin' && (
               <div><LinkButton path={'/'} title={'Home'}></LinkButton></div>
             )}
           {location.pathname !== '/manageWorkers' &&
             location.pathname !== '/manageClients' &&
-            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
             rdxCredentials.role !== 'admin' && (
               <div><LinkButton path={'/about'} title={'About'}></LinkButton></div>
             )}
@@ -68,7 +68,7 @@ export const Header = () => {
           <>
             {location.pathname !== '/manageWorkers' &&
               location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
               rdxCredentials.role !== 'admin' && (
                 <div onClick={account}><LinkButton path={'/account'} title={'Account'}></LinkButton></div>
               )}
@@ -77,9 +77,9 @@ export const Header = () => {
               location.pathname !== '/invoices' && (
                 <div onClick={appointments}><LinkButton path={'/appointments'} title={'Appointments'}></LinkButton></div>
               )}
-              {location.pathname !== '/manageWorkers' &&
+            {location.pathname !== '/manageWorkers' &&
               location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' && 
+              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
               rdxCredentials.role !== 'admin' && (
                 <div onClick={newAppointment}><LinkButton path={'/newAppointment'} title={'New appointment'}></LinkButton></div>
               )}

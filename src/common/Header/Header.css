@@ -9,11 +9,11 @@
 .logoDesign {
 
     height: 10vh;
-    width: 25vw;
+    width: 20vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 5em;
+    margin-left: 3em;
 }
 
 .insideLogoDesign {
