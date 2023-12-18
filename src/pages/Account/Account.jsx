@@ -1,26 +1,37 @@
-import React, { useState } from "react";
-import "./Register.css";
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import "./Account.css";
+import { userData } from '../userSlice';
+import { accountUser } from '../../services/apiCalls';
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { registerUsers } from "../../services/apiCalls";
-import { useNavigate } from 'react-router-dom';
 import { validator } from "../../services/useful";
+import { Navigate } from 'react-router';
 
-export const Register = () => {
 
-    const navigate = useNavigate();
+export const Account = () => {
+
+    const userDataRdx = useSelector(userData)
+    const token = userDataRdx.credentials
+    const role = userDataRdx.role
+    
+    useEffect(() => {
+        if (!token || role !== 'user') {
+            Navigate('/')
+        }
+    }, [token, role])
 
     const [user, setUser] = useState({
-        name: '',
-        lastName: '',
-        phone: '',
-        email: '',
-        password: '',
-        documentId: '',
-        street: '',
-        door: '',
-        zipCode: '',
-        town: '',
-        country: ''
+        name: userDataRdx.credentials.name,
+        lastName: userDataRdx.credentials.lastName,
+        phone: userDataRdx.credentials.phone,
+        email: userDataRdx.credentials.email,
+        password: userDataRdx.credentials.password,
+        documentId: userDataRdx.credentials.documentId,
+        street: userDataRdx.credentials.street,
+        door: userDataRdx.credentials.door,
+        zipCode: userDataRdx.credentials.zipCode,
+        town: userDataRdx.credentials.town,
+        country: userDataRdx.credentials.country
     })
 
     const [userError, setUserError] = useState({
@@ -38,6 +49,8 @@ export const Register = () => {
     })
 
     const [errorMsg, setErrorMsg] = useState('')
+
+    const [isEnabled, setIsEnabled] = useState(true)
 
     const functionHandler = (e) => {
         setUser((prevState) => ({
@@ -62,7 +75,19 @@ export const Register = () => {
         }))
     }
 
-    const registerButton = () => {
+    useEffect(() => {
+        const getAccountUser = async () => {
+            try {
+                const response = await accountUser(token)
+                setUser(response.data.data)
+            } catch (error) {
+                setErrorMsg(error.response.data.message)
+            }
+        }
+        getAccountUser()
+    }, [token])
+
+    const updateAccount = async () => {
         if (user.name === '' || user.lastName === '' ||
             user.phone === '' || user.email === '' ||
             user.password === '' || user.documentId === '' ||
@@ -72,160 +97,188 @@ export const Register = () => {
             return
         }
 
-        registerUsers(user)
-            .then(
-                (response) => {
-                    if (response.error) {
-                        setErrorMsg(response.data.message)
-                    } else {
-                        setTimeout(() => {
-                            navigate('/login')
-                        }, 500)
-                    }
-                }
-            )
-            .catch((error) => {
-                setErrorMsg(error.response.data.message)
-            })
+        try {
+            const body = {
+                name: user.name,
+                lastName: user.lastName,
+                phone: user.phone,
+                email: user.email,
+                password: user.password,
+                documentId: user.documentId,
+                street: user.street,
+                door: user.door,
+                zipCode: user.zipCode,
+                town: user.town,
+                country: user.country
+            }
+
+            const response = await updateUser(token, body)
+            setUser(response.data.data)
+            setIsEnabled(true)
+        } catch (error) {
+            setErrorMsg(error.response.data.message)
+        }
+    }
+
+    const cancelEdit = async () => {
+        setIsEnabled(true)
+        try {
+            const response = await accountUser(token)
+            setUser(response.data.data)
+        } catch (error) {
+            setErrorMsg(error.response.data.message)
+        }
     }
 
     return (
-        <div className='inputsDesign'>
-            <div className="registerDesign">
+        <div className='accountDesign'>
+            <div className="editDesign">
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'name'}
                     name={'name'}
-                    placeholder={'Name'}
-                    value={''}
+                    placeholder={''}
+                    value={user.name}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.nameError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'lastName'}
                     name={'lastName'}
-                    placeholder={'Last name'}
-                    value={''}
+                    placeholder={''}
+                    value={user.lastName}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.lastNameError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'phone'}
                     name={'phone'}
-                    placeholder={'Phone number'}
-                    value={''}
+                    placeholder={''}
+                    value={user.phone}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.phoneError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'email'}
                     name={'email'}
-                    placeholder={'example@example.com'}
-                    value={''}
+                    placeholder={''}
+                    value={user.email}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.emailError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'password'}
                     name={'password'}
-                    placeholder={'Password'}
-                    value={''}
+                    placeholder={''}
+                    value={user.password}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.passwordError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'dni'}
                     name={'documentId'}
-                    placeholder={'Dni/Nif'}
-                    value={''}
+                    placeholder={''}
+                    value={user.documentId}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.documentIdError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'street'}
                     name={'street'}
-                    placeholder={'Street'}
-                    value={''}
+                    placeholder={''}
+                    value={user.street}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.streetError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'door'}
                     name={'door'}
-                    placeholder={'Door number'}
-                    value={''}
+                    placeholder={''}
+                    value={user.door}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.doorError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'zipCode'}
                     name={'zipCode'}
-                    placeholder={'ZipCode'}
-                    value={''}
+                    placeholder={''}
+                    value={user.zipCode}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.zipCodeError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'town'}
                     name={'town'}
-                    placeholder={'Town/City'}
-                    value={''}
+                    placeholder={''}
+                    value={user.town}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.townError}</div>
                 <CustomInput
-                    disabled={false}
+                    disabled={isEnabled}
                     design={'inputDesign'}
                     type={'country'}
                     name={'country'}
-                    placeholder={'Country'}
-                    value={''}
+                    placeholder={''}
+                    value={user.country}
                     functionProp={functionHandler}
                     functionBlur={errorCheck}
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.countryError}</div>
-                <div className='errorMsg'>{errorMsg}</div>
-                <div className='buttonSubmit' onClick={registerButton}>Submit</div>
+                {
+                    isEnabled
+                        ? (
+                            <div className="editButton" onClick={() => setIsEnabled(!isEnabled)}>Edit</div>
+                        ) :
+                        (
+                            <>
+                                <div className="cancelButton" onClick={() => cancelEdit()}>Cancel</div>
+                                <div className="spaceBetweenButtons"></div>
+                                <div className="sendButton" onClick={() => updateAccount()}>Send</div>
+                                <div className='errorMsg'>{errorMsg}</div>
+                            </>
+                        )
+                }
             </div>
         </div>
     )

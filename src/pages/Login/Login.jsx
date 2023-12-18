@@ -54,7 +54,7 @@ export const Login = () => {
   const SendCredentials = () => {
 
     if (auth.email === '' || auth.password === '') {
-      return;
+      return
     }
 
     loginUsers(auth)
@@ -65,7 +65,6 @@ export const Login = () => {
           } else {
             dispatch(login({ credentials: response.data.token }))
             let decoded = jwtDecode(response.data.token)
-            console.log(decoded);
             dispatch(login({ role: decoded.role }))
 
             setTimeout(() => {
