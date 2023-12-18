@@ -5,7 +5,7 @@ import { userData } from '../userSlice';
 import { accountUser } from '../../services/apiCalls';
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 
 export const Account = () => {
@@ -13,19 +13,19 @@ export const Account = () => {
     const userDataRdx = useSelector(userData)
     const token = userDataRdx.credentials
     const role = userDataRdx.role
-    
+    const navigate = useNavigate()
+
     useEffect(() => {
-        if (!token || role !== 'user') {
-            Navigate('/')
+        if (!token && !role) {
+            navigate('/')
         }
-    }, [token, role])
+    }, [userDataRdx])
 
     const [user, setUser] = useState({
         name: userDataRdx.credentials.name,
         lastName: userDataRdx.credentials.lastName,
         phone: userDataRdx.credentials.phone,
         email: userDataRdx.credentials.email,
-        password: userDataRdx.credentials.password,
         documentId: userDataRdx.credentials.documentId,
         street: userDataRdx.credentials.street,
         door: userDataRdx.credentials.door,
@@ -39,7 +39,6 @@ export const Account = () => {
         lastNameError: '',
         phoneError: '',
         emailError: '',
-        passwordError: '',
         documentIdError: '',
         streetError: '',
         doorError: '',
@@ -112,7 +111,7 @@ export const Account = () => {
                 country: user.country
             }
 
-            const response = await updateUser(token, body)
+            const response = await User(token, body)
             setUser(response.data.data)
             setIsEnabled(true)
         } catch (error) {
