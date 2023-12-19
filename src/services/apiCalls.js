@@ -24,3 +24,11 @@ export const updateUser = async (token, body) => {
         }
     })
 }
+
+export const updatePasswordUser = async (token, body) => {
+    return await axios.put (`http://localhost:3000/updatePassword`, body, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

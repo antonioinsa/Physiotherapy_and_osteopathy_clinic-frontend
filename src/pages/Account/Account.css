@@ -10,13 +10,14 @@
 
 .editDesign {
 
-    height: 80vh;
+    height: 70vh;
     width: 40vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgb(100, 99, 99);
+    border-radius: 2%;
 }
 
 .MsgError {
@@ -42,6 +43,26 @@
 }
 
 .editButton:hover {
+
+    transition: 0.3s;
+    background-color: rgb(107, 252, 182);
+}
+
+.passwordButton {
+
+    height: 2em;
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(105, 216, 105);
+    color: white;
+    cursor: pointer;
+    border-radius: 1em;
+    transition: 0.3s;
+}
+
+.passwordButton:hover {
 
     transition: 0.3s;
     background-color: rgb(107, 252, 182);
@@ -89,4 +110,8 @@
 
 .spaceBetweenButtons{
     height: 1em;
+}
+
+.inputDesign{
+    color: rgb(0, 0, 0);
 }

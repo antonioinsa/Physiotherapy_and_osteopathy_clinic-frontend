@@ -1,176 +1,178 @@
+import "./UserPassword.css";
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
+import { accountData } from "../accountSlice";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getPasswordForChange, updatePasswordUser } from "../../services/apiCalls";
+import { Navigate, useNavigate } from "react-router-dom";
+import { updatePasswordUser } from "../../services/apiCalls";
+import { CustomInput } from "../../common/CustomInput/CustomInput";
+import { validator } from "../../services/useful";
 
 export const ChangePassword = () => {
+  const userDataRdx = useSelector(userData);
+  const token = userDataRdx.credentials;
+  const role = userDataRdx.role;
+  const passwordRdx = useSelector(accountData);
+  const pass = passwordRdx.password;
+  //console.log(passwordRdx);
+const navigate = useNavigate();
 
-    const userDataRdx = useSelector(userData)
-    const token = userDataRdx.credentials
-    const role = userDataRdx.role
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if (!token || !role) {
-            navigate('/')
-        }
-    }, [userDataRdx])
-
-    const [password, setPassword] = useState({
-        currentPassword: '',
-        newPassword: '',
-        confirmPassword: '',
-    })
-
-    const [passwordError, setPasswordError] = useState({
-        currentPasswordError: '',
-        newPasswordError: '',
-        confirmPasswordError: '',
-    })
-
-    const [errorMsg, setErrorMsg] = useState('')
-
-    const [isEnabled, setIsEnabled] = useState(true)
-
-    const functionPassword = (e) => {
-        setPassword((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value,
-        }))
+  useEffect(() => {
+    if (!token || !role) {
+      navigate("/");
     }
+  }, [userDataRdx]);
 
-    const errorCheck = (e) => {
-        let error = '';
-        error = validator(e.target.name === 'newPassword' ||
-            e.target.name === 'confirmPassword', e.target.value)
-        setPasswordError((prevState) => ({
-            ...prevState,
-            [e.target.name + 'Error']: error,
-        }))
-    }
+  const [newPassword, setNewPassword] = useState({
+    currentPassword: '', 
+    newPassword: '',
+    confirmPassword: '',
+  });
 
-    const clearError = (e) => {
-        setPasswordError((prevState) => ({
-            ...prevState,
-            [e.target.name + 'Error']: '',
-        }))
-    }
+  const [passwordError, setPasswordError] = useState({
+    newPasswordError: '', 
+    confirmPasswordError: '', 
+  });
 
-    useEffect(() => {
-        const getPassword = async () => {
-            try {
-                const response = await getPasswordForChange(token)
-                setPassword((prevState) => ({
-                    ...prevState,
-                    currentPassword: response.data.password,
-                }))
-            } catch (error) {
-                setErrorMsg(error.response.data.message)
-            }
-        }
-        getPassword()
-    }, [token])
+  const [errorMsg, setErrorMsg] = useState('');
 
-    const updatePassword = async () => {
-        if (password.currentPassword === '' ||
-            password.newPassword === '' ||
-            password.confirmPassword === '') {
-            setErrorMsg('All fields are mandatory')
-            return
-        }
+  const [isEnabled, setIsEnabled] = useState(true);
 
-        if (password.newPassword !== password.confirmPassword) {
-            setErrorMsg('New password and confirmation must match')
-            return
-        }
+  const functionPassword = (e) => {
+    setNewPassword((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-        try {
-            const response = await getPasswordForChange(token)
-            const isPasswordValid = response.data.data.password === password.currentPassword
+  const errorCheck = (e) => {
+    let error = '';
+    error = validator(e.target.name, e.target.value);
+    setPasswordError((prevState) => ({
+      ...prevState,
+      [e.target.name + 'Error']: error,
+    }));
+  };
 
-            if (!isPasswordValid) {
-                setErrorMsg('The current password is not valid')
-                return
-            }
-
-            const body = {
-                password: password.newPassword
-            }
-
-            const updateResponse = await updatePasswordUser(token, body)
-
-            setPassword((prevState) => ({
-                ...prevState,
-                newPassword: updateResponse.data.data.password,
-            }))
-
-            setIsEnabled(true)
-            setErrorMsg('Password successfully updated')
+  const clearError = (e) => {
+    setPasswordError((prevState) => ({
+      ...prevState,
+      [e.target.name + 'Error']: '',
+    }));
+  };
+console.log('llega1');
+  useEffect(() => {
+    const getPasswordUser = async () => {
+      try {
+        console.log('llega2');
+        const response = await accountUser(token)
+        console.log(response.data.data.password);
+        console.log('llega3');
+        setNewPassword(response.data.data.password)
         } catch (error) {
-            setErrorMsg(error.response.data.message)
-        }
+        setErrorMsg(error.response.data.message);
+      }
+    }
+    getPasswordUser();
+  }, [token])
+  console.log('llega4');
+  const updatePassword = async () => {
+    if (newPassword.newPassword === '' || newPassword.confirmPassword === '') {
+      setErrorMsg('All fields are mandatory');
+      return;
     }
 
-    const cancelChange = () => {
-        setIsEnabled(true)
-        navigate('/account')
+    if (newPassword.newPassword !== newPassword.confirmPassword) {
+      setErrorMsg('New password and confirmation must match');
+      return;
     }
 
-    return (
-        <div className='changePasswordDesign'>
-            <div className="passwordDesign">
-                <CustomInput
-                    disabled={isEnabled}
-                    design={'inputDesign'}
-                    type={'password'}
-                    name={'currentPassword'}
-                    placeholder={'currentPassword'}
-                    value={password.currentPassword}
-                    functionProp={functionPassword}
-                    functionBlur={errorCheck}
-                    functionFocus={clearError}
-                />
-                <div className='MsgError'>{passwordError.currentPasswordError}</div>
-                <CustomInput
-                    disabled={isEnabled}
-                    design={'inputDesign'}
-                    type={'password'}
-                    name={'newPassword'}
-                    placeholder={'newPassword'}
-                    value={password.newPassword}
-                    functionProp={functionPassword}
-                    functionBlur={errorCheck}
-                    functionFocus={clearError}
-                />
-                <div className='MsgError'>{passwordError.newPasswordError}</div>
-                <CustomInput
-                    disabled={isEnabled}
-                    design={'inputDesign'}
-                    type={'password'}
-                    name={'confirmPassword'}
-                    placeholder={'confirmPassword'}
-                    value={password.confirmPassword}
-                    functionProp={functionPassword}
-                    functionBlur={errorCheck}
-                    functionFocus={clearError}
-                />
-                <div className='MsgError'>{passwordError.confirmPasswordError}</div>
-                {
-                    isEnabled
-                        ? (
-                            <div className="editButton" onClick={() => { setIsEnabled(!isEnabled); functionPassword(); }}>Confirm change</div>
-                        ) :
-                        (
-                            <>
-                                <div className="cancelButton" onClick={() => cancelChange()}>Cancel</div>
-                                <div className="spaceBetweenButtons"></div>
-                                <div className="sendButton" onClick={() => updatePassword()}>Update</div>
-                                <div className='errorMsg'>{errorMsg}</div>
-                            </>
-                        )
-                }
+    try {
+      const isPasswordValid =
+        userDataRdx.credentials.password === newPassword.currentPassword;
+
+      if (!isPasswordValid) {
+        setErrorMsg('The current password is not valid');
+        return;
+      }
+
+      const body = {
+        password: newPassword.newPassword,
+      };
+
+      const updateResponse = await updatePasswordUser(token, body);
+
+      setNewPassword((prevState) => ({
+        ...prevState,
+        newPassword: updateResponse.data.data.password,
+      }));
+
+      setIsEnabled(true);
+      setErrorMsg('Password successfully updated');
+    } catch (error) {
+      setErrorMsg(error.response.data.message);
+    }
+  };
+
+  const cancelChange = () => {
+    setIsEnabled(true);
+    navigate('/account');
+  };
+
+  return (
+    <div className="changePasswordDesign">
+      <div className="passwordDesign">
+        <CustomInput
+          disabled={isEnabled}
+          design={'inputDesign'}
+          type={'password'}
+          name={'newPassword'}
+          placeholder={'New password'}
+          value={newPassword.newPassword}
+          functionProp={functionPassword}
+          functionBlur={errorCheck}
+          functionFocus={clearError}
+        />
+        <div className="MsgError">{passwordError.newPasswordError}</div>
+        <CustomInput
+          disabled={isEnabled}
+          design={'inputDesign'}
+          type={'password'}
+          name={'confirmPassword'}
+          placeholder={'Confirm password'}
+          value={newPassword.confirmPassword}
+          functionProp={functionPassword}
+          functionBlur={errorCheck}
+          functionFocus={clearError}
+        />
+        <div className="MsgError">{passwordError.confirmPasswordError}</div>
+        {isEnabled ? (
+          <div
+            className="editButton"
+            onClick={() => {setIsEnabled(!isEnabled); getPasswordUser();}}
+          >
+            click to Enable
+          </div>
+        ) : (
+          <>
+            <div className="spaceBetweenButtons"></div>
+            <div
+              className="sendButton"
+              onClick={() => updatePassword()}
+            >
+              Update
             </div>
-        </div>
-    )
-}
+            <div className="spaceBetweenButtons"></div>
+            <div
+              className="cancelButton"
+              onClick={() => cancelChange()}
+            >
+              Cancel
+            </div>
+            <div className="errorMsg">{errorMsg}</div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};

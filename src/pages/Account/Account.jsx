@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import "./Account.css";
 import { userData } from '../userSlice';
-import { accountUser } from '../../services/apiCalls';
+import { password } from '../accountSlice';
+import { accountUser, updateUser } from '../../services/apiCalls';
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
 import { useNavigate } from 'react-router';
@@ -14,12 +15,14 @@ export const Account = () => {
     const token = userDataRdx.credentials
     const role = userDataRdx.role
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (!token && !role) {
             navigate('/')
         }
     }, [userDataRdx])
+    console.log(userDataRdx);
 
     const [user, setUser] = useState({
         name: userDataRdx.credentials.name,
@@ -78,21 +81,21 @@ export const Account = () => {
         const getAccountUser = async () => {
             try {
                 const response = await accountUser(token)
+                dispatch(password(response.data.data.password));
                 setUser(response.data.data)
             } catch (error) {
                 setErrorMsg(error.response.data.message)
             }
         }
         getAccountUser()
-    }, [token])
-
+    }, [token, dispatch])
+    
     const updateAccount = async () => {
         if (user.name === '' || user.lastName === '' ||
             user.phone === '' || user.email === '' ||
-            user.password === '' || user.documentId === '' ||
+            user.documentId === '' || user.country === '' ||
             user.street === '' || user.door === '' ||
-            user.zipCode === '' || user.town === '' ||
-            user.country === '') {
+            user.zipCode === '' || user.town === '') {
             return
         }
 
@@ -102,7 +105,6 @@ export const Account = () => {
                 lastName: user.lastName,
                 phone: user.phone,
                 email: user.email,
-                password: user.password,
                 documentId: user.documentId,
                 street: user.street,
                 door: user.door,
@@ -111,7 +113,7 @@ export const Account = () => {
                 country: user.country
             }
 
-            const response = await User(token, body)
+            const response = await updateUser(token, body)
             setUser(response.data.data)
             setIsEnabled(true)
         } catch (error) {
@@ -127,6 +129,10 @@ export const Account = () => {
         } catch (error) {
             setErrorMsg(error.response.data.message)
         }
+    }
+    
+    const ChangePassword = () => {
+        navigate('/password')
     }
 
     return (
@@ -180,18 +186,6 @@ export const Account = () => {
                     functionFocus={clearError}
                 />
                 <div className='MsgError'>{userError.emailError}</div>
-                <CustomInput
-                    disabled={isEnabled}
-                    design={'inputDesign'}
-                    type={'password'}
-                    name={'password'}
-                    placeholder={''}
-                    value={user.password}
-                    functionProp={functionHandler}
-                    functionBlur={errorCheck}
-                    functionFocus={clearError}
-                />
-                <div className='MsgError'>{userError.passwordError}</div>
                 <CustomInput
                     disabled={isEnabled}
                     design={'inputDesign'}
@@ -267,13 +261,21 @@ export const Account = () => {
                 {
                     isEnabled
                         ? (
-                            <div className="editButton" onClick={() => setIsEnabled(!isEnabled)}>Edit</div>
+                            <>
+                                <div className="editButton" 
+                                onClick={() => setIsEnabled(!isEnabled)}>Edit profile data</div>
+                                <div className="spaceBetweenButtons"></div>
+                                <div className="passwordButton" 
+                                onClick={() => ChangePassword()}>Change password</div>
+                            </>
                         ) :
                         (
                             <>
-                                <div className="cancelButton" onClick={() => cancelEdit()}>Cancel</div>
+                                <div className="cancelButton" 
+                                onClick={() => cancelEdit()}>Cancel</div>
                                 <div className="spaceBetweenButtons"></div>
-                                <div className="sendButton" onClick={() => updateAccount()}>Send</div>
+                                <div className="sendButton" 
+                                onClick={() => updateAccount()}>Send</div>
                                 <div className='errorMsg'>{errorMsg}</div>
                             </>
                         )
