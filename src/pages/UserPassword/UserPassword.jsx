@@ -60,14 +60,14 @@ const navigate = useNavigate();
       [e.target.name + 'Error']: '',
     }));
   };
-console.log('llega1');
+//console.log('llega1');
   useEffect(() => {
     const getPasswordUser = async () => {
       try {
-        console.log('llega2');
+        //console.log('llega2');
         const response = await accountUser(token)
-        console.log(response.data.data.password);
-        console.log('llega3');
+        //console.log(response.data.data.password);
+        //console.log('llega3');
         setNewPassword(response.data.data.password)
         } catch (error) {
         setErrorMsg(error.response.data.message);
@@ -75,7 +75,7 @@ console.log('llega1');
     }
     getPasswordUser();
   }, [token])
-  console.log('llega4');
+  //console.log('llega4');
   const updatePassword = async () => {
     if (newPassword.newPassword === '' || newPassword.confirmPassword === '') {
       setErrorMsg('All fields are mandatory');

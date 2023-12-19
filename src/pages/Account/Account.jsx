@@ -22,7 +22,7 @@ export const Account = () => {
             navigate('/')
         }
     }, [userDataRdx])
-    console.log(userDataRdx);
+    //console.log(userDataRdx);
 
     const [user, setUser] = useState({
         name: userDataRdx.credentials.name,

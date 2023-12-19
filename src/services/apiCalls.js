@@ -32,3 +32,11 @@ export const updatePasswordUser = async (token, body) => {
         }
     })
 }
+
+export const invoicesUser = async (token) => {
+    return await axios.get (`http://localhost:3000/myInvoices`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
