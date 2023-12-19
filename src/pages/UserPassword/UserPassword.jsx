@@ -9,115 +9,114 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
 
 export const ChangePassword = () => {
-  const userDataRdx = useSelector(userData);
-  const token = userDataRdx.credentials;
-  const role = userDataRdx.role;
-  const passwordRdx = useSelector(accountData);
-  const pass = passwordRdx.password;
-  //console.log(passwordRdx);
-const navigate = useNavigate();
+  const userDataRdx = useSelector(userData)
+  const token = userDataRdx.credentials
+  const role = userDataRdx.role
+  const passwordRdx = useSelector(accountData)
+  const pass = passwordRdx.password
+  //console.log(passwordRdx)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!token || !role) {
-      navigate("/");
+      navigate("/")
     }
-  }, [userDataRdx]);
+  }, [userDataRdx])
 
   const [newPassword, setNewPassword] = useState({
-    currentPassword: '', 
+    currentPassword: '',
     newPassword: '',
     confirmPassword: '',
-  });
+  })
 
   const [passwordError, setPasswordError] = useState({
-    newPasswordError: '', 
-    confirmPasswordError: '', 
-  });
+    newPasswordError: '',
+    confirmPasswordError: '',
+  })
 
-  const [errorMsg, setErrorMsg] = useState('');
-
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [errorMsg, setErrorMsg] = useState('')
+  const [isEnabled, setIsEnabled] = useState(true)
 
   const functionPassword = (e) => {
     setNewPassword((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   const errorCheck = (e) => {
-    let error = '';
-    error = validator(e.target.name, e.target.value);
+    let error = ''
+    error = validator(e.target.name, e.target.value)
     setPasswordError((prevState) => ({
       ...prevState,
       [e.target.name + 'Error']: error,
-    }));
-  };
+    }))
+  }
 
   const clearError = (e) => {
     setPasswordError((prevState) => ({
       ...prevState,
       [e.target.name + 'Error']: '',
-    }));
-  };
-//console.log('llega1');
+    }))
+  }
+  //console.log('llega1')
   useEffect(() => {
     const getPasswordUser = async () => {
       try {
-        //console.log('llega2');
+        //console.log('llega2')
         const response = await accountUser(token)
-        //console.log(response.data.data.password);
-        //console.log('llega3');
+        //console.log(response.data.data.password)
+        //console.log('llega3')
         setNewPassword(response.data.data.password)
-        } catch (error) {
-        setErrorMsg(error.response.data.message);
+      } catch (error) {
+        setErrorMsg(error.response.data.message)
       }
     }
     getPasswordUser();
   }, [token])
-  //console.log('llega4');
+  //console.log('llega4')
   const updatePassword = async () => {
     if (newPassword.newPassword === '' || newPassword.confirmPassword === '') {
-      setErrorMsg('All fields are mandatory');
-      return;
+      setErrorMsg('All fields are mandatory')
+      return
     }
 
     if (newPassword.newPassword !== newPassword.confirmPassword) {
-      setErrorMsg('New password and confirmation must match');
-      return;
+      setErrorMsg('New password and confirmation must match')
+      return
     }
 
     try {
       const isPasswordValid =
-        userDataRdx.credentials.password === newPassword.currentPassword;
+        userDataRdx.credentials.password === newPassword.currentPassword
 
       if (!isPasswordValid) {
-        setErrorMsg('The current password is not valid');
-        return;
+        setErrorMsg('The current password is not valid')
+        return
       }
 
       const body = {
         password: newPassword.newPassword,
-      };
+      }
 
-      const updateResponse = await updatePasswordUser(token, body);
+      const updateResponse = await updatePasswordUser(token, body)
 
       setNewPassword((prevState) => ({
         ...prevState,
         newPassword: updateResponse.data.data.password,
-      }));
+      }))
 
-      setIsEnabled(true);
-      setErrorMsg('Password successfully updated');
+      setIsEnabled(true)
+      setErrorMsg('Password successfully updated')
     } catch (error) {
-      setErrorMsg(error.response.data.message);
+      setErrorMsg(error.response.data.message)
     }
-  };
+  }
 
   const cancelChange = () => {
-    setIsEnabled(true);
-    navigate('/account');
-  };
+    setIsEnabled(true)
+    navigate('/account')
+  }
 
   return (
     <div className="changePasswordDesign">
@@ -149,7 +148,7 @@ const navigate = useNavigate();
         {isEnabled ? (
           <div
             className="editButton"
-            onClick={() => {setIsEnabled(!isEnabled); getPasswordUser();}}
+            onClick={() => { setIsEnabled(!isEnabled); getPasswordUser(); }}
           >
             click to Enable
           </div>

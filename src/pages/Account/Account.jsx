@@ -51,7 +51,6 @@ export const Account = () => {
     })
 
     const [errorMsg, setErrorMsg] = useState('')
-
     const [isEnabled, setIsEnabled] = useState(true)
 
     const functionHandler = (e) => {

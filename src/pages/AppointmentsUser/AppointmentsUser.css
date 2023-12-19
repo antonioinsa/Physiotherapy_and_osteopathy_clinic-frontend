@@ -1,26 +1,13 @@
-.invoicesDesign{
+.appointmentsDesign {
 
     height: 90vh;
     width: 100vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background-color: bisque;
     color: black;
-    font-size: larger;
-}
-
-.cardInvoiceDesign {
-
-    height: 60vh;
-    width: 35vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(187, 187, 187);
-    border-radius: 2%;
 }
 
 .errorMsg {
@@ -31,11 +18,29 @@
     margin-top: 0.5em;
 }
 
-.navigationButtons {
-   
-    height: 10vh;
+.calendarDesign {
+
+    height: 40vh;
     width: 30vw;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-  }
+}
+
+.cardAppointmentDesign {
+
+    height: 40vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.react-calendar {
+
+    background-color: rgb(182, 189, 195);
+    border-radius: 5%;
+}

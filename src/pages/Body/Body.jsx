@@ -6,6 +6,7 @@ import { Register } from '../Register/Register';
 import { Account } from '../Account/Account';
 import { ChangePassword } from '../UserPassword/UserPassword';
 import { InvoicesUser } from '../InvoicesUser/InvoicesUser';
+import { AppointmentsUser } from '../AppointmentsUser/AppointmentsUser';
 
 
 
@@ -21,6 +22,7 @@ export const Body = () => {
                 <Route path="/account" element={<Account />} />
                 <Route path="/password" element={<ChangePassword />} />
                 <Route path="/myInvoices" element={<InvoicesUser />} />
+                <Route path="/myAppointments" element={<AppointmentsUser />} />
                 
 
 
