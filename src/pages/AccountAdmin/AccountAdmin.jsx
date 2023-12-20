@@ -22,10 +22,14 @@ export const Account = () => {
             navigate('/')
         }
     }, [userDataRdx])
+    //console.log(userDataRdx);
 
     const [user, setUser] = useState({
+        name: userDataRdx.credentials.name,
+        lastName: userDataRdx.credentials.lastName,
         phone: userDataRdx.credentials.phone,
         email: userDataRdx.credentials.email,
+        documentId: userDataRdx.credentials.documentId,
         street: userDataRdx.credentials.street,
         door: userDataRdx.credentials.door,
         zipCode: userDataRdx.credentials.zipCode,
@@ -47,13 +51,9 @@ export const Account = () => {
     })
 
     const [errorMsg, setErrorMsg] = useState('')
-    const [successfully, setSuccessfully] = useState('')
     const [isEnabled, setIsEnabled] = useState(true)
 
     const functionHandler = (e) => {
-        if (['name', 'lastName', 'documentId'].includes(e.target.name)) {
-            return;
-        }
         setUser((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
@@ -115,12 +115,6 @@ export const Account = () => {
             const response = await updateUser(token, body)
             setUser(response.data.data)
             setIsEnabled(true)
-            setSuccessfully(response.data.message)
-
-            setTimeout(() => {
-                setSuccessfully('')
-            }, 1000)
-
         } catch (error) {
             setErrorMsg(error.response.data.message)
         }
@@ -131,7 +125,6 @@ export const Account = () => {
         try {
             const response = await accountUser(token)
             setUser(response.data.data)
-
         } catch (error) {
             setErrorMsg(error.response.data.message)
         }
@@ -273,8 +266,6 @@ export const Account = () => {
                                 <div className="spaceBetweenButtons"></div>
                                 <div className="passwordButton" 
                                 onClick={() => ChangePassword()}>Change password</div>
-                                <div className="spaceBetweenButtons"></div>
-                                <div className='successfully'>{successfully}</div>
                             </>
                         ) :
                         (

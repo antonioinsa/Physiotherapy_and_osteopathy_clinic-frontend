@@ -115,3 +115,9 @@
 .inputDesign{
     color: rgb(0, 0, 0);
 }
+
+.successfully{
+    height: 2em;
+    color: rgb(107, 252, 182);
+    font-weight: bolder;
+}
