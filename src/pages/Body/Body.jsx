@@ -7,6 +7,7 @@ import { Account } from '../Account/Account';
 import { ChangePassword } from '../UserPassword/UserPassword';
 import { InvoicesUser } from '../InvoicesUser/InvoicesUser';
 import { AppointmentsUser } from '../AppointmentsUser/AppointmentsUser';
+import { AccountAdmin } from '../AccountAdmin/AccountAdmin';
 
 
 
@@ -23,6 +24,7 @@ export const Body = () => {
                 <Route path="/password" element={<ChangePassword />} />
                 <Route path="/myInvoices" element={<InvoicesUser />} />
                 <Route path="/myAppointments" element={<AppointmentsUser />} />
+                <Route path="/workerSpace" element={<AccountAdmin />} />
                 
 
 

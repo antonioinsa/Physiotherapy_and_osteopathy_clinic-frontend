@@ -14,7 +14,7 @@ export const Login = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const rdxCredentials = useSelector(userData)
+  useSelector(userData)
 
   const [auth, setAuth] = useState({
     email: '',
@@ -68,10 +68,10 @@ export const Login = () => {
             dispatch(login({ role: decoded.role }))
 
             setTimeout(() => {
-              if (decoded.role !== 'superAdmin') {
+              if (decoded.role === 'superAdmin') {
                 navigate('/saProfile')
-              } else if (decoded.role !== 'admin') {
-                navigate('/workerProfile')
+              } else if (decoded.role === 'admin') {
+                navigate('/workerSpace')
               } else {
                 navigate('/')
               }

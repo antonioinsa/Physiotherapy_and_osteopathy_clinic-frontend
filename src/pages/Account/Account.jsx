@@ -34,11 +34,8 @@ export const Account = () => {
     })
 
     const [userError, setUserError] = useState({
-        nameError: '',
-        lastNameError: '',
         phoneError: '',
         emailError: '',
-        documentIdError: '',
         streetError: '',
         doorError: '',
         zipCodeError: '',

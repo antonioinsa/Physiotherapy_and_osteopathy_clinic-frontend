@@ -10,8 +10,8 @@
 
 .editDesign {
 
-    height: 70vh;
-    width: 40vw;
+    height: 60vh;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
