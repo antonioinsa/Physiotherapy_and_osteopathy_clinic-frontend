@@ -66,7 +66,7 @@ export const Login = () => {
             dispatch(login({ credentials: response.data.token }))
             let decoded = jwtDecode(response.data.token)
             dispatch(login({ role: decoded.role }))
-
+            
             setTimeout(() => {
               if (decoded.role === 'superAdmin') {
                 navigate('/saProfile')

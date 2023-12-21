@@ -1,0 +1,31 @@
+    .scroll-container {
+
+      overflow-y: auto;
+      height: 28em;
+      width: 28em;
+      margin-top: 2em;
+    }
+
+    .appointments {
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .appointment-item {
+
+      border-bottom: 0.1em solid red;
+      color: black;
+      
+      font-weight: bolder;
+    }
+
+    .sort-order-button {
+
+      color: rgb(19, 105, 252, 0.8);
+      font-weight: bolder;
+      background-color: rgb(219, 202, 202);
+      border-top-left-radius: 15%;
+      border-top-right-radius: 15%;
+      cursor: pointer;
+    }

@@ -30,7 +30,7 @@
     width: 30vw;
     display: flex;
     align-items: start;
-    
+
 }
 
 .profilePicture {
@@ -41,7 +41,7 @@
     margin-top: 2em;
     margin-bottom: 0.5em;
     border-radius: 5%;
-    
+
 }
 
 .profile {
@@ -80,7 +80,7 @@
     border-radius: 5%;
 }
 
-.cardAppointmentDesign{
+.cardAppointmentDesign {
 
     height: 24vh;
     width: 20vw;
@@ -89,13 +89,13 @@
     margin-bottom: 7em;
 }
 
-.appointment{
+.appointment {
 
     color: black;
     font-weight: bolder;
 }
 
-.paginationButtons{
+.paginationButtons {
     color: rgb(19, 105, 252, 0.8);
     width: 18em;
     display: flex;

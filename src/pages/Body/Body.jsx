@@ -8,6 +8,7 @@ import { ChangePassword } from '../UserPassword/UserPassword';
 import { InvoicesUser } from '../InvoicesUser/InvoicesUser';
 import { AppointmentsUser } from '../AppointmentsUser/AppointmentsUser';
 import { AccountAdmin } from '../AccountAdmin/AccountAdmin';
+import { AccountSuperAdmin } from '../AccountSuperAdmin/AccountSuperAdmin';
 
 
 
@@ -25,9 +26,8 @@ export const Body = () => {
                 <Route path="/myInvoices" element={<InvoicesUser />} />
                 <Route path="/myAppointments" element={<AppointmentsUser />} />
                 <Route path="/workerSpace" element={<AccountAdmin />} />
+                <Route path="/saProfile" element={<AccountSuperAdmin />} />
                 
-
-
                 
             </Routes>
         </>

@@ -56,3 +56,11 @@ export const appointmentsAdmin = async (token) => {
         }
     })
 }
+
+export const allAppointments = async (token) => {
+    return await axios.get (`http://localhost:3000/allAppointments`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

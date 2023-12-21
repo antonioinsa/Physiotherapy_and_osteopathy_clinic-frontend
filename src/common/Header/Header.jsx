@@ -45,6 +45,10 @@ export const Header = () => {
     navigate('/workerSpace')
   }
 
+  const saSpace = () => {
+    navigate('/saProfile')
+  }
+
   return (
     <div className="headerDesign">
       <div className="logoDesign">
@@ -80,6 +84,11 @@ export const Header = () => {
               location.pathname !== '/manageClients' &&
               location.pathname !== '/invoices' && rdxCredentials.role === 'admin' && (
                 <div onClick={mySpace}><LinkButton path={'/workerSpace'} title={'My Space'}></LinkButton></div>
+              )}
+              {location.pathname !== '/manageWorkers' &&
+              location.pathname !== '/manageClients' &&
+              location.pathname !== '/invoices' && rdxCredentials.role === 'superAdmin' && (
+                <div onClick={saSpace}><LinkButton path={'/saProfile'} title={'My Space'}></LinkButton></div>
               )}
             {location.pathname !== '/manageWorkers' &&
               location.pathname !== '/manageClients' &&
