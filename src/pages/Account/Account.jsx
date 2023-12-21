@@ -48,8 +48,18 @@ export const Account = () => {
     const [isEnabled, setIsEnabled] = useState(true)
 
     const functionHandler = (e) => {
-        if (['name', 'lastName', 'documentId'].includes(e.target.name)) {
-            return;
+        if (role !== 'superAdmin' && ['name', 'lastName', 'documentId'].includes(e.target.name)) {
+            return
+        }
+        setUser((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+    const functionChange = (e) => {
+        if (role !== 'superAdmin') {
+            return
         }
         setUser((prevState) => ({
             ...prevState,
@@ -192,7 +202,7 @@ export const Account = () => {
                 <CustomInput
                     disabled={isEnabled}
                     design={'inputDesign'}
-                    type={'dni'}
+                    type={'documentId'}
                     name={'documentId'}
                     placeholder={''}
                     value={user.documentId}

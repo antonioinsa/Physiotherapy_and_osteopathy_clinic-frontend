@@ -1,247 +1,247 @@
 import dayjs from 'dayjs';
 
 export const validator = (type, value, confirmValue) => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/;
-    const dniRegex = /^[0-9]{8}[A-Za-z]$/;
-    const spanishPhoneRegex = /^(?:\+34|0034|34)?[6-9]\d{8}$/;
-    const validHours = ['09:00', '10:15', '11:30', '12:45', '16:00', '17:15', '18:30'];
-    const today = dayjs();
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/
+    const dniRegex = /^[0-9]{8}[A-Za-z]$/
+    const spanishPhoneRegex = /^(?:\+34|0034|34)?[6-9]\d{8}$/
+    const validHours = ['09:00', '10:15', '11:30', '12:45', '16:00', '17:15', '18:30']
+    const today = dayjs()
 
     switch (type) {
         case 'email':
             if (!value) {
-                return 'Must provide an email';
+                return 'Must provide an email'
             }
 
             if (typeof value !== 'string') {
-                return 'Incorrect email';
+                return 'Incorrect email'
             }
 
             if (value.length > 100) {
-                return 'Maximum 100 characters';
+                return 'Maximum 100 characters'
             }
 
             if (!emailRegex.test(value)) {
-                return 'Email format is not valid';
+                return 'Email format is not valid'
             }
 
-            break;
+            break
 
         case 'password':
             if (!value) {
-                return 'Must provide a password';
+                return 'Must provide a password'
             }
 
             if (typeof value !== 'string') {
-                return 'Incorrect password';
+                return 'Incorrect password'
             }
 
             if (value.length > 12) {
-                return 'Maximum 12 characters';
+                return 'Maximum 12 characters'
             }
 
             if (!passwordRegex.test(value)) {
-                return 'Password must be between 6 and 12 characters and contain at least one lowercase letter, one uppercase letter, one number, and one special character';
+                return 'Password must be between 6 and 12 characters and contain at least one lowercase letter, one uppercase letter, one number, and one special character'
             }
 
-            break;
+            break
 
         case 'confirmPassword':
             if (!confirmValue) {
-                return 'Must confirm password';
+                return 'Must confirm password'
             }
 
             if (typeof confirmValue !== 'string') {
-                return 'Incorrect password';
+                return 'Incorrect password'
             }
 
             if (confirmValue.length > 12) {
-                return 'Maximum 12 characters';
+                return 'Maximum 12 characters'
             }
 
             if (value !== confirmValue) {
-                return 'Passwords must match';
+                return 'Passwords must match'
             }
 
-            break;
+            break
 
-        case 'dni':
+        case 'documentId':
             if (!value) {
-                return 'Must provide a document ID';
+                return 'Must provide a document ID'
             }
 
             if (typeof value !== 'string') {
-                return 'Incorrect document ID';
+                return 'Incorrect document ID'
             }
 
             if (value.length > 9) {
-                return 'Maximum 8 letters and 1 character';
+                return 'Maximum 8 letters and 1 character'
             }
 
             if (!dniRegex.test(value)) {
-                return 'Document ID is not valid';
+                return 'Document ID is not valid'
             }
 
-            break;
+            break
 
         case 'phone':
             if (!value) {
-                return 'Must provide a phone';
+                return 'Must provide a phone'
             }
 
             if (typeof value !== 'string') {
-                return 'Incorrect phone';
+                return 'Incorrect phone'
             }
 
             if (value.length > 9) {
-                return 'Maximum 9 characters';
+                return 'Maximum 9 characters'
             }
 
             if (!spanishPhoneRegex.test(value)) {
-                return 'Phone is not valid';
+                return 'Phone is not valid'
             }
 
-            break;
+            break
 
         case 'name':
         case 'lastName':
             if (!value) {
-                return 'Must provide a name';
+                return 'Must provide a name'
             }
 
             if (value.trim().length < 3 || value.trim().length > 50) {
-                return 'Minimum 3 characters and Maximum 50 characters';
+                return 'Minimum 3 characters and Maximum 50 characters'
             }
 
-            break;
+            break
 
         case 'service':
             if (!value) {
-                return 'Must provide a service';
+                return 'Must provide a service'
             }
 
-            const validService = ['physiotherapy', 'osteopathy'];
-            const serviceTrue = value.toLowerCase();
+            const validService = ['physiotherapy', 'osteopathy']
+            const serviceTrue = value.toLowerCase()
 
             if (!validService.includes(serviceTrue)) {
-                return 'Incorrect service, please choose a valid service (physiotherapy, osteopathy)';
+                return 'Incorrect service, please choose a valid service (physiotherapy, osteopathy)'
             }
 
-            break;
+            break
 
         case 'date':
             if (!value) {
-                return 'Must provide a date';
+                return 'Must provide a date'
             }
 
             if (!/^\d{2}-\d{2}-\d{4}$/.test(value)) {
-                return 'Incorrect date, please choose a valid date DD-MM-YYYY';
+                return 'Incorrect date, please choose a valid date DD-MM-YYYY'
             }
 
             if (dayjs(value, 'DD-MM-YYYY').isBefore(today, 'day')) {
-                return 'Current date is before selected date. Please choose a valid date';
+                return 'Current date is before selected date. Please choose a valid date'
             }
 
-            break;
+            break
 
         case 'time':
             if (!value) {
-                return 'Must provide an hour';
+                return 'Must provide an hour'
             }
 
             if (typeof value !== 'string') {
-                return 'Incorrect hour';
+                return 'Incorrect hour'
             }
 
             if (!validHours.includes(value)) {
-                return 'Incorrect hour, please choose a valid hour (09:00, 10:15, 11:30, 12:45, 16:00, 17:15, 18:30)';
+                return 'Incorrect hour, please choose a valid hour (09:00, 10:15, 11:30, 12:45, 16:00, 17:15, 18:30)'
             }
 
             if (dayjs(value, 'HH:mm').isBefore(today, 'minute')) {
-                return 'Please choose another available hour';
+                return 'Please choose another available hour'
             }
 
-            break;
+            break
 
         case 'appointment':
             if (dayjs(value, 'DD-MM-YYYY').isSame(today, 'day') && dayjs(value, 'HH:mm').isBefore(today, 'minute')) {
-                return 'Current hour is before selected hour. Please choose a valid hour';
+                return 'Current hour is before selected hour. Please choose a valid hour'
             }
 
             if (dayjs(value, 'DD-MM-YYYY').isSame(today, 'day') && validHours.includes(value)) {
-                return 'Please choose another available hour or another day';
+                return 'Please choose another available hour or another day'
             }
 
             if (dayjs(value, 'DD-MM-YYYY').isBefore(today, 'day')) {
-                return 'Current date is before selected date. Please choose a valid date';
+                return 'Current date is before selected date. Please choose a valid date'
             }
 
             if (!validHours.includes(value)) {
-                return 'Please choose a valid hour (09:00, 10:15, 11:30, 12:45, 16:00, 17:15, 18:30)';
+                return 'Please choose a valid hour (09:00, 10:15, 11:30, 12:45, 16:00, 17:15, 18:30)'
             }
 
-            break;
+            break
 
         case 'town':
         case 'country':
             if (value.length < 4 || value.length > 30) {
-                return 'Minimum 4 and Maximum 30 characters';
+                return 'Minimum 4 and Maximum 30 characters'
             }
 
             if (/\s/.test(value) && /^\s|\s$/.test(value)) {
-                return 'Cannot contain spaces at the beginning or end';
+                return 'Cannot contain spaces at the beginning or end'
             }
 
             if (!/^[a-zA-Z0-9\s']+$/g.test(value)) {
-                return 'Cannot contain special characters, except apostrophe';
+                return 'Cannot contain special characters, except apostrophe'
             }
 
-            break;
+            break
 
         case 'zipCode':
             if (value.length !== 5) {
-                return 'Must have exactly 5 characters';
+                return 'Must have exactly 5 characters'
             }
 
-            break;
+            break
 
         case 'door':
             if (value.length < 1 || value.length > 4) {
-                return 'Minimum 1 and Maximum 4 characters';
+                return 'Minimum 1 and Maximum 4 characters'
             }
 
             if (!/\d/.test(value)) {
-                return 'Must contain at least one number';
+                return 'Must contain at least one number'
             }
 
             if (!/^[a-zA-Z0-9]{0,4}$/.test(value)) {
-                return 'Maximum 4 characters';
+                return 'Maximum 4 characters'
             }
 
             if (/\s/.test(value) && /^\s|\s$/.test(value)) {
-                return 'Cannot contain spaces at the beginning or end';
+                return 'Cannot contain spaces at the beginning or end'
             }
 
             if (!/^[a-zA-Z0-9\s]*$/g.test(value)) {
-                return 'Cannot contain special characters';
+                return 'Cannot contain special characters'
             }
 
-            break;
+            break
 
         case 'street':
             if (value.length < 4 || value.length > 100) {
-                return 'Minimum 4 and Maximum 100 characters';
+                return 'Minimum 4 and Maximum 100 characters'
             }
 
             if (/\s/.test(value) && /^\s|\s$/.test(value)) {
-                return 'Cannot contain spaces at the beginning or end';
+                return 'Cannot contain spaces at the beginning or end'
             }
 
             if (!/^[a-zA-Z0-9\s']+$/g.test(value)) {
-                return 'Cannot contain special characters, except apostrophe';
+                return 'Cannot contain special characters, except apostrophe'
             }
 
-            break;
+            break
     }
-};
+}
