@@ -13,6 +13,11 @@ export const AccountAdmin = () => {
     const token = userDataRdx.credentials
     const role = userDataRdx.role
     const navigate = useNavigate()
+    const [appointments, setAppointments] = useState([])
+    const [filteredAppointments, setFilteredAppointments] = useState([])
+    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [markedDates, setMarkedDates] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
         if (!token || role !== 'admin') {
@@ -27,11 +32,6 @@ export const AccountAdmin = () => {
         email: userDataRdx.credentials.email,
     })
 
-    const [appointments, setAppointments] = useState([])
-    const [filteredAppointments, setFilteredAppointments] = useState([])
-    const [selectedDate, setSelectedDate] = useState(new Date())
-    const [markedDates, setMarkedDates] = useState([])
-    const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
         const getAccountAdmin = async () => {

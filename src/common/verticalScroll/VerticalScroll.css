@@ -1,9 +1,15 @@
-    .scroll-container {
+    .scrollContainer {
 
       overflow-y: auto;
       height: 28em;
       width: 28em;
       margin-top: 2em;
+      color: black;
+      font-weight: bolder;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .appointments {
@@ -12,7 +18,7 @@
       flex-direction: column;
     }
 
-    .appointment-item {
+    .appointmentItem {
 
       border-bottom: 0.1em solid red;
       color: black;
@@ -20,12 +26,28 @@
       font-weight: bolder;
     }
 
-    .sort-order-button {
+    .headerSortOrderButton{
 
-      color: rgb(19, 105, 252, 0.8);
-      font-weight: bolder;
-      background-color: rgb(219, 202, 202);
-      border-top-left-radius: 15%;
-      border-top-right-radius: 15%;
-      cursor: pointer;
+      width: 28em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    .sortOrderButton {
+
+      width: 15em;
+      color: white;
+      font-weight: bolder;
+      background-color: rgb(105, 216, 105);
+      border-bottom-left-radius: 5em;
+      border-bottom-right-radius: 5em;
+      
+    }
+
+    .sortOrderButton:hover {
+
+      transition: 0.4s;
+      background-color: rgb(107, 252, 182);
+      cursor: pointer;
+  }

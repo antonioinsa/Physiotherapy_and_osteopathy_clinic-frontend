@@ -13,19 +13,19 @@ export const AccountSuperAdmin = () => {
     const token = userDataRdx.credentials
     const role = userDataRdx.role
     const navigate = useNavigate()
-
-    useEffect(() => {
-        if (!token || role !== 'superAdmin') {
-            navigate('/')
-        }
-    }, [token, role])
-
     const [appointments, setAppointments] = useState([])
     const [filteredAppointments, setFilteredAppointments] = useState([])
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [markedDates, setMarkedDates] = useState([])
     const [errorMsg, setErrorMsg] = useState('')
     const [sortOrder, setSortOrder] = useState('asc')
+    const [selectedService, setSelectedService] = useState('all')
+
+    useEffect(() => {
+        if (!token || role !== 'superAdmin') {
+            navigate('/')
+        }
+    }, [token, role])
 
     useEffect(() => {
         const fetchAppointments = async () => {
@@ -48,11 +48,16 @@ export const AccountSuperAdmin = () => {
         setSelectedDate(date)
     }
 
+    const handleServiceChange = (e) => {
+        setSelectedService(e.target.value);
+    }
+    
     const handleSearch = () => {
         const selectedDateISO = selectedDate.toISOString().split('T')[0]
         const filteredAppointments = appointments.filter((appointment) => {
             const appointmentDateISO = new Date(appointment.date).toISOString().split('T')[0]
-            return appointmentDateISO === selectedDateISO
+            return appointmentDateISO === selectedDateISO && 
+            (selectedService === 'all' || appointment.service === selectedService)
         })
         const sortedAppointments = filteredAppointments.slice().sort((a, b) => a.hour - b.hour)
         setFilteredAppointments(sortOrder === 'asc' ? sortedAppointments : sortedAppointments.reverse())
@@ -84,7 +89,14 @@ export const AccountSuperAdmin = () => {
                             return null
                         }}
                     />
+                    <div className='selectAndSearch'>
+                        <select onChange={handleServiceChange} value={selectedService}>
+                            <option value='all'>All</option>
+                            <option value='physiotherapy'>Physiotherapy</option>
+                            <option value='osteopathy'>Osteopathy</option>
+                        </select>
                     <button className='searchButton' onClick={handleSearch}>Search</button>
+                    </div>
                 </div>
                 <div className='cardAppointments'>
                     <VerticalScroll appointments={filteredAppointments} setSortOrder={setSortOrder} />
@@ -98,6 +110,7 @@ export const AccountSuperAdmin = () => {
                     <div className='saButton'>Invoices</div>
                     <div className='saButton' onClick={goToEditDate}>Edit my date</div>
                 </div>
+                <div className='errorMsg'>{errorMsg}</div>
             </div>
         </div>
 

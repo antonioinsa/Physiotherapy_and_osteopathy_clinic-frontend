@@ -12,18 +12,17 @@ export const AppointmentsUser = () => {
     const token = userDataRdx.credentials
     const role = userDataRdx.role
     const navigate = useNavigate()
-
-    useEffect(() => {
-        if (!token && role !== 'user') {
-            navigate('/')
-        }
-    }, [userDataRdx])
-
     const [appointments, setAppointments] = useState([])
     const [errorMsg, setErrorMsg] = useState('')
     const [filteredAppointments, setFilteredAppointments] = useState([])
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [markedDates, setMarkedDates] = useState([])
+    
+    useEffect(() => {
+        if (!token && role !== 'user') {
+            navigate('/')
+        }
+    }, [userDataRdx])
 
     useEffect(() => {
         const fetchAppointments = async () => {

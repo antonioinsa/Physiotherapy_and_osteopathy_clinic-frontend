@@ -10,6 +10,9 @@ export const InvoicesUser = () => {
     const token = userDataRdx.credentials
     const role = userDataRdx.role
     const navigate = useNavigate()
+    const [invoices, setInvoices] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [errorMsg, setErrorMsg] = useState('')
 
     useEffect(() => {
         if (!token && role !== 'user') {
@@ -17,9 +20,6 @@ export const InvoicesUser = () => {
         }
     }, [userDataRdx])
 
-    const [invoices, setInvoices] = useState([])
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [errorMsg, setErrorMsg] = useState('')
 
     useEffect(() => {
         const fetchData = async () => {
