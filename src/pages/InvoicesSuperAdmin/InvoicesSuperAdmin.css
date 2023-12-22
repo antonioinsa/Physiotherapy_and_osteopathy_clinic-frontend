@@ -1,0 +1,120 @@
+.superAdminInvoicesDesign {
+
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../images/run_wallpaper.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.titleInvoices {
+
+    height: 3em;
+    width: 15em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    color: black;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.select {
+
+    color: black;
+    font-weight: bold;
+}
+
+
+.button {
+
+    width: 10em;
+    border-radius: 1em;
+    background-color: rgb(105, 216, 105);
+    color: white;
+    font-weight: bolder;
+    margin-top: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.button:hover {
+
+    transition: 0.4s;
+    background-color: rgb(107, 252, 182);
+    cursor: pointer;
+}
+
+.invoicesPartDesign {
+
+    background-color: rgb(157, 157, 157, 0.6);
+    width: 40em;
+    height: 80vh;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cardInvoices {
+
+    height: 55vh;
+    width: 30vw;
+    margin-top: 3em;
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.paginationButtons {
+
+    height: 10vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons{
+    
+    height: 4vh;
+    width: 25vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.fisicsButtons {
+    
+    border-radius: 1em;
+    width: 12em;
+    background-color: rgb(105, 216, 105);
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.fisicsButtons:hover {
+
+    transition: 0.4s;
+    background-color: rgb(107, 252, 182);
+    cursor: pointer;
+}
+
+.progressBar {
+
+    background-color: rgba(128, 128, 128, 0.525);
+    height: 0.5vh;
+    width: 13vw;
+    margin-bottom: 0.5em;
+}
+
+.progress {
+
+    background-color: black;
+    height: 0.5vh;
+}

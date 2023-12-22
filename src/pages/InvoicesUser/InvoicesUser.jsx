@@ -22,7 +22,7 @@ export const InvoicesUser = () => {
 
 
     useEffect(() => {
-        const fetchData = async () => {
+        const getUserInvoices = async () => {
             try {
                 const response = await invoicesUser(token)
                 const sortedInvoices = response.data.data.sort((a, b) =>
@@ -34,7 +34,7 @@ export const InvoicesUser = () => {
             }
         }
 
-        fetchData()
+        getUserInvoices()
     }, [token])
 
     const showNextInvoice = () => {

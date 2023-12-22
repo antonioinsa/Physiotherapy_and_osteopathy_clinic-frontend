@@ -9,7 +9,7 @@ import { InvoicesUser } from '../InvoicesUser/InvoicesUser';
 import { AppointmentsUser } from '../AppointmentsUser/AppointmentsUser';
 import { AccountAdmin } from '../AccountAdmin/AccountAdmin';
 import { AccountSuperAdmin } from '../AccountSuperAdmin/AccountSuperAdmin';
-
+import { InvoicesSuperAdmin } from '../InvoicesSuperAdmin/InvoicesSuperAdmin';
 
 
 export const Body = () => {
@@ -27,6 +27,7 @@ export const Body = () => {
                 <Route path="/myAppointments" element={<AppointmentsUser />} />
                 <Route path="/workerSpace" element={<AccountAdmin />} />
                 <Route path="/saProfile" element={<AccountSuperAdmin />} />
+                <Route path="/saInvoices" element={<InvoicesSuperAdmin />} />
                 
                 
             </Routes>

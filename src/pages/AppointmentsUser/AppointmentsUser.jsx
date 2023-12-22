@@ -25,7 +25,7 @@ export const AppointmentsUser = () => {
     }, [userDataRdx])
 
     useEffect(() => {
-        const fetchAppointments = async () => {
+        const getAppointmentsUser = async () => {
             try {
                 const response = await appointmentsUser(token)
                 setAppointments(response.data.data)
@@ -38,7 +38,7 @@ export const AppointmentsUser = () => {
                 setErrorMsg(error.response.data.message)
             }
         }
-        fetchAppointments()
+        getAppointmentsUser()
     }, [token])
 
     const handleDateChange = (date) => {

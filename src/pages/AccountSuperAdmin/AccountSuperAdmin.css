@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
 }
 
-.dinamicPartDesign {
+.dinamicPartAdministrationDesign {
 
 
     height: 90vh;
@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.title {
+.titleAdministration {
 
     height: 10vh;
     width: 40vw;
@@ -54,7 +54,7 @@
     border-radius: 5%;
 }
 
-.staticPartDesign {
+.staticPartAdministrationDesign {
     
     height: 90vh;
     width: 50vw;

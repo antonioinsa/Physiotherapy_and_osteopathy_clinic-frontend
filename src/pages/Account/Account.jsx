@@ -57,16 +57,6 @@ export const Account = () => {
         }))
     }
 
-    const functionChange = (e) => {
-        if (role !== 'superAdmin') {
-            return
-        }
-        setUser((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }))
-    }
-
     const errorCheck = (e) => {
         let error = '';
         error = validator(e.target.name, e.target.value)

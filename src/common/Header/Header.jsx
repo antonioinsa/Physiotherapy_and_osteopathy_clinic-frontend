@@ -49,6 +49,10 @@ export const Header = () => {
     navigate('/saProfile')
   }
 
+  const saInvoices = () => {
+    navigate('/saInvoices')
+  }
+
   return (
     <div className="headerDesign">
       <div className="logoDesign">
@@ -113,9 +117,14 @@ export const Header = () => {
                   location.pathname !== '/invoices' && (
                     <div onClick={manageClients}><LinkButton path={'/manageClients'} title={'Manage Clients'}></LinkButton></div>
                   )}
+                  {location.pathname !== '/manageWorkers' &&
+                  location.pathname !== '/manageClients' &&
+                  location.pathname !== '/invoices' && rdxCredentials.role === 'superAdmin' && (
+                    <div onClick={saInvoices}><LinkButton path={'/saInvoices'} title={'Invoices'}></LinkButton></div>
+                  )}
                 {location.pathname !== '/manageWorkers' &&
                   location.pathname !== '/manageClients' &&
-                  location.pathname !== '/invoices' && (
+                  location.pathname !== '/invoices' && rdxCredentials.role === 'user' && (
                     <div onClick={invoices}><LinkButton path={'/invoices'} title={'Invoices'}></LinkButton></div>
                   )}
               </>

@@ -49,31 +49,34 @@ export const AccountSuperAdmin = () => {
     }
 
     const handleServiceChange = (e) => {
-        setSelectedService(e.target.value);
+        setSelectedService(e.target.value)
     }
-    
+
     const handleSearch = () => {
         const selectedDateISO = selectedDate.toISOString().split('T')[0]
         const filteredAppointments = appointments.filter((appointment) => {
             const appointmentDateISO = new Date(appointment.date).toISOString().split('T')[0]
-            return appointmentDateISO === selectedDateISO && 
-            (selectedService === 'all' || appointment.service === selectedService)
+            return appointmentDateISO === selectedDateISO &&
+                (selectedService === 'all' || appointment.service === selectedService)
         })
         const sortedAppointments = filteredAppointments.slice().sort((a, b) => a.hour - b.hour)
-        setFilteredAppointments(sortOrder === 'asc' ? sortedAppointments : sortedAppointments.reverse())
+        setFilteredAppointments(sortOrder === 'asc' ?
+            sortedAppointments : sortedAppointments.reverse())
     }
-
 
     const goToEditDate = () => {
         navigate('/account')
     }
 
+    const goToInvoices = () => {
+        navigate('/saInvoices')
+    }
 
 
     return (
         <div className='superAdminProfileDesign'>
-            <div className='dinamicPartDesign'>
-                <div className='title'>Administration</div>
+            <div className='dinamicPartAdministrationDesign'>
+                <div className='titleAdministration'>Administration</div>
                 <div className='calendar'>
                     <Calendar
                         onChange={handleDateChange}
@@ -95,19 +98,19 @@ export const AccountSuperAdmin = () => {
                             <option value='physiotherapy'>Physiotherapy</option>
                             <option value='osteopathy'>Osteopathy</option>
                         </select>
-                    <button className='searchButton' onClick={handleSearch}>Search</button>
+                        <button className='searchButton' onClick={handleSearch}>Search</button>
                     </div>
                 </div>
                 <div className='cardAppointments'>
                     <VerticalScroll appointments={filteredAppointments} setSortOrder={setSortOrder} />
                 </div>
             </div>
-            <div className='staticPartDesign'>
+            <div className='staticPartAdministrationDesign'>
                 <div className='ButtonsForOptions'>
                     <div className='saButton'>Manage workers</div>
                     <div className='saButton'>Manage clients</div>
                     <div className='saButton'>Appointments</div>
-                    <div className='saButton'>Invoices</div>
+                    <div className='saButton' onClick={goToInvoices}>Invoices</div>
                     <div className='saButton' onClick={goToEditDate}>Edit my date</div>
                 </div>
                 <div className='errorMsg'>{errorMsg}</div>

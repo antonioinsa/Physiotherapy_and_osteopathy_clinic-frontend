@@ -40,7 +40,7 @@ const VerticalScroll = ({ appointments }) => {
                                     <p>Service: {appointment.service}</p>
                                     <p className='outstanding'>Worker Name: {appointment.name_worker}</p>
                                     <p className='outstanding'>Worker Last name: {appointment.lastName_worker}</p>
-                                    <p>Price: {appointment.price}</p>
+                                    <p>Price: {appointment.price}€</p>
                                 </div>
                             </div>
                         </div>

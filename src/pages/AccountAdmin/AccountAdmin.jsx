@@ -46,7 +46,7 @@ export const AccountAdmin = () => {
     }, [token])
 
     useEffect(() => {
-        const fetchAppointments = async () => {
+        const getAppointments = async () => {
             try {
                 const response = await appointmentsAdmin(token)
                 setAppointments(response.data.data)
@@ -59,7 +59,7 @@ export const AccountAdmin = () => {
                 setErrorMsg(error.response.data.message)
             }
         }
-        fetchAppointments()
+        getAppointments()
     }, [token])
 
     const appointmentsPerPage = 1
