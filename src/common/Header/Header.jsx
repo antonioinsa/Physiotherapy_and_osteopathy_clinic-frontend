@@ -62,71 +62,47 @@ export const Header = () => {
         <div className="clinicName">Pterion Pysiotherapy and Osteopathy Clinic</div>
       </div>
       <div className="buttonsDesign">
-        <>
-          {location.pathname !== '/manageWorkers' &&
-            location.pathname !== '/manageClients' &&
-            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
-            rdxCredentials.role !== 'admin' && (
+        {rdxCredentials.role !== 'admin' &&  rdxCredentials.role !== 'superAdmin' && (
+          <>
+            {(
               <div><LinkButton path={'/'} title={'Home'}></LinkButton></div>
             )}
-          {location.pathname !== '/manageWorkers' &&
-            location.pathname !== '/manageClients' &&
-            location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
-            rdxCredentials.role !== 'admin' && (
+            {(
               <div><LinkButton path={'/about'} title={'About'}></LinkButton></div>
             )}
-        </>
+          </>
+        )}
         {rdxCredentials?.credentials ? (
           <>
-            {location.pathname !== '/manageWorkers' &&
-              location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
-              rdxCredentials.role !== 'admin' && (
-                <div onClick={account}><LinkButton path={'/account'} title={'Account'}></LinkButton></div>
-              )}
-              {location.pathname !== '/manageWorkers' &&
-              location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && rdxCredentials.role === 'admin' && (
-                <div onClick={mySpace}><LinkButton path={'/workerSpace'} title={'My Space'}></LinkButton></div>
-              )}
-              {location.pathname !== '/manageWorkers' &&
-              location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && rdxCredentials.role === 'superAdmin' && (
-                <div onClick={saSpace}><LinkButton path={'/saProfile'} title={'My Space'}></LinkButton></div>
-              )}
-            {location.pathname !== '/manageWorkers' &&
-              location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && (
-                <div onClick={appointments}><LinkButton path={'/appointments'} title={'Appointments'}></LinkButton></div>
-              )}
-            {location.pathname !== '/manageWorkers' &&
-              location.pathname !== '/manageClients' &&
-              location.pathname !== '/invoices' && rdxCredentials.role !== 'superAdmin' &&
-              rdxCredentials.role !== 'admin' && (
-                <div onClick={newAppointment}><LinkButton path={'/newAppointment'} title={'New appointment'}></LinkButton></div>
-              )}
+            {rdxCredentials.role === 'user' && (
+              <div onClick={account}><LinkButton path={'/account'} title={'Account'}></LinkButton></div>
+            )}
+            {rdxCredentials.role === 'admin' && (
+              <div onClick={mySpace}><LinkButton path={'/workerSpace'} title={'My Space'}></LinkButton></div>
+            )}
+            {rdxCredentials.role === 'superAdmin' && (
+              <div onClick={saSpace}><LinkButton path={'/saProfile'} title={'My Space'}></LinkButton></div>
+            )}
+            {rdxCredentials.role === 'user' && (
+              <div onClick={appointments}><LinkButton path={'/appointments'} title={'Appointments'}></LinkButton></div>
+            )}
+            {rdxCredentials.role === 'user' && (
+              <div onClick={newAppointment}><LinkButton path={'/newAppointment'} title={'New appointment'}></LinkButton></div>
+            )}
             {rdxCredentials.role === 'superAdmin' && (
               <>
-                {location.pathname !== '/manageWorkers' &&
-                  location.pathname !== '/manageClients' &&
-                  location.pathname !== '/invoices' && (
-                    <div onClick={manageWorkers}><LinkButton path={'/manageWorkers'} title={'Manage Workers'}></LinkButton></div>
-                  )}
-                {location.pathname !== '/manageWorkers' &&
-                  location.pathname !== '/manageClients' &&
-                  location.pathname !== '/invoices' && (
-                    <div onClick={manageClients}><LinkButton path={'/manageClients'} title={'Manage Clients'}></LinkButton></div>
-                  )}
-                  {location.pathname !== '/manageWorkers' &&
-                  location.pathname !== '/manageClients' &&
-                  location.pathname !== '/invoices' && rdxCredentials.role === 'superAdmin' && (
-                    <div onClick={saInvoices}><LinkButton path={'/saInvoices'} title={'Invoices'}></LinkButton></div>
-                  )}
-                {location.pathname !== '/manageWorkers' &&
-                  location.pathname !== '/manageClients' &&
-                  location.pathname !== '/invoices' && rdxCredentials.role === 'user' && (
-                    <div onClick={invoices}><LinkButton path={'/invoices'} title={'Invoices'}></LinkButton></div>
-                  )}
+                {(
+                  <div onClick={manageWorkers}><LinkButton path={'/manageWorkers'} title={'Manage Workers'}></LinkButton></div>
+                )}
+                {(
+                  <div onClick={manageClients}><LinkButton path={'/manageClients'} title={'Manage Clients'}></LinkButton></div>
+                )}
+                {(
+                  <div onClick={saInvoices}><LinkButton path={'/saInvoices'} title={'Invoices'}></LinkButton></div>
+                )}
+                {rdxCredentials.role === 'user' && (
+                  <div onClick={invoices}><LinkButton path={'/invoices'} title={'Invoices'}></LinkButton></div>
+                )}
               </>
             )}
             <div onClick={logOut}><LinkButton path={'/'} title={'LogOut'}></LinkButton></div>

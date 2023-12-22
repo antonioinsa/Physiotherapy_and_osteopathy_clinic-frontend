@@ -15,7 +15,7 @@ export const InvoicesUser = () => {
     const [errorMsg, setErrorMsg] = useState('')
 
     useEffect(() => {
-        if (!token && role !== 'user') {
+        if (!token || role !== 'user') {
             navigate('/')
         }
     }, [userDataRdx])

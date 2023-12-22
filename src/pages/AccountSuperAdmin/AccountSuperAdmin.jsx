@@ -109,7 +109,6 @@ export const AccountSuperAdmin = () => {
                 <div className='ButtonsForOptions'>
                     <div className='saButton'>Manage workers</div>
                     <div className='saButton'>Manage clients</div>
-                    <div className='saButton'>Appointments</div>
                     <div className='saButton' onClick={goToInvoices}>Invoices</div>
                     <div className='saButton' onClick={goToEditDate}>Edit my date</div>
                 </div>
