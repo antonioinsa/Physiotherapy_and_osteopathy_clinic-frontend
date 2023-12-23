@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import './AppointmentsUser.css';
+import 'react-calendar/dist/Calendar.css';
 import { useSelector } from 'react-redux';
 import { userData } from '../userSlice';
 import { useNavigate } from 'react-router';

@@ -16,12 +16,15 @@ export const Account = () => {
     const role = userDataRdx.role
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [errorMsg, setErrorMsg] = useState('')
+    const [successfully, setSuccessfully] = useState('')
+    const [isEnabled, setIsEnabled] = useState(true)
 
     useEffect(() => {
         if (!token && !role) {
             navigate('/')
         }
-    }, [userDataRdx])
+    }, [token, role])
 
     const [user, setUser] = useState({
         phone: userDataRdx.credentials.phone,
@@ -43,9 +46,6 @@ export const Account = () => {
         countryError: ''
     })
 
-    const [errorMsg, setErrorMsg] = useState('')
-    const [successfully, setSuccessfully] = useState('')
-    const [isEnabled, setIsEnabled] = useState(true)
 
     const functionHandler = (e) => {
         if (role !== 'superAdmin' && ['name', 'lastName', 'documentId'].includes(e.target.name)) {

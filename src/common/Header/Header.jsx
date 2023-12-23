@@ -22,7 +22,7 @@ export const Header = () => {
   }
 
   const appointments = () => {
-    navigate('/appointments')
+    navigate('/myAppointments')
   }
 
   const newAppointment = () => {
@@ -84,7 +84,7 @@ export const Header = () => {
               <div onClick={saSpace}><LinkButton path={'/saProfile'} title={'My Space'}></LinkButton></div>
             )}
             {rdxCredentials.role === 'user' && (
-              <div onClick={appointments}><LinkButton path={'/appointments'} title={'Appointments'}></LinkButton></div>
+              <div onClick={appointments}><LinkButton path={'/myAppointments'} title={'Appointments'}></LinkButton></div>
             )}
             {rdxCredentials.role === 'user' && (
               <div onClick={newAppointment}><LinkButton path={'/newAppointment'} title={'New appointment'}></LinkButton></div>

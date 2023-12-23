@@ -10,6 +10,7 @@ import { AppointmentsUser } from '../AppointmentsUser/AppointmentsUser';
 import { AccountAdmin } from '../AccountAdmin/AccountAdmin';
 import { AccountSuperAdmin } from '../AccountSuperAdmin/AccountSuperAdmin';
 import { InvoicesSuperAdmin } from '../InvoicesSuperAdmin/InvoicesSuperAdmin';
+import { NewAppointment } from '../NewAppointment/NewAppointment';
 
 
 export const Body = () => {
@@ -28,6 +29,7 @@ export const Body = () => {
                 <Route path="/workerSpace" element={<AccountAdmin />} />
                 <Route path="/saProfile" element={<AccountSuperAdmin />} />
                 <Route path="/saInvoices" element={<InvoicesSuperAdmin />} />
+                <Route path="/newAppointment" element={<NewAppointment />} />
                 
                 
             </Routes>
