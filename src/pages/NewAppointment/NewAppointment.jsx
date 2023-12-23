@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./NewAppointment.css";
-import 'react-calendar/dist/Calendar.css';
 import { validator } from "../../services/useful";
+import 'react-calendar/dist/Calendar.css';
 import { newAppointment } from "../../services/apiCalls";
 import { useSelector } from "react-redux";
 import { userData } from "../../pages/userSlice";
@@ -16,8 +16,6 @@ export const NewAppointment = () => {
     const [errorMsg, setErrorMsg] = useState('')
     const [successfully, setSuccessfully] = useState('')
     const [selectedDate, setSelectedDate] = useState(new Date())
-    const [hoursTaken, sethoursTaken] = useState({});
-
 
     useEffect(() => {
         if (!token || role !== 'user') {
@@ -70,26 +68,16 @@ export const NewAppointment = () => {
                 hour: appointment.hour,
                 service: appointment.service,
             }
-
-            if (hoursTaken[appointment.service]?.includes(appointment.hour)) {
-                setErrorMsg('Selected hour is already taken for this service')
-                return
-            }
-
+            
             const response = await newAppointment(token, body)
-            sethoursTaken((prevHoursTaken) => {
-                const serviceHours = prevHoursTaken[appointment.service] || [];
-                return {
-                    ...prevHoursTaken,
-                    [appointment.service]: [...serviceHours, appointment.hour],
-                };
-            });
-    
-            setSuccessfully(response.data.message);
+            setErrorMsg('')
+            setAppointment(response.data.data)
+            setSuccessfully(response.data.message)
 
             setTimeout(() => {
+                setSuccessfully(response.data.message)
                 navigate('/')
-            }, 1800)
+            }, 500)
 
         } catch (error) {
             setErrorMsg(error.response.data.message)
@@ -135,9 +123,7 @@ export const NewAppointment = () => {
                                 onBlur={errorCheck}
                             >
                                 {serviceOptions.map((option) => (
-                                    <option key={option.value}
-                                        value={option.value}
-                                        >
+                                    <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>
                                 ))}
@@ -152,16 +138,11 @@ export const NewAppointment = () => {
                                 onBlur={errorCheck}
                             >
                                 {hourOptions.map((option) => (
-                                    <option
-                                        key={option.value}
-                                        value={option.value}
-                                        disabled={hoursTaken[appointment.service]?.includes(option.value)}
-                                    >
+                                    <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>
                                 ))}
                             </select>
-
                         </div>
                     </div>
                 </div>
