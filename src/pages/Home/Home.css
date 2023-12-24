@@ -2,14 +2,89 @@
 
     height: 90vh;
     width: 100vw;
-
     background-color: white;
     background-image: url(../../images/columna-vertebral.jpg);
-
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: bottom;
-    
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.upperCaseDesign {
+
+    height: 60vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.iconsDesign {
+
+    height: 5vh;
+    width: 23vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5em;
+}
+
+.coverModelDesign {
+
+    height: 60vh;
+    width: 100vw;
+    background-image: url(../../images/boceto.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 3em;
+}
+
+.mailIcon {
+
+    height: 5vh;
+    width: 5vw;
+    background-image: url(../../images/Mail.gif);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    margin-left: 7em;
+    cursor: pointer;
+}
+
+.instagramIcon {
+
+    height: 5vh;
+    width: 5vw;
+    background-image: url(../../images/Instagram.gif);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.mapsIcon {
+
+    height: 5vh;
+    width: 5vw;
+    background-image: url(../../images/GoogleMaps.gif);
+    background-size: 55%;
+    background-repeat: no-repeat;
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+
+.whatsappIcon {
+
+    height: 5vh;
+    width: 5vw;
+    background-image: url(../../images/Whatsapp.gif);
+    background-size: 70%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.icon{
+    color: transparent;
+    font-size: xx-large;
+}
