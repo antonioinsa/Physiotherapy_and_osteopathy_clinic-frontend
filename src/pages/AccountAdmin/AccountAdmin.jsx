@@ -128,7 +128,7 @@ export const AccountAdmin = () => {
                 <button onClick={handleSearch}>Search</button>
             </div>
 
-            <div className='cardAppointmentDesign'>
+            <div className='cardAppointmentWorkerDesign'>
                 <div className='appointment'>
                     {currentAppointments.length > 0 ? (
                         currentAppointments.map((appointment, index) => (
@@ -149,7 +149,7 @@ export const AccountAdmin = () => {
                     )}
                 </div>
                 {filteredAppointments.length > appointmentsPerPage && (
-                    <div className='paginationButtons'>
+                    <div className='pagButtons'>
                         <button onClick={goToPrevPage} disabled={currentPage === 1}>Prev</button>
                         <span>{`Page ${currentPage} of ${totalPages}`}</span>
                         <button onClick={goToNextPage} disabled={currentPage === totalPages}>Next</button>
