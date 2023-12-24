@@ -79,6 +79,20 @@ export const InvoicesSuperAdmin = () => {
         setFilteredInvoices(sortOrder === 'asc' ? sortedInvoices : sortedInvoices.reverse())
     }, [invoices, selectedYear, selectedMonth, selectedDay, sortOrder])
 
+    const handleYearChange = (e) => {
+        setSelectedYear(e.target.value)
+        setSelectedMonth('all')
+        setSelectedDay('all')
+    }
+
+    const handleMonthChange = (e) => {
+        setSelectedMonth(e.target.value)
+        setSelectedDay('all')
+    }
+
+    const handleDayChange = (e) => {
+        setSelectedDay(e.target.value)
+    }
 
     const months = [
         { value: 'all', label: 'All' },
@@ -94,7 +108,7 @@ export const InvoicesSuperAdmin = () => {
         { value: '10', label: 'October' },
         { value: '11', label: 'November' },
         { value: '12', label: 'December' },
-    ];
+    ]
 
     const daysInMonth = (month) => {
         switch (month) {
@@ -127,11 +141,7 @@ export const InvoicesSuperAdmin = () => {
                     <label className='select'>Year:</label>
                     <select
                         value={selectedYear}
-                        onChange={(e) => {
-                            setSelectedYear(e.target.value)
-                            setSelectedMonth('all')
-                            setSelectedDay('all')
-                        }}
+                        onChange={handleYearChange}
                     >
                         {availableYears.map((year) => (
                             <option key={year} value={year}>
@@ -144,10 +154,7 @@ export const InvoicesSuperAdmin = () => {
                     <label className='select'>Month:</label>
                     <select
                         value={selectedMonth}
-                        onChange={(e) => {
-                            setSelectedMonth(e.target.value)
-                            setSelectedDay('all')
-                        }}
+                        onChange={handleMonthChange}
                     >
                         {months.map((month) => (
                             <option key={month.value} value={month.value}>
@@ -158,8 +165,9 @@ export const InvoicesSuperAdmin = () => {
                 </div>
                 <div>
                     <label className='select'>Day:</label>
-                    <select value={selectedDay} onChange={(e) =>
-                        setSelectedDay(e.target.value)}>
+                    <select
+                        value={selectedDay}
+                        onChange={handleDayChange}>
                         <option value='all'>All</option>
                         {daysInMonth(selectedMonth).map((day) => (
                             <option key={day} value={day}>

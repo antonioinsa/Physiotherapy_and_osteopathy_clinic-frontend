@@ -68,7 +68,7 @@ export const NewAppointment = () => {
                 hour: appointment.hour,
                 service: appointment.service,
             }
-            
+
             const response = await newAppointment(token, body)
             setErrorMsg('')
             setAppointment(response.data.data)
