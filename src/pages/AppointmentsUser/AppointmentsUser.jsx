@@ -17,7 +17,8 @@ export const AppointmentsUser = () => {
     const [filteredAppointments, setFilteredAppointments] = useState([])
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [markedDates, setMarkedDates] = useState([])
-    
+    const [currentAppointmentIndex, setCurrentAppointmentIndex] = useState(0)
+
     useEffect(() => {
         if (!token && role !== 'user') {
             navigate('/')
@@ -28,6 +29,7 @@ export const AppointmentsUser = () => {
         const getAppointmentsUser = async () => {
             try {
                 const response = await appointmentsUser(token)
+
                 setAppointments(response.data.data)
 
                 const appointmentDates = response.data.data.map(appointment =>
@@ -42,6 +44,7 @@ export const AppointmentsUser = () => {
     }, [token])
 
     const handleDateChange = (date) => {
+        setCurrentAppointmentIndex(0)
         setSelectedDate(date)
     }
 
@@ -51,42 +54,69 @@ export const AppointmentsUser = () => {
             const appointmentDateISO = new Date(appointment.date).toISOString().split('T')[0]
             return appointmentDateISO === selectedDateISO
         })
-        setFilteredAppointments(filteredAppointments)
+
+        const sortedAppointmentsOrder = filteredAppointments.sort((a, b) => {
+            const timeA = parseInt(a.hour.split(':')[0]) * 60 + parseInt(a.hour.split(':')[1])
+            const timeB = parseInt(b.hour.split(':')[0]) * 60 + parseInt(b.hour.split(':')[1])
+            return timeB - timeA
+        })
+        setFilteredAppointments(sortedAppointmentsOrder)
+        setCurrentAppointmentIndex(0)
     }
+
+    const handlePrevAppointment = () => {
+        if (filteredAppointments.length > 1 && currentAppointmentIndex > 0) {
+            setCurrentAppointmentIndex(currentAppointmentIndex - 1);
+        }
+    };
+
+    const handleNextAppointment = () => {
+        if (filteredAppointments.length > 1 && currentAppointmentIndex < filteredAppointments.length - 1) {
+            setCurrentAppointmentIndex(currentAppointmentIndex + 1);
+        }
+    };
 
 
     return (
         <div className="appointmentsDesign">
-            <div className="calendarDesign">
+            <div className="calendarUserDesign">
                 <Calendar
                     onChange={handleDateChange}
                     value={selectedDate}
                     tileContent={({ date, view }) => {
                         const dateISO = date.toISOString().split('T')[0]
                         if (view === 'month' && markedDates.includes(dateISO)) {
-                            return <div style={{ backgroundColor: 'green', 
-                            borderRadius: '50%', height: '0.7em', width: '0.7em' }}></div>
+                            return <div style={{
+                                backgroundColor: 'green',
+                                borderRadius: '50%', height: '0.7em', width: '0.7em'
+                            }}></div>
                         }
                         return null
                     }}
                 />
                 <button onClick={handleSearch}>Search</button>
             </div>
-            <div className="cardAppointmentDesign">
+            <div className="cardAppointmentUserDesign">
                 {filteredAppointments.length > 0 ? (
-                    filteredAppointments.map((appointment, index) => (
-                        <div key={index} className="appointmentRow">
-                            <p>Date: {new Date(appointment.date).toLocaleDateString()}</p>
-                            <p>Hour: {appointment.hour}h</p>
-                            <p>Service: {appointment.service}</p>
-                            <p>Price: {appointment.price}€</p>
-                            {appointment.exercises.length > 0 && (
-                                <p>Exercises: {appointment.exercises.join(', ')}</p>
-                            )}
-                        </div>
-                    ))
+                    <div className="appointmentRow">
+                        <p>Date: {new Date(filteredAppointments[currentAppointmentIndex].date).toLocaleDateString()}</p>
+                        <p>Hour: {filteredAppointments[currentAppointmentIndex].hour}h</p>
+                        <p>Service: {filteredAppointments[currentAppointmentIndex].service}</p>
+                        <p>Price: {filteredAppointments[currentAppointmentIndex].price}€</p>
+                        {filteredAppointments[currentAppointmentIndex].exercises.length > 0 && (
+                            <p>Exercises: {filteredAppointments[currentAppointmentIndex].exercises.join(', ')}</p>
+                        )}
+                    </div>
                 ) : (
                     <p>No appointments found for the selected date</p>
+                )}
+                {filteredAppointments.length > 1 && (
+                    <div className='prevNextButtons'>
+                        <button onClick={handlePrevAppointment}
+                            disabled={currentAppointmentIndex === 0}>Prev</button>
+                        <button onClick={handleNextAppointment}
+                            disabled={currentAppointmentIndex === filteredAppointments.length - 1}>Next</button>
+                    </div>
                 )}
             </div>
             <div className="errorMsg">{errorMsg}</div>

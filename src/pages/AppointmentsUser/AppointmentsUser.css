@@ -18,7 +18,7 @@
     margin-top: 0.5em;
 }
 
-.calendarDesign {
+.calendarUserDesign {
 
     height: 40vh;
     width: 30vw;
@@ -28,14 +28,16 @@
     align-items: center;
 }
 
-.cardAppointmentDesign {
+.cardAppointmentUserDesign {
 
-    height: 40vh;
+    background-color: rgba(168, 168, 168, 0.5);
+    height: 30vh;
     width: 20vw;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    border-radius: 5%;
 }
 
 
@@ -43,4 +45,11 @@
 
     background-color: rgb(182, 189, 195);
     border-radius: 5%;
+}
+
+.prevNextButtons{
+
+    width: 11em;
+    display: flex;
+    justify-content: space-between;
 }
