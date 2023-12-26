@@ -1,20 +1,18 @@
 import "./UserPassword.css";
-import { useSelector } from "react-redux";
-import { userData } from "../userSlice";
-import { accountData } from "../accountSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { userData, logout } from "../userSlice";
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { updatePasswordUser } from "../../services/apiCalls";
+import { useNavigate } from "react-router-dom";
+import { updatePasswordUser, accountUser } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
+import bcrypt from "bcryptjs";
 
 export const ChangePassword = () => {
   const userDataRdx = useSelector(userData)
+  const dispatch = useDispatch()
   const token = userDataRdx.credentials
   const role = userDataRdx.role
-  const passwordRdx = useSelector(accountData)
-  const pass = passwordRdx.password
-  //console.log(passwordRdx)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -23,21 +21,28 @@ export const ChangePassword = () => {
     }
   }, [userDataRdx])
 
+  const logOut = () => {
+    dispatch(logout({ credentials: "", role: "" }))
+    navigate("/")
+  };
+
   const [newPassword, setNewPassword] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
   })
 
   const [passwordError, setPasswordError] = useState({
-    newPasswordError: '',
-    confirmPasswordError: '',
+    currentPasswordError: "",
+    newPasswordError: "",
+    confirmPasswordError: "",
   })
 
-  const [errorMsg, setErrorMsg] = useState('')
-  const [isEnabled, setIsEnabled] = useState(true)
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isEnabled, setIsEnabled] = useState(true);
+  const [isUpdateEnabled, setIsUpdateEnabled] = useState(false);
 
-  const functionPassword = (e) => {
+  const handlePassword = (e) => {
     setNewPassword((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -45,127 +50,138 @@ export const ChangePassword = () => {
   }
 
   const errorCheck = (e) => {
-    let error = ''
+    let error = "";
     error = validator(e.target.name, e.target.value)
     setPasswordError((prevState) => ({
       ...prevState,
-      [e.target.name + 'Error']: error,
+      [e.target.name + "Error"]: error,
     }))
   }
 
   const clearError = (e) => {
     setPasswordError((prevState) => ({
       ...prevState,
-      [e.target.name + 'Error']: '',
+      [e.target.name + "Error"]: "",
     }))
   }
-  //console.log('llega1')
-  useEffect(() => {
-    const getPasswordUser = async () => {
-      try {
-        //console.log('llega2')
-        const response = await accountUser(token)
-        //console.log(response.data.data.password)
-        //console.log('llega3')
-        setNewPassword(response.data.data.password)
-      } catch (error) {
-        setErrorMsg(error.response.data.message)
+
+  const checkCurrentPassword = async () => {
+    try {
+      const response = await accountUser(token)
+      const password = response.data.data.password
+      console.log(password)
+
+      //console.log(newPassword.currentPassword);
+
+      //const decryptedPassword = bcrypt.hashSync(newPassword.currentPassword, 5);
+
+      //console.log(decryptedPassword);
+
+      if (password === newPassword.currentPassword) {
+        setIsEnabled(false)
+        setIsUpdateEnabled(true)
+      } else {
+        setIsEnabled(true)
+        setIsUpdateEnabled(false)
       }
+    } catch (error) {
+      setErrorMsg(error.response.data.message)
     }
-    getPasswordUser();
-  }, [token])
-  //console.log('llega4')
+  }
+
   const updatePassword = async () => {
-    if (newPassword.newPassword === '' || newPassword.confirmPassword === '') {
-      setErrorMsg('All fields are mandatory')
+    if (
+      newPassword.newPassword === "" ||
+      newPassword.confirmPassword === ""
+    ) {
+      setErrorMsg("All fields are mandatory")
       return
     }
 
     if (newPassword.newPassword !== newPassword.confirmPassword) {
-      setErrorMsg('New password and confirmation must match')
+      setErrorMsg("New password and confirmation must match")
       return
     }
 
     try {
-      const isPasswordValid =
-        userDataRdx.credentials.password === newPassword.currentPassword
-
-      if (!isPasswordValid) {
-        setErrorMsg('The current password is not valid')
-        return
-      }
-
-      const body = {
-        password: newPassword.newPassword,
-      }
+      const body = { password: newPassword.newPassword }
 
       const updateResponse = await updatePasswordUser(token, body)
-
       setNewPassword((prevState) => ({
         ...prevState,
-        newPassword: updateResponse.data.data.password,
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
       }))
-
-      setIsEnabled(true)
-      setErrorMsg('Password successfully updated')
+      if (updateResponse.data.success === true) {
+        logOut()
+      }
     } catch (error) {
       setErrorMsg(error.response.data.message)
     }
   }
 
   const cancelChange = () => {
-    setIsEnabled(true)
-    navigate('/account')
+    setIsEnabled(!isEnabled)
+    navigate("/account")
   }
 
   return (
     <div className="changePasswordDesign">
       <div className="passwordDesign">
         <CustomInput
-          disabled={isEnabled}
-          design={'inputDesign'}
-          type={'password'}
-          name={'newPassword'}
-          placeholder={'New password'}
-          value={newPassword.newPassword}
-          functionProp={functionPassword}
+          disabled={!isEnabled}
+          design={"inputDesign"}
+          type={"password"}
+          name={"currentPassword"}
+          placeholder={"Current password"}
+          value={newPassword.currentPassword}
+          functionProp={handlePassword}
           functionBlur={errorCheck}
           functionFocus={clearError}
         />
-        <div className="MsgError">{passwordError.newPasswordError}</div>
+        <div className="errorMsg">{passwordError.currentPasswordError}</div>
         <CustomInput
           disabled={isEnabled}
-          design={'inputDesign'}
-          type={'password'}
-          name={'confirmPassword'}
-          placeholder={'Confirm password'}
-          value={newPassword.confirmPassword}
-          functionProp={functionPassword}
+          design={"inputDesign"}
+          type={"password"}
+          name={"newPassword"}
+          placeholder={"New password"}
+          value={newPassword.newPassword}
+          functionProp={handlePassword}
           functionBlur={errorCheck}
           functionFocus={clearError}
         />
-        <div className="MsgError">{passwordError.confirmPasswordError}</div>
+        <div className="errorMsg">{passwordError.newPasswordError}</div>
+        <CustomInput
+          disabled={isEnabled}
+          design={"inputDesign"}
+          type={"password"}
+          name={"confirmPassword"}
+          placeholder={"Confirm password"}
+          value={newPassword.confirmPassword}
+          functionProp={handlePassword}
+          functionBlur={errorCheck}
+          functionFocus={clearError}
+        />
+        <div className="errorMsg">{passwordError.confirmPasswordError}</div>
         {isEnabled ? (
           <div
             className="editButton"
-            onClick={() => { setIsEnabled(!isEnabled); getPasswordUser(); }}
+            onClick={() => {
+              checkCurrentPassword();
+            }}
           >
-            click to Enable
+            Click to Enable
           </div>
         ) : (
           <>
             <div className="spaceBetweenButtons"></div>
-            <div
-              className="sendButton"
-              onClick={() => updatePassword()}
-            >
+            <div className="sendButton" onClick={() => updatePassword()}>
               Update
             </div>
             <div className="spaceBetweenButtons"></div>
-            <div
-              className="cancelButton"
-              onClick={() => cancelChange()}
-            >
+            <div className="cancelButton" onClick={() => cancelChange()}>
               Cancel
             </div>
             <div className="errorMsg">{errorMsg}</div>
