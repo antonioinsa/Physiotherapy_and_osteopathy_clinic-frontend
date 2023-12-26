@@ -6,7 +6,7 @@ export const Home = () => {
             <div className="upperCaseDesign">
                 <div className="iconsDesign">
                     <div className="mailIcon">
-                        <a href="https://www.instagram.com/pterion.fisioterapiavlc@gmail.com/">
+                        <a href="https://www.pterion.fisioterapiavlc@gmail.com/">
                             <span className="icon">gm</span>
                         </a>
                     </div>

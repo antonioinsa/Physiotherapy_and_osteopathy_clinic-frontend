@@ -43,7 +43,7 @@ export const NewAppointment = () => {
         return day === 0 || day === 6
     } // Sunday (0) - Saturday (6)
 
-    const handlerAppointment = (e) => {
+    const handleAppointment = (e) => {
         setAppointment((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
@@ -60,27 +60,39 @@ export const NewAppointment = () => {
 
     const newAppointmentClient = async () => {
         try {
-            const formattedDate = new Intl.DateTimeFormat('es-ES').format(selectedDate)
-            const changeFormateDate = formattedDate.split('/').join('-')
+            const currentDate = new Date()
+            const selectedDateTime = new Date(selectedDate)
+            const selectedHour = parseInt(appointment.hour.split(":")[0])
+            const selectedMinute = parseInt(appointment.hour.split(":")[1])
 
-            const body = {
-                date: changeFormateDate,
-                hour: appointment.hour,
-                service: appointment.service,
-            }
+            if (
+                selectedDateTime > currentDate ||
+                (selectedHour > currentDate.getHours() &&
+                    selectedMinute >= currentDate.getMinutes())
+            ) {
+                const formattedDate = new Intl.DateTimeFormat('es-ES').format(selectedDate)
+                const changeFormateDate = formattedDate.split('/').join('-')
 
-            const response = await newAppointment(token, body)
-            setErrorMsg('')
-            setAppointment(response.data.data)
-            setSuccessfully(response.data.message)
+                const body = {
+                    date: changeFormateDate,
+                    hour: appointment.hour,
+                    service: appointment.service,
+                }
 
-            setTimeout(() => {
+                const response = await newAppointment(token, body)
+                setErrorMsg('')
+                setAppointment(response.data.data)
                 setSuccessfully(response.data.message)
-                navigate('/')
-            }, 500)
 
+                setTimeout(() => {
+                    setSuccessfully(response.data.message)
+                    navigate('/')
+                }, 500)
+            } else {
+                setErrorMsg('Selected time must be in the future.')
+            }
         } catch (error) {
-            setErrorMsg(error.response.data.message)
+            setErrorMsg(error.response?.data?.message || 'An error occurred')
         }
     }
 
@@ -119,7 +131,7 @@ export const NewAppointment = () => {
                                 className='selectDesign'
                                 name='service'
                                 value={appointment.service}
-                                onChange={handlerAppointment}
+                                onChange={handleAppointment}
                                 onBlur={errorCheck}
                             >
                                 {serviceOptions.map((option) => (
@@ -134,7 +146,7 @@ export const NewAppointment = () => {
                                 className='selectDesign'
                                 name='hour'
                                 value={appointment.hour}
-                                onChange={handlerAppointment}
+                                onChange={handleAppointment}
                                 onBlur={errorCheck}
                             >
                                 {hourOptions.map((option) => (

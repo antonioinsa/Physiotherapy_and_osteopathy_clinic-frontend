@@ -7,6 +7,7 @@ export const validator = (type, value, confirmValue) => {
     const spanishPhoneRegex = /^(?:\+34|0034|34)?[6-9]\d{8}$/
     const validHours = ['09:00', '10:15', '11:30', '12:45', '16:00', '17:15', '18:30']
     const today = dayjs()
+    const currentHour = dayjs().format("HH:mm")
 
     switch (type) {
         case 'email':
@@ -145,7 +146,7 @@ export const validator = (type, value, confirmValue) => {
 
             break
 
-        case 'time':
+        case 'hour':
             if (!value) {
                 return 'Must provide an hour'
             }
@@ -160,6 +161,10 @@ export const validator = (type, value, confirmValue) => {
 
             if (dayjs(value, 'HH:mm').isBefore(today, 'minute')) {
                 return 'Please choose another available hour'
+            }
+
+            if (validHours.some(validHour => dayjs(validHour, "HH:mm").isBefore(currentHour, 'minute'))) {
+                return 'Current hour exceeds available hours'
             }
 
             break
