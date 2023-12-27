@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import { useSelector } from 'react-redux';
 import { userData } from '../userSlice';
 import { useNavigate } from 'react-router';
-import { appointmentsUser } from '../../services/apiCalls';
+import { appointmentsUser, deleteCurrentAppointment } from '../../services/apiCalls';
 
 export const AppointmentsUser = () => {
     const userDataRdx = useSelector(userData)
@@ -18,6 +18,7 @@ export const AppointmentsUser = () => {
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [markedDates, setMarkedDates] = useState([])
     const [currentAppointmentIndex, setCurrentAppointmentIndex] = useState(0)
+    const [successfully, setSuccessfully] = useState('')
 
     useEffect(() => {
         if (!token && role !== 'user') {
@@ -43,6 +44,27 @@ export const AppointmentsUser = () => {
         getAppointmentsUser()
     }, [token])
 
+    const deleteAppointment = async () => {
+        try {
+            const id = filteredAppointments[currentAppointmentIndex]?.id
+
+            if (id) {
+                const response = await deleteCurrentAppointment(id, token)
+
+                if (response.status === 200) {
+                    setSuccessfully(response.data.message)
+                    setTimeout(() => {
+                        setSuccessfully('')
+                        navigate('/home')
+                    }, 1000)
+                    
+                }
+            }
+        } catch (error) {
+            setErrorMsg(error.response.data.message)
+        }
+    }
+
     const handleDateChange = (date) => {
         setCurrentAppointmentIndex(0)
         setSelectedDate(date)
@@ -66,15 +88,15 @@ export const AppointmentsUser = () => {
 
     const handlePrevAppointment = () => {
         if (filteredAppointments.length > 1 && currentAppointmentIndex > 0) {
-            setCurrentAppointmentIndex(currentAppointmentIndex - 1);
+            setCurrentAppointmentIndex(currentAppointmentIndex - 1)
         }
-    };
+    }
 
     const handleNextAppointment = () => {
         if (filteredAppointments.length > 1 && currentAppointmentIndex < filteredAppointments.length - 1) {
-            setCurrentAppointmentIndex(currentAppointmentIndex + 1);
+            setCurrentAppointmentIndex(currentAppointmentIndex + 1)
         }
-    };
+    }
 
 
     return (
@@ -118,8 +140,14 @@ export const AppointmentsUser = () => {
                             disabled={currentAppointmentIndex === filteredAppointments.length - 1}>Next</button>
                     </div>
                 )}
+                {filteredAppointments.length > 0 && (
+                <div className='cancelAppointmentUser'>
+                    <button className='cancelButtonAppointmentUser' onClick={deleteAppointment}>Cancel</button>
+                </div>
+            )}
+                <div className="errorMsg">{errorMsg}</div>
+                <div className='successfully'>{successfully}</div>
             </div>
-            <div className="errorMsg">{errorMsg}</div>
         </div>
     )
 }

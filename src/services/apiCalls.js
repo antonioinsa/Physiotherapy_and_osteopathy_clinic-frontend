@@ -80,3 +80,11 @@ export const newAppointment = async (token, body) => {
         }
     })
 }
+
+export const deleteCurrentAppointment = async (id, token) => {
+    return await axios.delete(`http://localhost:3000/deleteAppointment/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
