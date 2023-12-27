@@ -88,3 +88,11 @@ export const deleteCurrentAppointment = async (id, token) => {
         }
     })
 }
+
+export const deleteProfile = async (token) => {
+    return await axios.delete(`http://localhost:3000/delete`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

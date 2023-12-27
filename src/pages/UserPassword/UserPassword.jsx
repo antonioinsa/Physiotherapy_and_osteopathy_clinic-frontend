@@ -24,7 +24,7 @@ export const ChangePassword = () => {
   const logOut = () => {
     dispatch(logout({ credentials: "", role: "" }))
     navigate("/")
-  };
+  }
 
   const [newPassword, setNewPassword] = useState({
     currentPassword: "",
@@ -65,8 +65,13 @@ export const ChangePassword = () => {
     }))
   }
 
+
+
   const checkCurrentPassword = async () => {
     try {
+      if (newPassword.currentPassword === "") {
+        return setErrorMsg("Current password is required")
+      }
       const response = await accountUser(token)
       const password = response.data.data.password
       console.log(password)
@@ -168,10 +173,7 @@ export const ChangePassword = () => {
         {isEnabled ? (
           <div
             className="editButton"
-            onClick={() => {
-              checkCurrentPassword();
-            }}
-          >
+            onClick={() => { checkCurrentPassword(); }}>
             Click to Enable
           </div>
         ) : (

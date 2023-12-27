@@ -11,7 +11,7 @@ import { AccountAdmin } from '../AccountAdmin/AccountAdmin';
 import { AccountSuperAdmin } from '../AccountSuperAdmin/AccountSuperAdmin';
 import { InvoicesSuperAdmin } from '../InvoicesSuperAdmin/InvoicesSuperAdmin';
 import { NewAppointment } from '../NewAppointment/NewAppointment';
-
+import { DeleteUsers } from '../DeleteUsers/DeleteUsers';
 
 export const Body = () => {
     return (
@@ -30,6 +30,7 @@ export const Body = () => {
                 <Route path="/saProfile" element={<AccountSuperAdmin />} />
                 <Route path="/saInvoices" element={<InvoicesSuperAdmin />} />
                 <Route path="/newAppointment" element={<NewAppointment />} />
+                <Route path="/delete" element={<DeleteUsers />} />
                 
                 
             </Routes>
