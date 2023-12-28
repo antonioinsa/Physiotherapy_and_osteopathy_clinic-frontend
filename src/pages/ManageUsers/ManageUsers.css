@@ -1,4 +1,4 @@
-.superAdminManageWorkersDesign {
+.superAdminManageUsersDesign {
 
     height: 90vh;
     width: 100vw;
@@ -11,7 +11,7 @@
     background-repeat: no-repeat;
 }
 
-.titleManageWorkers {
+.titleManageUsers {
 
     height: 5vh;
     width: 87vw;
@@ -22,13 +22,13 @@
     display: flex;
 }
 
-.spaceUpperSpecialty {
+.spaceUpperSpecialtyInput {
 
     width: 2em;
     height: 0.5em;
 }
 
-.cardSaWorkersDesign {
+.cardSaUsersDesign {
 
     height: 90vh;
     width: 50vw;
@@ -38,7 +38,7 @@
     align-items: center;
 }
 
-.inputsEditDesign {
+.inputsToEditDesign {
     background-color: grey;
     height: 75vh;
     width: 29vw;
@@ -46,15 +46,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 1em;
+    border-radius: 5%;
 }
 
-.selectWorkers {
+.selectUsers {
 
     margin-bottom: 2em;
 }
 
-.buttonBed {
+.buttonBottomBed {
 
     height: 3em;
     width: 8em;
@@ -69,20 +69,20 @@
     margin-top: 0.5em;
 }
 
-.buttonBed:hover {
+.buttonBottomBed:hover {
 
     transition: 0.4s;
     background-color: rgb(107, 252, 182);
     cursor: pointer;
 }
 
-.buttonsManageWorkerDesign {
+.buttonsManageUserDesign {
 
     display: flex;
     justify-content: space-around;
 }
 
-.pictureWorker {
+.pictureUser {
     
     height: 9vh;
     width: 7vw;
@@ -94,13 +94,13 @@
     
 }
 
-.buttonBedDelete {
+.buttonBedDeleteUser {
 
     height: 3em;
     width: 8em;
     border-radius: 1em;
     background-color: rgb(105, 216, 105);
-    border: 0.1em solid rgb(255, 0, 0);
+    border: 0.15em solid rgb(255, 0, 0);
     color: red;
     font-weight: bolder;
     display: flex;
@@ -109,10 +109,47 @@
     margin-top: 0.5em;
 }
 
-.buttonBedDelete:hover {
+.buttonBedDeleteUser:hover {
 
     transition: 0.4s;
     background-color: red;
     color: white;
     cursor: pointer;
 }
+
+.changeRoleUser{
+
+    height: 2.5em;
+    width: 13.5em;
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1em;
+    border: 0.1em solid black;
+    margin-bottom: 1em;
+}
+
+.buttonBottomBedChangeRole {
+
+    height: 3em;
+    width: 8em;
+    border-radius: 1em;
+    background-color: rgb(105, 216, 105);
+    border: 0.15em solid orange;
+    color: rgb(157, 115, 37);
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5em;
+}
+
+.buttonBottomBedChangeRole:hover {
+
+    transition: 0.4s;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+}
+

@@ -106,7 +106,7 @@ export const manageWorkersData = async (token, body) => {
 }
 
 export const allWorkers = async (token) => {
-    return await axios.get(`http://localhost:3000/allUsers`, {
+    return await axios.get(`http://localhost:3000/allWorkers`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -115,6 +115,30 @@ export const allWorkers = async (token) => {
 
 export const deleteSaProfile = async (id, token) => {
     return await axios.delete(`http://localhost:3000/delete/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const allUsers = async (token) => {
+    return await axios.get(`http://localhost:3000/allUsers`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const changeRoleUser = async (token, body) => {
+    return await axios.put(`http://localhost:3000/changeRole`, body, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const manageUsersData = async (token, body) => {
+    return await axios.put(`http://localhost:3000/updateUser`, body, {
         headers: {
             Authorization: `Bearer ${token}`
         }

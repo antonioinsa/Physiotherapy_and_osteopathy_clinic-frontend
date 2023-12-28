@@ -1,17 +1,18 @@
-import "./ManageWorkers.css";
+import "./ManageUsers.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import {
-    allWorkers,
+    allUsers,
+    changeRoleUser,
     deleteSaProfile,
-    manageWorkersData
+    manageUsersData
 } from "../../services/apiCalls";
 import { userData } from '../userSlice';
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
 
-export const ManageWorkers = () => {
+export const ManageUsers = () => {
     const userDataRdx = useSelector(userData)
     const token = userDataRdx.credentials
     const role = userDataRdx.role
@@ -19,10 +20,9 @@ export const ManageWorkers = () => {
     const [errorMsg, setErrorMsg] = useState('')
     const [successfully, setSuccessfully] = useState('')
     const [isEnabled, setIsEnabled] = useState(true)
-    const [workerList, setWorkerList] = useState([])
-    const [selectedWorker, setSelectedWorker] = useState(null)
-    const [workerStateOfComponent, setWorkerStateOfComponent] = useState(0)
-
+    const [userList, setUserList] = useState([])
+    const [selectedUser, setSelectedUser] = useState(null)
+    const [userStateOfComponent, setUserStateOfComponent] = useState(0)
 
     useEffect(() => {
         if (!token && role === 'superAdmin') {
@@ -30,22 +30,22 @@ export const ManageWorkers = () => {
         }
     }, [token, role])
 
-    const [worker, setWorker] = useState({
+    const [user, setUser] = useState({
         name: '',
-        lastName:'' ,
-        documentId:'' ,
+        lastName: '',
+        documentId: '',
         phone: '',
-        email:'' ,
+        email: '',
         street: '',
         door: '',
         zipCode: '',
         town: '',
-        country:'' ,
-        specialty: '',
-        picture: ''
+        country: '',
+        picture: '',
+        role: ''
     })
 
-    const [workerError, setWorkerError] = useState({
+    const [userError, setUserError] = useState({
         nameError: '',
         lastNameError: '',
         documentIdError: '',
@@ -56,12 +56,12 @@ export const ManageWorkers = () => {
         zipCodeError: '',
         townError: '',
         countryError: '',
-        specialtyError: '',
-        pictureError: ''
+        pictureError: '',
+        roleError: ''
     })
 
     const functionHandler = (e) => {
-        setWorker((prevState) => ({
+        setUser((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
@@ -70,87 +70,85 @@ export const ManageWorkers = () => {
     const errorCheck = (e) => {
         let error = '';
         error = validator(e.target.name, e.target.value)
-        setWorkerError((prevState) => ({
+        setUserError((prevState) => ({
             ...prevState,
             [e.target.name + 'Error']: error,
         }))
     }
 
     const clearError = (e) => {
-        setWorkerError((prevState) => ({
+        setUserError((prevState) => ({
             ...prevState,
             [e.target.name + 'Error']: '',
         }))
     }
 
     useEffect(() => {
-        const WorkerProfileData = async () => {
+        const userProfileData = async () => {
             try {
-                const response = await allWorkers(token)
-                setWorkerList(response.data.data)
+                const response = await allUsers(token)
+                setUserList(response.data.data)
             } catch (error) {
                 setErrorMsg(error.response.data.message)
             }
         }
-        WorkerProfileData()
-    }, [token, workerStateOfComponent])
+        userProfileData()
+    }, [token, userStateOfComponent])
 
-    const findWorkerById = (workerId) => {
-        return workerList.find((worker) => worker.id === workerId)
+    const findUserById = (userId) => {
+        return userList.find((user) => user.id === userId)
     }
 
-    const handleWorkerSelection = (e) => {
-        const selectedWorkerId = parseInt(e.target.value, 10)
-        const selectedWorker = findWorkerById(selectedWorkerId)
+    const handleUserSelection = (e) => {
+        const selectedUserId = parseInt(e.target.value, 10)
+        const selectedUser = findUserById(selectedUserId)
 
-        setSelectedWorker(selectedWorker)
+        setSelectedUser(selectedUser)
 
-        setWorker({
-            name: selectedWorker.name,
-            lastName: selectedWorker.lastName,
-            documentId: selectedWorker.documentId,
-            phone: selectedWorker.phone,
-            email: selectedWorker.email,
-            street: selectedWorker.street,
-            door: selectedWorker.door,
-            zipCode: selectedWorker.zipCode,
-            town: selectedWorker.town,
-            country: selectedWorker.country,
-            specialty: selectedWorker.specialty,
-            picture: selectedWorker.picture
+        setUser({
+            name: selectedUser.name,
+            lastName: selectedUser.lastName,
+            documentId: selectedUser.documentId,
+            phone: selectedUser.phone,
+            email: selectedUser.email,
+            street: selectedUser.street,
+            door: selectedUser.door,
+            zipCode: selectedUser.zipCode,
+            town: selectedUser.town,
+            country: selectedUser.country,
+            picture: selectedUser.picture,
+            role: selectedUser.role
         })
     }
 
-    const updateWorkerData = async () => {
-        if (worker.name === '' || worker.lastName === '' ||
-            worker.phone === '' || worker.email === '' ||
-            worker.documentId === '' || worker.country === '' ||
-            worker.street === '' || worker.door === '' ||
-            worker.zipCode === '' || worker.town === '' ||
-            worker.specialty === '' || worker.picture === '') {
+    const updateUserData = async () => {
+        if (user.name === '' || user.lastName === '' ||
+            user.phone === '' || user.email === '' ||
+            user.documentId === '' || user.country === '' ||
+            user.street === '' || user.door === '' ||
+            user.zipCode === '' || user.town === '') {
             return
         }
 
         try {
             const body = {
-                id: selectedWorker.id,
-                name: worker.name,
-                lastName: worker.lastName,
-                phone: worker.phone,
-                email: worker.email,
-                documentId: worker.documentId,
-                street: worker.street,
-                door: worker.door,
-                zipCode: worker.zipCode,
-                town: worker.town,
-                country: worker.country,
-                specialty: worker.specialty,
-                picture: worker.picture
+                id: selectedUser.id,
+                name: user.name,
+                lastName: user.lastName,
+                phone: user.phone,
+                email: user.email,
+                documentId: user.documentId,
+                street: user.street,
+                door: user.door,
+                zipCode: user.zipCode,
+                town: user.town,
+                country: user.country,
+                picture: user.picture
             }
 
-            const response = await manageWorkersData(token, body)
-            setWorkerStateOfComponent((state) => state + 1)
-            setWorker(response.data.data)
+            const response = await manageUsersData(token, body)
+            setUserStateOfComponent((state) => state + 1)
+            setUser(response.data.data)
             setIsEnabled(true)
             setSuccessfully(response.data.message)
 
@@ -166,8 +164,8 @@ export const ManageWorkers = () => {
     const cancelEditData = async () => {
         setIsEnabled(true)
         try {
-            const response = await allWorkers(token)
-            setWorker(response.data.data)
+            const response = await allUsers(token)
+            setUser(response.data.data)
 
         } catch (error) {
             setErrorMsg(error.response.data.message)
@@ -175,13 +173,15 @@ export const ManageWorkers = () => {
     }
 
     const deleteUser = async () => {
+        if (isEnabled !== true) {
+            return
+        }
         try {
-
-            const id = parseInt(selectedWorker.id)
+            const id = parseInt(selectedUser.id)
             const response = await deleteSaProfile(id, token)
             if (response.status === 200) {
                 setSuccessfully(response.data.message)
-                
+
                 setTimeout(() => {
                     setSuccessfully('')
                 }, 1000)
@@ -192,27 +192,52 @@ export const ManageWorkers = () => {
         }
     }
 
+    const changeRole = async () => {
+        if (isEnabled !== true) {
+            return
+        }
+        try {
+            const body = {
+                id: parseInt(selectedUser.id),
+                role: user.role,
+            }
+
+            const response = await changeRoleUser(token, body)
+            setUserStateOfComponent((state) => state + 1)
+            setUser(response.data.data)
+            setIsEnabled(true)
+            setSuccessfully(response.data.message)
+
+            setTimeout(() => {
+                setSuccessfully('')
+            }, 1000)
+
+        } catch (error) {
+            setErrorMsg(error.response.data.message)
+        }
+    }
+
 
     return (
-        <div className="superAdminManageWorkersDesign">
-            <div className="titleManageWorkers">Manage Workers</div>
-            <div className="cardSaWorkersDesign">
-                <div className="profileWorkerSelected">
-                    <div className="dataWorkerSelected">
-                        <div className="inputsEditDesign">
-                            <div className="pictureWorker">
-                                <img className="pictureWorker" src={worker.picture} alt="worker" />
+        <div className="superAdminManageUsersDesign">
+            <div className="titleManageUsers">Manage Users</div>
+            <div className="cardSaUsersDesign">
+                <div className="profileUserSelected">
+                    <div className="dataUserSelected">
+                        <div className="inputsToEditDesign">
+                            <div className="pictureUser">
+                                <img className="pictureUser" src={user.picture} alt="user" />
                             </div>
                             <div className="spaceBetweenButtons"></div>
                             <select
-                                className="selectWorkers"
-                                onChange={handleWorkerSelection}
-                                value={selectedWorker ? selectedWorker.id : ""}
+                                className="selectUsers"
+                                onChange={handleUserSelection}
+                                value={selectedUser ? selectedUser.id : ""}
                             >
-                                <option value="">Select a worker</option>
-                                {workerList.map((worker) => (
-                                    <option key={worker.id} value={worker.id}>
-                                        {`${worker.name} ${worker.lastName}`}
+                                <option value="">Select a User</option>
+                                {userList.map((user) => (
+                                    <option key={user.id} value={user.id}>
+                                        {`${user.name} ${user.lastName}`}
                                     </option>
                                 ))}
                             </select>
@@ -222,145 +247,146 @@ export const ManageWorkers = () => {
                                 type={'name'}
                                 name={'name'}
                                 placeholder={'name'}
-                                value={worker.name}
+                                value={user.name}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-
-                            <div className='MsgError'>{workerError.nameError}</div>
+                            <div className='MsgError'>{userError.nameError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'lastName'}
                                 name={'lastName'}
                                 placeholder={'lastName'}
-                                value={worker.lastName}
+                                value={user.lastName}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.lastNameError}</div>
+                            <div className='MsgError'>{userError.lastNameError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'phone'}
                                 name={'phone'}
                                 placeholder={'phone'}
-                                value={worker.phone}
+                                value={user.phone}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.phoneError}</div>
+                            <div className='MsgError'>{userError.phoneError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'email'}
                                 name={'email'}
                                 placeholder={'email'}
-                                value={worker.email}
+                                value={user.email}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.emailError}</div>
+                            <div className='MsgError'>{userError.emailError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'documentId'}
                                 name={'documentId'}
                                 placeholder={'documentId'}
-                                value={worker.documentId}
+                                value={user.documentId}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.documentIdError}</div>
+                            <div className='MsgError'>{userError.documentIdError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'street'}
                                 name={'street'}
                                 placeholder={'street'}
-                                value={worker.street}
+                                value={user.street}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.streetError}</div>
+                            <div className='MsgError'>{userError.streetError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'door'}
                                 name={'door'}
                                 placeholder={'door'}
-                                value={worker.door}
+                                value={user.door}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.doorError}</div>
+                            <div className='MsgError'>{userError.doorError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'zipCode'}
                                 name={'zipCode'}
                                 placeholder={'zipCode'}
-                                value={worker.zipCode}
+                                value={user.zipCode}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.zipCodeError}</div>
+                            <div className='MsgError'>{userError.zipCodeError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'town'}
                                 name={'town'}
                                 placeholder={'town'}
-                                value={worker.town}
+                                value={user.town}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.townError}</div>
+                            <div className='MsgError'>{userError.townError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'country'}
                                 name={'country'}
                                 placeholder={'country'}
-                                value={worker.country}
+                                value={user.country}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.countryError}</div>
-                            <CustomInput
-                                disabled={isEnabled}
-                                design={'inputDesign'}
-                                type={'specialty'}
-                                name={'specialty'}
-                                placeholder={'specialty'}
-                                value={worker.specialty}
-                                functionProp={functionHandler}
-                                functionBlur={errorCheck}
-                                functionFocus={clearError}
-                            />
-                            <div className='MsgError'>{workerError.specialtyError}</div>
+                            <div className='MsgError'>{userError.countryError}</div>
                             <CustomInput
                                 disabled={isEnabled}
                                 design={'inputDesign'}
                                 type={'picture'}
                                 name={'picture'}
                                 placeholder={'Insert picture direction'}
-                                value={worker.picture}
+                                value={user.picture}
                                 functionProp={functionHandler}
                                 functionBlur={errorCheck}
                                 functionFocus={clearError}
                             />
-                            <div className='MsgError'>{workerError.pictureError}</div>
+                            <div className='MsgError'>{userError.pictureError}</div>
+                            <div className="changeRoleUser">
+                                <CustomInput
+                                    disabled={!isEnabled}
+                                    design={'inputDesign'}
+                                    type={'role'}
+                                    name={'role'}
+                                    placeholder={'Change role'}
+                                    value={user.role}
+                                    functionProp={functionHandler}
+                                    functionBlur={errorCheck}
+                                    functionFocus={clearError}
+                                />
+                            </div>
+                            <div className='MsgError'>{userError.roleError}</div>
                             {
                                 isEnabled
                                     ? (
@@ -375,22 +401,23 @@ export const ManageWorkers = () => {
                                                 onClick={() => cancelEditData()}>Cancel</div>
                                             <div className="spaceBetweenButtons"></div>
                                             <div className="sendButton"
-                                                onClick={() => updateWorkerData()}>Send</div>
+                                                onClick={() => updateUserData()}>Send</div>
                                             <div className='errorMsg'>{errorMsg}</div>
                                         </>
                                     )
                             }
                         </div>
                     </div>
-                    <div className="buttonsManageWorkerDesign">
-                        <div className="buttonBed"
+                    <div className="buttonsManageUserDesign">
+                        <div className="buttonBottomBed"
                             onClick={() => setIsEnabled(!isEnabled)}>Edit profile</div>
-                        <div className="buttonBedDelete"
+                        <div className="buttonBottomBedChangeRole"
+                            onClick={() => changeRole()}>Change Role</div>
+                        <div className="buttonBedDeleteUser"
                             onClick={() => deleteUser()}>Delete</div>
                     </div>
                 </div>
             </div>
         </div>
     )
-
 }

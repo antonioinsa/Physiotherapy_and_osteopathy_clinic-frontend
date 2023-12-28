@@ -76,6 +76,10 @@ export const AccountSuperAdmin = () => {
         navigate('/saWorkers')
     }
 
+    const goToManageClients = () => {
+        navigate('/saUsers')
+    }
+
 
     return (
         <div className='superAdminProfileDesign'>
@@ -112,7 +116,7 @@ export const AccountSuperAdmin = () => {
             <div className='staticPartAdministrationDesign'>
                 <div className='ButtonsForOptions'>
                     <div className='saButton' onClick={goToManageWorkers}>Manage workers</div>
-                    <div className='saButton'>Manage clients</div>
+                    <div className='saButton' onClick={goToManageClients}>Manage clients</div>
                     <div className='saButton' onClick={goToInvoices}>Invoices</div>
                     <div className='saButton' onClick={goToEditDate}>Edit my date</div>
                 </div>

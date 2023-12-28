@@ -281,8 +281,23 @@ export const validator = (type, value, confirmValue) => {
                 return 'Picture must be a valid URL'
             }
 
-            if (!/\.(jpg|jpeg|png|gif)$/i.test(value)) {
-                return 'Picture must be a valid URL with a valid format (jpg, jpeg, png, gif)'
+            if (!/\.(jpg|jpeg|png)$/i.test(value)) {
+                return 'Picture must be a valid URL with a valid format (jpg, jpeg, png)'
+            }
+
+            break
+
+        case 'role':
+            if (!value) {
+                return 'Must provide a role'
+            }
+
+            if (typeof value !== 'string') {
+                return 'Incorrect role'
+            }
+
+            if (value !== 'admin' && value !== 'user') {
+                return 'You must choose a valid role (admin, user)'
             }
 
             break

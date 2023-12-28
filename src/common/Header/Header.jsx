@@ -34,7 +34,7 @@ export const Header = () => {
   }
 
   const manageClients = () => {
-    navigate('/manageClients')
+    navigate('/saUsers')
   }
 
   const invoices = () => {
@@ -95,7 +95,7 @@ export const Header = () => {
                   <div onClick={manageWorkers}><LinkButton path={'/saWorkers'} title={'Manage Workers'}></LinkButton></div>
                 )}
                 {(
-                  <div onClick={manageClients}><LinkButton path={'/manageClients'} title={'Manage Clients'}></LinkButton></div>
+                  <div onClick={manageClients}><LinkButton path={'/saUsers'} title={'Manage Clients'}></LinkButton></div>
                 )}
                 {(
                   <div onClick={saInvoices}><LinkButton path={'/saInvoices'} title={'Invoices'}></LinkButton></div>
