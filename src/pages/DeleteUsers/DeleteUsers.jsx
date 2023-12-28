@@ -30,7 +30,7 @@ export const DeleteUsers = () => {
             const response = await deleteProfile(token)
             if (response.status === 200) {
                 setSuccessfully(response.data.message)
-                    logOut()
+                logOut()
             }
 
         } catch (error) {
@@ -38,11 +38,24 @@ export const DeleteUsers = () => {
         }
     }
 
+    const CancelDeleteUser = () => {
+        navigate('/')
+    }
+
 
     return (
         <div className="deleteUserDesign">
+            <div className='alertMessage'>
+                <p>"Warning! You are about to permanently delete your account.</p>
+                <p>This action cannot be undone and will result in the irreversible loss of all your data.</p>
+                <p>Are you sure you want to proceed with the account deletion?"</p>
+            </div>
             <div >
-            <button className='buttonToDelete' onClick={deleteUser}>Delete User</button>
+                <button className='buttonToDelete' onClick={deleteUser}>Delete User</button>
+            </div>
+            <div className='spaceBetweenButtonAndMessage'></div>
+            <div >
+                <button className='buttonToCancelAccount' onClick={CancelDeleteUser}>Cancel account deletion</button>
             </div>
             <div className='spaceBetweenButtonAndMessage'></div>
             <div className='successfully'>{successfully}</div>

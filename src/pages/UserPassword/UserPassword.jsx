@@ -15,6 +15,11 @@ export const ChangePassword = () => {
   const role = userDataRdx.role
   const navigate = useNavigate()
 
+  const [successfully, setSuccessfully] = useState('')
+  const [errorMsg, setErrorMsg] = useState("")
+  const [isEnabled, setIsEnabled] = useState(true)
+  const [isUpdateEnabled, setIsUpdateEnabled] = useState(false)
+
   useEffect(() => {
     if (!token || !role) {
       navigate("/")
@@ -38,9 +43,6 @@ export const ChangePassword = () => {
     confirmPasswordError: "",
   })
 
-  const [errorMsg, setErrorMsg] = useState("");
-  const [isEnabled, setIsEnabled] = useState(true);
-  const [isUpdateEnabled, setIsUpdateEnabled] = useState(false);
 
   const handlePassword = (e) => {
     setNewPassword((prevState) => ({
@@ -119,6 +121,7 @@ export const ChangePassword = () => {
         confirmPassword: "",
       }))
       if (updateResponse.data.success === true) {
+        setSuccessfully(response.data.message)
         logOut()
       }
     } catch (error) {
@@ -129,6 +132,10 @@ export const ChangePassword = () => {
   const cancelChange = () => {
     setIsEnabled(!isEnabled)
     navigate("/account")
+  }
+
+  const deleteUser = () => {
+    navigate("/delete")
   }
 
   return (
@@ -179,14 +186,18 @@ export const ChangePassword = () => {
         ) : (
           <>
             <div className="spaceBetweenButtons"></div>
+            <div className="deleteAccountButton" onClick={() => deleteUser()}>
+              Delete account permanently</div>
+            <div className="spaceBetweenButtons"></div>
             <div className="sendButton" onClick={() => updatePassword()}>
-              Update
+              Update password
             </div>
             <div className="spaceBetweenButtons"></div>
             <div className="cancelButton" onClick={() => cancelChange()}>
               Cancel
             </div>
             <div className="errorMsg">{errorMsg}</div>
+            <div className='successfully'>{successfully}</div>
           </>
         )}
       </div>

@@ -1,4 +1,4 @@
-.deleteUserDesign{
+.deleteUserDesign {
 
     height: 90vh;
     width: 100vw;
@@ -10,9 +10,9 @@
 
 }
 
-.buttonToDelete{
+.buttonToDelete {
 
-    background-color: rgb(239, 117, 117);
+    background-color: rgb(239, 117, 117, 0.5);
     height: 5vh;
     width: 15vw;
     display: flex;
@@ -25,13 +25,43 @@
 
 }
 
-.buttonToDelete:hover{
+.buttonToDelete:hover {
 
     transition: 0.4s;
     background-color: red;
     cursor: pointer;
 }
 
-.spaceBetweenButtonAndMessage{
+.spaceBetweenButtonAndMessage {
+
     height: 2em;
+}
+
+.alertMessage {
+
+    color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.buttonToCancelAccount {
+
+    background-color: rgba(117, 239, 152, 0.5);
+    height: 5vh;
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 0.1em solid black;
+    margin-top: 1em;
+    margin-bottom: -0.1em;
+
+}
+
+.buttonToCancelAccount:hover {
+
+    transition: 0.4s;
+    background-color: green;
+    cursor: pointer;
 }
