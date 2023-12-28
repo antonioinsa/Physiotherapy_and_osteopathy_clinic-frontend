@@ -248,5 +248,43 @@ export const validator = (type, value, confirmValue) => {
             }
 
             break
+
+        case 'specialty':
+            if (!value) {
+                return 'Must provide a specialty'
+            }
+
+            if (typeof value !== 'string') {
+                return 'Incorrect specialty'
+            }
+
+            if (value !== 'physiotherapy' && value !== 'osteopathy') {
+                return 'You must choose a valid specialty (physiotherapy, osteopathy)'
+            }
+
+            break
+
+        case 'picture':
+            if (!value) {
+                return 'Must provide a picture'
+            }
+
+            if (typeof value !== 'string') {
+                return 'Incorrect picture'
+            }
+
+            if (value.length > 255) {
+                return 'Maximum 255 characters'
+            }
+
+            if (!/^https?:\/\/\S+$/.test(value)) {
+                return 'Picture must be a valid URL'
+            }
+
+            if (!/\.(jpg|jpeg|png|gif)$/i.test(value)) {
+                return 'Picture must be a valid URL with a valid format (jpg, jpeg, png, gif)'
+            }
+
+            break
     }
 }

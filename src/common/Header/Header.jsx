@@ -30,7 +30,7 @@ export const Header = () => {
   }
 
   const manageWorkers = () => {
-    navigate('/manageWorkers')
+    navigate('/saWorkers')
   }
 
   const manageClients = () => {
@@ -92,7 +92,7 @@ export const Header = () => {
             {rdxCredentials.role === 'superAdmin' && (
               <>
                 {(
-                  <div onClick={manageWorkers}><LinkButton path={'/manageWorkers'} title={'Manage Workers'}></LinkButton></div>
+                  <div onClick={manageWorkers}><LinkButton path={'/saWorkers'} title={'Manage Workers'}></LinkButton></div>
                 )}
                 {(
                   <div onClick={manageClients}><LinkButton path={'/manageClients'} title={'Manage Clients'}></LinkButton></div>

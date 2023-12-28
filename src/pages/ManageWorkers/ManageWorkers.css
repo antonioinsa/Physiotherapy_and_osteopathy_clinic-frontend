@@ -1,0 +1,95 @@
+.superAdminManageWorkersDesign {
+
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../images/run_wallpaper.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.titleManageWorkers {
+
+    height: 5vh;
+    width: 87vw;
+    color: black;
+    font-size: 2em;
+    font-weight: bolder;
+    font-style: italic;
+    display: flex;
+}
+
+.spaceUpperSpecialty {
+
+    width: 2em;
+    height: 0.5em;
+}
+
+.cardSaWorkersDesign {
+
+    height: 90vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputsEditDesign {
+    background-color: grey;
+    height: 75vh;
+    width: 29vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+}
+
+.selectWorkers {
+
+    margin-bottom: 2em;
+}
+
+.buttonBed {
+
+    height: 4em;
+    width: 8em;
+    border-radius: 1em;
+    background-color: rgb(105, 216, 105);
+    border: 0.1em solid black;
+    color: white;
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5em;
+}
+
+.buttonBed:hover {
+
+    transition: 0.4s;
+    background-color: rgb(107, 252, 182);
+    cursor: pointer;
+}
+
+.buttonsManageWorkerDesign {
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.pictureWorker {
+    
+    height: 9vh;
+    width: 7vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1em solid black;
+    border-radius: 1em;
+    
+}

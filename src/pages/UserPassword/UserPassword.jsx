@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { updatePasswordUser, accountUser } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
-import bcrypt from "bcryptjs";
+//import bcrypt from "bcryptjs";
 
 export const ChangePassword = () => {
   const userDataRdx = useSelector(userData)

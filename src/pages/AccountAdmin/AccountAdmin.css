@@ -86,7 +86,8 @@
     width: 20vw;
     background-color: rgb(182, 189, 195);
     border-radius: 5%;
-    margin-bottom: 7em;
+    margin-bottom: 3em;
+    margin-left: 3em;
 }
 
 .appointment {
@@ -103,4 +104,9 @@
     justify-content: space-evenly;
     align-items: center;
     font-weight: bolder;
+}
+
+.buttonSearchAdmin{
+    
+    margin-top: 1.5em;
 }

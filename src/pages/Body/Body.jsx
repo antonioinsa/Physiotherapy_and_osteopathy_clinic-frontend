@@ -12,6 +12,7 @@ import { AccountSuperAdmin } from '../AccountSuperAdmin/AccountSuperAdmin';
 import { InvoicesSuperAdmin } from '../InvoicesSuperAdmin/InvoicesSuperAdmin';
 import { NewAppointment } from '../NewAppointment/NewAppointment';
 import { DeleteUsers } from '../DeleteUsers/DeleteUsers';
+import { ManageWorkers } from '../ManageWorkers/ManageWorkers';
 
 export const Body = () => {
     return (
@@ -31,6 +32,7 @@ export const Body = () => {
                 <Route path="/saInvoices" element={<InvoicesSuperAdmin />} />
                 <Route path="/newAppointment" element={<NewAppointment />} />
                 <Route path="/delete" element={<DeleteUsers />} />
+                <Route path="/saWorkers" element={<ManageWorkers />} />
                 
                 
             </Routes>

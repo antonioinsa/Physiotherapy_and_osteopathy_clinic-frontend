@@ -125,7 +125,7 @@ export const AccountAdmin = () => {
                         return null
                     }}
                 />
-                <button onClick={handleSearch}>Search</button>
+                <button className='buttonSearchAdmin' onClick={handleSearch}>Search</button>
             </div>
 
             <div className='cardAppointmentWorkerDesign'>

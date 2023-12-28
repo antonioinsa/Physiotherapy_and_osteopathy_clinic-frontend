@@ -96,3 +96,27 @@ export const deleteProfile = async (token) => {
         }
     })
 }
+
+export const manageWorkersData = async (token, body) => {
+    return await axios.put(`http://localhost:3000/updateWorker`, body, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const allWorkers = async (token) => {
+    return await axios.get(`http://localhost:3000/allUsers`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
+
+export const deleteSaProfile = async (id, token) => {
+    return await axios.delete(`http://localhost:3000/delete/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}
