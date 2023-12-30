@@ -117,7 +117,7 @@ export const NewAppointment = () => {
         <div className="newAppointmentDesign">
             <div className="inputsNewAppointmentDesign">
                 <div className="createAppointmentDesign">
-                    <div className="calendar">
+                    <div className="calendarNewAppointment">
                         <Calendar
                             onChange={(date) => handleDateChange(date)}
                             value={selectedDate}
@@ -125,10 +125,10 @@ export const NewAppointment = () => {
                             tileDisabled={({ date }) => isWeekend(date)}
                         />
                     </div>
-                    <div className="inputSelects">
+                    <div className="inputSelectsNewAppointment">
                         <div>
                             <select
-                                className='selectDesign'
+                                className='selectDesignNewAppointment'
                                 name='service'
                                 value={appointment.service}
                                 onChange={handleAppointment}
@@ -143,7 +143,7 @@ export const NewAppointment = () => {
                         </div>
                         <div>
                             <select
-                                className='selectDesign'
+                                className='selectDesignNewAppointment'
                                 name='hour'
                                 value={appointment.hour}
                                 onChange={handleAppointment}
@@ -159,7 +159,7 @@ export const NewAppointment = () => {
                     </div>
                 </div>
                 <div className="buttonAndMessage">
-                    <div className='buttonCreate' onClick={newAppointmentClient}>Create</div>
+                    <div className='buttonCreateNewAppointment' onClick={newAppointmentClient}>Create</div>
                     {successfully && <div className='successMsg'>{successfully}</div>}
                     {errorMsg && <div className='errorMsg'>{errorMsg}</div>}
                 </div>

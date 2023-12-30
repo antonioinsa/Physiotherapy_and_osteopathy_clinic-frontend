@@ -72,7 +72,7 @@ export const Header = () => {
                     </>
                   )}
                   {rdxCredentials.role === 'user' && (
-                    <Nav.Link className="font-weight-bold" as={Link} to="/invoices" onClick={() => setNavbarExpanded(false)}>Invoices</Nav.Link>
+                    <Nav.Link className="font-weight-bold" as={Link} to="/myInvoices" onClick={() => setNavbarExpanded(false)}>Invoices</Nav.Link>
                   )}
                   <Nav.Link className="font-weight-bold" onClick={logOut}>Log Out</Nav.Link>
                 </>
