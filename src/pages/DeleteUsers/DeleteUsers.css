@@ -65,3 +65,44 @@
     background-color: green;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 480px) {
+    .alertMessage {
+
+        color: red;
+        font-size: 1em;
+        font-weight: bold;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+
+    .buttonToDelete {
+
+        background-color: rgb(239, 117, 117, 0.5);
+        height: 10vh;
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border: 0.1em solid black;
+        margin-top: 1em;
+        margin-bottom: -0.1em;
+    
+    }
+
+    .buttonToCancelAccount {
+
+        background-color: rgba(117, 239, 152, 0.5);
+        height: 10vh;
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border: 0.1em solid black;
+        margin-top: 1em;
+        margin-bottom: -0.1em;
+    
+    }
+}
