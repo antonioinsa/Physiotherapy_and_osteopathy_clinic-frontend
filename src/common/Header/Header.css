@@ -19,9 +19,10 @@
     display: flex;
     align-items: center;
     background-color: rgb(19, 105, 252, 0.6);
+    margin-bottom: 10em;
 }
 
-.font-weight-bold{
+.font-weight-bold {
     font-weight: bold;
 }
 
@@ -34,6 +35,18 @@
     align-items: center;
     height: 6vh;
     width: 4vw;
+}
+
+@media screen and (max-width: 980px) {
+.headerDesign {
+
+    transition: height 0.3s ease;
+}
+
+.headerDesign.expanded {
+
+    height: 23em;
+}
 }
 
 @media screen and (max-width: 480px) {
@@ -52,5 +65,15 @@
         align-items: center;
         height: 6vh;
         width: 10vw;
+    }
+
+    .headerDesign {
+
+        transition: height 0.3s ease;
+    }
+    
+    .headerDesign.expanded {
+    
+        height: 21em;
     }
 }
