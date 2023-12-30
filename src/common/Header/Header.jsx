@@ -1,9 +1,16 @@
 import React from "react";
 import './Header.css';
-import { LinkButton } from "../LinkButton/LinkButton";
+import { Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { logout, userData } from "../../pages/userSlice";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Image from 'react-bootstrap/Image';
+
+
+
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -15,6 +22,14 @@ export const Header = () => {
   const logOut = () => {
     dispatch(logout({ credentials: '', role: '' }))
     navigate('/')
+  }
+
+  const home = () => {
+    navigate('/')
+  }
+
+  const about = () => {
+    navigate('/about')
   }
 
   const account = () => {
@@ -38,7 +53,7 @@ export const Header = () => {
   }
 
   const invoices = () => {
-    navigate('/invoices')
+    navigate('/myInvoices')
   }
 
   const mySpace = () => {
@@ -54,63 +69,64 @@ export const Header = () => {
   }
 
   return (
-    <div className="headerDesign">
-      <div className="logoDesign">
-        <div className="insideLogoDesign">
-          <img src="../src/images/logo_mini.png" width="60" height="60"></img>
-        </div>
-        <div className="clinicName">Pterion Pysiotherapy and Osteopathy Clinic</div>
-      </div>
-      <div className="buttonsDesign">
-        {rdxCredentials.role !== 'admin' &&  rdxCredentials.role !== 'superAdmin' && (
-          <>
-            {(
-              <div><LinkButton path={'/'} title={'Home'}></LinkButton></div>
-            )}
-            {(
-              <div><LinkButton path={'/about'} title={'About'}></LinkButton></div>
-            )}
-          </>
-        )}
-        {rdxCredentials?.credentials ? (
-          <>
-            {rdxCredentials.role === 'user' && (
-              <div onClick={account}><LinkButton path={'/account'} title={'Account'}></LinkButton></div>
-            )}
-            {rdxCredentials.role === 'admin' && (
-              <div onClick={mySpace}><LinkButton path={'/workerSpace'} title={'My Space'}></LinkButton></div>
-            )}
-            {rdxCredentials.role === 'superAdmin' && (
-              <div onClick={saSpace}><LinkButton path={'/saProfile'} title={'My Space'}></LinkButton></div>
-            )}
-            {rdxCredentials.role === 'user' && (
-              <div onClick={appointments}><LinkButton path={'/myAppointments'} title={'Appointments'}></LinkButton></div>
-            )}
-            {rdxCredentials.role === 'user' && (
-              <div onClick={newAppointment}><LinkButton path={'/newAppointment'} title={'New appointment'}></LinkButton></div>
-            )}
-            {rdxCredentials.role === 'superAdmin' && (
-              <>
-                {(
-                  <div onClick={manageWorkers}><LinkButton path={'/saWorkers'} title={'Manage Workers'}></LinkButton></div>
-                )}
-                {(
-                  <div onClick={manageClients}><LinkButton path={'/saUsers'} title={'Manage Clients'}></LinkButton></div>
-                )}
-                {(
-                  <div onClick={saInvoices}><LinkButton path={'/saInvoices'} title={'Invoices'}></LinkButton></div>
-                )}
-                {rdxCredentials.role === 'user' && (
-                  <div onClick={invoices}><LinkButton path={'/invoices'} title={'Invoices'}></LinkButton></div>
-                )}
-              </>
-            )}
-            <div onClick={logOut}><LinkButton path={'/'} title={'LogOut'}></LinkButton></div>
-          </>
-        ) : (
-          <div><LinkButton path={'/login'} title={'Login'}></LinkButton></div>
-        )}
-      </div>
-    </div>
+    <Col sm={12} lg={6} xl={4} xxl={3} className="headerDesign">
+      <Navbar expand="lg" className="customNavBar">
+        <Container>
+          <Navbar.Brand href="#home">
+            <div className="insideLogoDesign">
+            <Image
+              className="logoImage"
+              src="../src/images/logo_mini.png"
+              alt="Pterion"
+            />
+            </div>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav style={{ marginLeft: 'auto' }}>
+              {rdxCredentials?.credentials ? (
+                <>
+                  {rdxCredentials.role === 'user' && (
+                    <Nav.Link onClick={home}>Home</Nav.Link>
+                  )}
+                  {rdxCredentials.role === 'user' && (
+                    <Nav.Link onClick={about}>About</Nav.Link>
+                  )}
+                  {rdxCredentials.role === 'user' && (
+                    <Nav.Link onClick={account}>Account</Nav.Link>
+                  )}
+                  {rdxCredentials.role === 'admin' && (
+                    <Nav.Link onClick={mySpace}>My Space</Nav.Link>
+                  )}
+                  {rdxCredentials.role === 'superAdmin' && (
+                    <Nav.Link onClick={saSpace}>My Space</Nav.Link>
+                  )}
+                  {rdxCredentials.role === 'user' && (
+                    <Nav.Link onClick={appointments}>Appointments</Nav.Link>
+                  )}
+                  {rdxCredentials.role === 'user' && (
+                    <Nav.Link onClick={newAppointment}>New Appointment</Nav.Link>
+                  )}
+                  {rdxCredentials.role === 'superAdmin' && (
+                    <>
+                      <Nav.Link onClick={manageWorkers}>Manage Workers</Nav.Link>
+                      <Nav.Link onClick={manageClients}>Manage Clients</Nav.Link>
+                      <Nav.Link onClick={saInvoices}>Invoices</Nav.Link>
+                    </>
+                  )}
+                  {rdxCredentials.role === 'user' && (
+                    <Nav.Link onClick={invoices}>Invoices</Nav.Link>
+                  )}
+                  <Nav.Link onClick={logOut}>Log Out</Nav.Link>
+                </>
+              ) : (
+                <Nav.Link href="/login">Login</Nav.Link>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </Col>
   )
 }
+

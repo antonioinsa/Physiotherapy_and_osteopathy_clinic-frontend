@@ -39,7 +39,7 @@
     align-items: center;
 }
 
-.buttonAndMessage{
+.buttonAndMessage {
 
     height: 5em;
     width: 40em;
@@ -54,7 +54,7 @@
     height: 4em;
     width: 9em;
     border-radius: 1em;
-    background-color:rgb(105, 216, 105);
+    background-color: rgb(105, 216, 105);
     color: white;
     font-weight: bolder;
     display: flex;
@@ -68,4 +68,78 @@
     transition: 0.4s;
     background-color: rgb(107, 252, 182);
     cursor: pointer;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .newAppointmentDesign {
+        height: 106vh;
+        width: 115vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(220, 220, 245);
+        overflow-x: hidden;
+    }
+
+    .inputsNewAppointmentDesign {
+
+        height: 100vh;
+        width: 105vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5%;
+        background-color: rgb(19, 105, 252, 0.8);
+    }
+
+    .createAppointmentDesign {
+
+        height: 70vh;
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .inputSelects {
+
+        height: 30vh;
+        width: 20vw;
+        display: flex;
+        justify-content: center;
+    }
+
+    .buttonAndMessage {
+
+        height: 1vh;
+        width: 85vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttonCreate {
+
+        height: 5vh;
+        width: 30vw;
+        border-radius: 1em;
+        background-color: rgb(105, 216, 105);
+        color: white;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttonCreate:hover {
+
+        transition: 0.4s;
+        background-color: rgb(107, 252, 182);
+        cursor: pointer;
+    }
 }

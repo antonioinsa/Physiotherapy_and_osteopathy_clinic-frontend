@@ -6,33 +6,49 @@
     display: flex;
 }
 
-.logoDesign {
+.logoImage {
+
+    height: 95%;
+    width: 100%;
+}
+
+.customNavBar {
 
     height: 10vh;
-    width: 20vw;
+    width: 100vw;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-left: 3em;
+    background-color: rgb(19, 105, 252, 0.6);
 }
+
+
 
 .insideLogoDesign {
 
     background-color: white;
     border-radius: 20%;
-}
-
-.clinicName{
-
-    font-weight: bold;
-    color: rgb(105, 216, 105);
-}
-
-.buttonsDesign {
-
-    height: 10vh;
-    width: 90vw;
     display: flex;
-    align-items: end;
-    justify-content: end;
+    justify-content: center;
+    align-items: center;
+    height: 6vh;
+    width: 4vw;
+}
+
+@media screen and (max-width: 360px) {
+    .logoImage {
+
+        height: 95%;
+        width: 100%;
+    }
+
+    .insideLogoDesign {
+
+        background-color: white;
+        border-radius: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 6vh;
+        width: 10vw;
+    }
 }

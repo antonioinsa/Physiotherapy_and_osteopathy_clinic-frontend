@@ -13,7 +13,7 @@
 
 .cardWorkerDesign {
 
-    height: 32vh;
+    height: 40vh;
     width: 18vw;
     background-color: rgb(19, 105, 252, 0.8);
     border-radius: 5%;
@@ -35,7 +35,7 @@
 
 .profilePicture {
 
-    height: 8vh;
+    height: 10vh;
     width: 6vw;
     background-color: cadetblue;
     margin-top: 2em;
@@ -82,7 +82,7 @@
 
 .cardAppointmentWorkerDesign {
 
-    height: 24vh;
+    height: 35vh;
     width: 20vw;
     background-color: rgb(182, 189, 195);
     border-radius: 5%;
@@ -90,16 +90,19 @@
     margin-left: 3em;
 }
 
-.appointment {
+.appointmentsToMe {
 
     color: black;
     font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
 }
 
 .pagButtons {
     
     color: rgb(19, 105, 252, 0.8);
-    width: 20.8em;
+    width: 20vw;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -109,4 +112,121 @@
 .buttonSearchAdmin{
     
     margin-top: 1.5em;
+}
+
+@media only screen and (max-width: 480px) {
+    .accountAdminDesign {
+
+        height: 210vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: url(../../images/body_physio.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    .cardWorkerDesign {
+    
+        height: 60vh;
+        width: 100vw;
+        background-color: rgb(19, 105, 252, 0.8);
+        border-radius: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1em;
+        margin-left: 0em;
+    }
+    
+    .columnCardWorkerDesign {
+    
+        height: 70vh;
+        width: 85vw;
+        display: flex;
+        align-items: start;
+    }
+    
+    .profilePicture {
+    
+        height: 15vh;
+        width: 20vw;
+        background-color: cadetblue;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        border-radius: 5%;
+    }
+    
+    .profile {
+    
+        height: 14vh;
+        width: 12vw;
+        color: white;
+        font-weight: bolder;
+        font-size: large;
+        margin-bottom: 5em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .editButton {
+    
+        height: 2em;
+        width: 8em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(105, 216, 105);
+        color: white;
+        cursor: pointer;
+        border-radius: 1em;
+        transition: 0.3s;
+    }
+    
+    .editButton:hover {
+    
+        transition: 0.3s;
+        background-color: rgb(107, 252, 182);
+    }
+    
+    .react-calendar {
+    
+        background-color: rgb(182, 189, 195);
+        border-radius: 5%;
+    }
+    
+    .cardAppointmentWorkerDesign {
+    
+        height: 60vh;
+        width: 80vw;
+        background-color: rgb(182, 189, 195);
+        border-radius: 5%;
+        margin-right: 3em;
+        margin-top: 1.5em;
+        
+    }
+    
+    .appointmentToMe {
+    
+        color: black;
+        font-weight: bolder;
+    }
+    
+    .pagButtons {
+        
+        color: rgb(19, 105, 252, 0.8);
+        width: 20.8em;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-weight: bolder;
+    }
+    
+    .buttonSearchAdmin{
+        
+        margin-top: 1.5em;
+    }
 }

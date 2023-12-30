@@ -1,8 +1,9 @@
 import "./Home.css";
+import { Col } from "react-bootstrap";
 
 export const Home = () => {
     return (
-        <div className="homeDesign">
+        <Col sm={12} lg={6} xl={4} xxl={3} className="homeDesign">
             <div className="upperCaseDesign">
                 <div className="iconsDesign">
                     <div className="mailIcon">
@@ -26,8 +27,8 @@ export const Home = () => {
                         </a>
                     </div>
                 </div>
-                    <div className="coverModelDesign"></div>
+                <div className="coverModelDesign"></div>
             </div>
-        </div>
+        </Col>
     )
 }

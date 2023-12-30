@@ -129,7 +129,7 @@ export const AccountAdmin = () => {
             </div>
 
             <div className='cardAppointmentWorkerDesign'>
-                <div className='appointment'>
+                <div className='appointmentsToMe'>
                     {currentAppointments.length > 0 ? (
                         currentAppointments.map((appointment, index) => (
                             <div key={index} className="appointmentRow">
@@ -154,7 +154,7 @@ export const AccountAdmin = () => {
                         <span>{`Page ${currentPage} of ${totalPages}`}</span>
                         <button onClick={goToNextPage} disabled={currentPage === totalPages}>Next</button>
                     </div>
-                )}
+                 )}
             </div>
         </div>
 

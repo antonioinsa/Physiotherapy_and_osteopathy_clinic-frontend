@@ -88,3 +88,103 @@
     color: transparent;
     font-size: xx-large;
 }
+
+@media only screen and (max-width: 640px) {
+    .iconsDesign {
+
+        height: 14vh;
+        width: 25vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .mailIcon {
+
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/Mail.gif);
+        background-size: 68%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    
+    .instagramIcon {
+    
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/Instagram.gif);
+        background-size: 120%;
+        cursor: pointer;
+    }
+    
+    .mapsIcon {
+    
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/GoogleMaps.gif);
+        background-size: 55%;
+        background-repeat: no-repeat;
+        margin-top: 0.5em;
+        cursor: pointer;
+    }
+    
+    .whatsappIcon {
+    
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/Whatsapp.gif);
+        background-size: 75%;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .iconsDesign {
+        
+        height: 15vh;
+        width: 20vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .mailIcon {
+
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/Mail.gif);
+        background-size: 68%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    
+    .instagramIcon {
+    
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/Instagram.gif);
+        background-size: 120%;
+        cursor: pointer;
+    }
+    
+    .mapsIcon {
+    
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/GoogleMaps.gif);
+        background-size: 55%;
+        background-repeat: no-repeat;
+        margin-top: 0.5em;
+        cursor: pointer;
+    }
+    
+    .whatsappIcon {
+    
+        height: 15vh;
+        width: 15vw;
+        background-image: url(../../images/Whatsapp.gif);
+        background-size: 75%;
+        cursor: pointer;
+    }
+}
