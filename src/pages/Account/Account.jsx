@@ -265,7 +265,7 @@ export const Account = () => {
                     isEnabled
                         ? (
                             <>
-                                <div className="editButton" 
+                                <div className="editAccountButton" 
                                 onClick={() => setIsEnabled(!isEnabled)}>Edit profile data</div>
                                 <div className="spaceBetweenButtons"></div>
                                 <div className="passwordButton" 
@@ -276,10 +276,10 @@ export const Account = () => {
                         ) :
                         (
                             <>
-                                <div className="cancelButton" 
+                                <div className="cancelAccountButton" 
                                 onClick={() => cancelEdit()}>Cancel</div>
                                 <div className="spaceBetweenButtons"></div>
-                                <div className="sendButton" 
+                                <div className="sendAccountButton" 
                                 onClick={() => updateAccount()}>Send</div>
                                 <div className='errorMsg'>{errorMsg}</div>
                             </>

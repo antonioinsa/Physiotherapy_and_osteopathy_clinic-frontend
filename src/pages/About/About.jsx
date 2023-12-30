@@ -5,7 +5,7 @@ export const About = () => {
         <div className="aboutDesign">
             <div className="subAboutDesign">
                 <div>
-                    <div className="header">
+                    <div className="headerTitle">
                         Somos sanitarios desde 1999. Pasión, experiencia, formación, innovación y rigor forman parte de nuestro ADN.
                     </div>
                     <div className="introduction">

@@ -22,7 +22,7 @@
     align-items: center;
 }
 
-.header {
+.headerTitle {
 
     height: 10vh;
     width: 90vw;
@@ -105,7 +105,7 @@
 }
 
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 1280px) {
     .aboutDesign {
 
         height: 90vh;
@@ -119,23 +119,24 @@
     
     .subAboutDesign{
     
-        height: 0vh;
-        width: 0vw;
+        height: 90vh;
+        width: 100vw;
         display: flex;
         flex-direction: column;
-        color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
         
         justify-content: center;
         align-items: center;
     }
 
-    .header {
+    .headerTitle {
     
         height: 90vh;
         width: 90vw;
         justify-content: center;
         align-items: center;
-        margin-top: 50%;
+        margin-bottom: -90%;
+        margin-top: 150%;
     }
     
     .introduction {
@@ -154,7 +155,7 @@
         align-items: center;
         font-size: x-large;
         font-weight: bolder;
-        margin-top: 20%;
+        margin-top: 15%;
     }
     
     .title {
@@ -214,7 +215,7 @@
 @media only screen and (max-width: 480px) {  
     .aboutDesign {
 
-        height: 240vh;
+        height: 200vh;
         width: 100vw;
         display: flex;
         justify-content: center;
@@ -230,24 +231,23 @@
         display: flex;
         flex-direction: column;
         color: rgb(255, 255, 255);
-        
         justify-content: center;
         align-items: center;
     }
     
-    .header {
+    .headerTitle {
     
-        height: 220vh;
+        height: 120vh;
         width: 90vw;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 10%;
+        
     }
     
     .introduction {
     
-        height: 70vh;
+        height: 65vh;
         width: 90vw;
         display: flex;
         justify-content: center;
@@ -263,7 +263,7 @@
         align-items: center;
         font-size: x-large;
         font-weight: bolder;
-        margin-top: 1%;
+        margin-top: -7%;
     }
     
     .title {
@@ -275,13 +275,13 @@
     .pointOne {
     
         height: 40vh;
-        width: 45vw;
+        width: 40vw;
     }
     
     .pointTwo {
         
         height: 40vh;
-        width: 45vw;
+        width: 43vw;
     }
     
     .total {

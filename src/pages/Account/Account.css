@@ -10,7 +10,7 @@
 
 .editDesign {
 
-    height: 65vh;
+    height: 85vh;
     width: 25vw;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@
     margin-top: 0.5em;
 }
 
-.editButton {
+.editAccountButton {
 
     height: 2em;
     width: 10em;
@@ -42,7 +42,7 @@
     transition: 0.3s;
 }
 
-.editButton:hover {
+.editAccountButton:hover {
 
     transition: 0.3s;
     background-color: rgb(107, 252, 182);
@@ -68,7 +68,7 @@
     background-color: rgb(107, 252, 182);
 }
 
-.sendButton {
+.sendAccountButton {
 
     height: 2em;
     width: 10em;
@@ -82,13 +82,13 @@
     transition: 0.3s;
 }
 
-.sendButton:hover {
+.sendAccountButton:hover {
 
     transition: 0.3s;
     background-color: crimson;
 }
 
-.cancelButton {
+.cancelAccountButton {
 
     height: 2em;
     width: 10em;
@@ -102,7 +102,7 @@
     transition: 0.3s;
 }
 
-.cancelButton:hover {
+.cancelAccountButton:hover {
 
     transition: 0.3s;
     background-color: crimson;
@@ -123,7 +123,7 @@
 }
 
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 1280px) {
     .accountDesign {
 
         height: 100vh;
@@ -136,7 +136,7 @@
 
     .editDesign {
 
-        height: 70vh;
+        height: 95vh;
         width: 30vw;
         display: flex;
         flex-direction: column;
@@ -144,14 +144,14 @@
         align-items: center;
         background-color: rgb(100, 99, 99);
         border-radius: 2%;
-        margin-top: 20%;
+        
     }
 }
 
 @media only screen and (max-width: 480px) {
     .accountDesign {
 
-        height: 210vh;
+        height: 130vh;
         width: 100vw;
         display: flex;
         justify-content: center;
@@ -169,6 +169,7 @@
         align-items: center;
         background-color: rgb(100, 99, 99);
         border-radius: 2%;
+        margin-top: -2em;
     }
 
 

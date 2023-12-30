@@ -140,7 +140,7 @@ export const ChangePassword = () => {
 
   return (
     <div className="changePasswordDesign">
-      <div className="passwordDesign">
+      <div className="passwordCardDesign">
         <CustomInput
           disabled={!isEnabled}
           design={"inputDesign"}
@@ -186,14 +186,14 @@ export const ChangePassword = () => {
         ) : (
           <>
             <div className="spaceBetweenButtons"></div>
-            <div className="deleteAccountButton" onClick={() => deleteUser()}>
+            <div className="deletePasswordButton" onClick={() => deleteUser()}>
               Delete account permanently</div>
             <div className="spaceBetweenButtons"></div>
-            <div className="sendButton" onClick={() => updatePassword()}>
+            <div className="sendPasswordButton" onClick={() => updatePassword()}>
               Update password
             </div>
             <div className="spaceBetweenButtons"></div>
-            <div className="cancelButton" onClick={() => cancelChange()}>
+            <div className="cancelPasswordButton" onClick={() => cancelChange()}>
               Cancel
             </div>
             <div className="errorMsg">{errorMsg}</div>
