@@ -106,18 +106,41 @@
 
 
 @media only screen and (max-width: 980px) {
+    .aboutDesign {
+
+        height: 90vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        background-image: url(../../images/proccess_bad_to_god2.jpg);
+        background-size: cover;
+        
+    }
+    
+    .subAboutDesign{
+    
+        height: 0vh;
+        width: 0vw;
+        display: flex;
+        flex-direction: column;
+        color: rgb(0, 0, 0);
+        
+        justify-content: center;
+        align-items: center;
+    }
+
     .header {
     
-        height: 10vh;
+        height: 90vh;
         width: 90vw;
         justify-content: center;
         align-items: center;
-        margin-top: 3%;
+        margin-top: 50%;
     }
     
     .introduction {
     
-        height: 10vh;
+        height: 1vh;
         width: 90vw;
         justify-content: center;
         flex-direction: column;
@@ -191,7 +214,7 @@
 @media only screen and (max-width: 480px) {  
     .aboutDesign {
 
-        height: 200vh;
+        height: 240vh;
         width: 100vw;
         display: flex;
         justify-content: center;
@@ -202,19 +225,19 @@
     
     .subAboutDesign{
     
-        height: 200vh;
-        width: 100vw;
+        height: 0vh;
+        width: 0vw;
         display: flex;
         flex-direction: column;
         color: rgb(255, 255, 255);
-        background-color: rgba(0, 0, 0, 0.4);
+        
         justify-content: center;
         align-items: center;
     }
     
     .header {
     
-        height: 7vh;
+        height: 220vh;
         width: 90vw;
         display: flex;
         justify-content: center;

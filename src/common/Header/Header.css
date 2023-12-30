@@ -21,7 +21,9 @@
     background-color: rgb(19, 105, 252, 0.6);
 }
 
-
+.font-weight-bold{
+    font-weight: bold;
+}
 
 .insideLogoDesign {
 
@@ -34,7 +36,7 @@
     width: 4vw;
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 480px) {
     .logoImage {
 
         height: 95%;

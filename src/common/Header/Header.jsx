@@ -87,40 +87,40 @@ export const Header = () => {
               {rdxCredentials?.credentials ? (
                 <>
                   {rdxCredentials.role === 'user' && (
-                    <Nav.Link onClick={home}>Home</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={home}>Home</Nav.Link>
                   )}
                   {rdxCredentials.role === 'user' && (
-                    <Nav.Link onClick={about}>About</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={about}>About</Nav.Link>
                   )}
                   {rdxCredentials.role === 'user' && (
-                    <Nav.Link onClick={account}>Account</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={account}>Account</Nav.Link>
                   )}
                   {rdxCredentials.role === 'admin' && (
-                    <Nav.Link onClick={mySpace}>My Space</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={mySpace}>My Space</Nav.Link>
                   )}
                   {rdxCredentials.role === 'superAdmin' && (
-                    <Nav.Link onClick={saSpace}>My Space</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={saSpace}>My Space</Nav.Link>
                   )}
                   {rdxCredentials.role === 'user' && (
-                    <Nav.Link onClick={appointments}>Appointments</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={appointments}>Appointments</Nav.Link>
                   )}
                   {rdxCredentials.role === 'user' && (
-                    <Nav.Link onClick={newAppointment}>New Appointment</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={newAppointment}>New Appointment</Nav.Link>
                   )}
                   {rdxCredentials.role === 'superAdmin' && (
                     <>
-                      <Nav.Link onClick={manageWorkers}>Manage Workers</Nav.Link>
-                      <Nav.Link onClick={manageClients}>Manage Clients</Nav.Link>
-                      <Nav.Link onClick={saInvoices}>Invoices</Nav.Link>
+                      <Nav.Link className="font-weight-bold" onClick={manageWorkers}>Manage Workers</Nav.Link>
+                      <Nav.Link className="font-weight-bold" onClick={manageClients}>Manage Clients</Nav.Link>
+                      <Nav.Link className="font-weight-bold" onClick={saInvoices}>Invoices</Nav.Link>
                     </>
                   )}
                   {rdxCredentials.role === 'user' && (
-                    <Nav.Link onClick={invoices}>Invoices</Nav.Link>
+                    <Nav.Link className="font-weight-bold" onClick={invoices}>Invoices</Nav.Link>
                   )}
-                  <Nav.Link onClick={logOut}>Log Out</Nav.Link>
+                  <Nav.Link className="font-weight-bold" onClick={logOut}>Log Out</Nav.Link>
                 </>
               ) : (
-                <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link className="font-weight-bold" href="/login">Login</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
