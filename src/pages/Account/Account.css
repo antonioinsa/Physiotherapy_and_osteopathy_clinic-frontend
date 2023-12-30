@@ -10,14 +10,14 @@
 
 .editDesign {
 
-    height: 60vh;
+    height: 65vh;
     width: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgb(100, 99, 99);
-    border-radius: 2%;
+    border-radius: 5%;
 }
 
 .MsgError {
@@ -120,4 +120,45 @@
     height: 2em;
     color: rgb(107, 252, 182);
     font-weight: bolder;
+}
+
+
+@media only screen and (max-width: 980px) {
+    .editDesign {
+
+        height: 70vh;
+        width: 30vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(100, 99, 99);
+        border-radius: 2%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .accountDesign {
+
+        height: 210vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: bisque;
+    }
+
+    .editDesign {
+
+        height: 115vh;
+        width: 90vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(100, 99, 99);
+        border-radius: 2%;
+    }
+
+
 }
