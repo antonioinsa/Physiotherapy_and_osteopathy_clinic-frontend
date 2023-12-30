@@ -32,15 +32,15 @@ export const ManageWorkers = () => {
 
     const [worker, setWorker] = useState({
         name: '',
-        lastName:'' ,
-        documentId:'' ,
+        lastName: '',
+        documentId: '',
         phone: '',
-        email:'' ,
+        email: '',
         street: '',
         door: '',
         zipCode: '',
         town: '',
-        country:'' ,
+        country: '',
         specialty: '',
         picture: ''
     })
@@ -181,7 +181,7 @@ export const ManageWorkers = () => {
             const response = await deleteSaProfile(id, token)
             if (response.status === 200) {
                 setSuccessfully(response.data.message)
-                
+
                 setTimeout(() => {
                     setSuccessfully('')
                 }, 1000)
@@ -371,10 +371,10 @@ export const ManageWorkers = () => {
                                     ) :
                                     (
                                         <>
-                                            <div className="cancelButton"
+                                            <div className="manageWorkerButton"
                                                 onClick={() => cancelEditData()}>Cancel</div>
                                             <div className="spaceBetweenButtons"></div>
-                                            <div className="sendButton"
+                                            <div className="manageWorkerButton"
                                                 onClick={() => updateWorkerData()}>Send</div>
                                             <div className='errorMsg'>{errorMsg}</div>
                                         </>
@@ -391,6 +391,7 @@ export const ManageWorkers = () => {
                 </div>
             </div>
         </div>
+
     )
 
 }

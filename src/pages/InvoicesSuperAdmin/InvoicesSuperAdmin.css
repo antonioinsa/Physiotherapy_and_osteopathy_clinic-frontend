@@ -1,6 +1,6 @@
 .superAdminInvoicesDesign {
 
-    height: 90vh;
+    height: 150vh;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -52,12 +52,13 @@
 .invoicesPartDesign {
 
     background-color: rgb(157, 157, 157, 0.6);
-    width: 40em;
-    height: 80vh;
+    height: 130vh;
+    width: 40vw;
     border-radius: 5%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: -5%;
 }
 
 .cardInvoices {
@@ -72,12 +73,13 @@
 
 .paginationButtons {
 
-    height: 10vh;
+    height: 12vh;
     width: 30vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    margin-top: 6%;
 }
 
 .buttons{
@@ -117,4 +119,76 @@
 
     background-color: black;
     height: 0.5vh;
+}
+
+@media only screen and (max-width: 480px) {
+    .superAdminInvoicesDesign {
+
+        height: 200vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(../../images/run_wallpaper.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .invoicesPartDesign {
+
+        background-color: rgb(157, 157, 157, 0.6);
+        height: 170vh;
+        width: 95vw;
+        border-radius: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -20%;
+    }
+
+    .button {
+
+        height: 2em;
+        width: 10em;
+        border-radius: 1em;
+        background-color: rgb(105, 216, 105);
+        color: white;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+    
+    .cardInvoices {
+    
+        height: 55vh;
+        width: 30vw;
+        margin-top: 1em;
+        color: black;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .paginationButtons {
+    
+        height: 20vh;
+        width: 95vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 10%;
+    }
+    
+    .buttons{
+        
+        height: 4vh;
+        width: 25vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 }

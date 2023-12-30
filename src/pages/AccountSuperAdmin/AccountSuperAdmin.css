@@ -3,6 +3,7 @@
     height: 90vh;
     width: 100vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-image: url(../../images/run_wallpaper.jpg);
@@ -12,64 +13,79 @@
 
 .dinamicPartAdministrationDesign {
 
-
-    height: 90vh;
-    width: 50vw;
+    height: 70vh;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    
 }
 
 .titleAdministration {
 
-    height: 10vh;
-    width: 40vw;
+    height: 6vh;
+    width: 18vw;
     display: flex;
-    justify-content: start;
+    justify-content: end;
     align-items: center;
     font-size: xx-large;
     font-style: italic;
     color: black;
-
+    margin-bottom: 35%;
+    margin-left: 2%;
+    
 }
 
-.calendar {
+.calendarSuperAdmin {
 
-    height: 35vh;
+    height: 45vh;
     width: 50vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .searchButton {
     margin-top: 2em;
 }
 
-.cardAppointments {
-    background-color: rgb(190, 190, 190, 0.5);
-    height: 42vh;
-    width: 26vw;
+.containerCardAppointmentsSuperAdmin{
+    
+    height: 78vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.cardAppointmentsSuperAdmin {
+    background-color: rgba(255, 245, 245, 0.704);
+    height: 71vh;
+    width: 35vw;
     border-radius: 5%;
+    display: flex;
+    justify-content: center;
 }
 
 .staticPartAdministrationDesign {
-    
-    height: 90vh;
-    width: 50vw;
+
+    height: 10vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.ButtonsForOptions{
-    
+.ButtonsForOptions {
+
     height: 40vh;
-    width: 20vw;
+    width: 60vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
 
@@ -77,10 +93,10 @@
 
 .saButton {
 
-    height: 4em;
+    height: 3em;
     width: 9em;
     border-radius: 1em;
-    background-color:rgb(105, 216, 105);
+    background-color: rgb(105, 216, 105);
     border: 0.1em solid black;
     color: white;
     font-weight: bolder;
@@ -97,12 +113,119 @@
     cursor: pointer;
 }
 
-.selectAndSearch{
-    
+.selectAndSearch {
+
     height: 7vh;
     width: 8vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 1em;
+}
+
+@media only screen and (max-width: 480px) {
+    .superAdminProfileDesign {
+
+        height: 270vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url(../../images/run_wallpaper.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .dinamicPartAdministrationDesign {
+
+        height: 18vh;
+        width: 90vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .titleAdministration {
+
+        height: 50vh;
+        width: 60vw;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        font-size: xx-large;
+        font-style: italic;
+        color: black;
+        margin-top: 5%;
+    }
+
+    .calendarSuperAdmin {
+
+        height: 60vh;
+        width: 95vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40%;
+    }
+
+    .searchButton {
+        margin-top: 2em;
+        margin-bottom: 10em;
+    }
+
+    .cardAppointmentsSuperAdmin {
+        background-color: rgb(190, 190, 190, 0.5);
+        height: 95vh;
+        width: 85vw;
+        border-radius: 5%;
+    }
+
+    .staticPartAdministrationDesign {
+
+        height: 300vh;
+        width: 40vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 240%;
+    }
+
+    .ButtonsForOptions {
+
+        height: 50vh;
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 150%;
+    }
+
+    .saButton {
+
+        height: 3em;
+        width: 9em;
+        border-radius: 1em;
+        background-color: rgb(105, 216, 105);
+        border: 0.1em solid black;
+        color: white;
+        font-weight: bolder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.5em;
+    }
+
+    .selectAndSearch {
+
+        height: 60vh;
+        width: 8vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1em;
+    }
 }

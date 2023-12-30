@@ -85,7 +85,7 @@ export const AccountSuperAdmin = () => {
         <div className='superAdminProfileDesign'>
             <div className='dinamicPartAdministrationDesign'>
                 <div className='titleAdministration'>Administration</div>
-                <div className='calendar'>
+                <div className='calendarSuperAdmin'>
                     <Calendar
                         onChange={handleDateChange}
                         value={selectedDate}
@@ -109,8 +109,10 @@ export const AccountSuperAdmin = () => {
                         <button className='searchButton' onClick={handleSearch}>Search</button>
                     </div>
                 </div>
-                <div className='cardAppointments'>
-                    <VerticalScroll appointments={filteredAppointments} setSortOrder={setSortOrder} />
+                <div className='containerCardAppointmentsSuperAdmin'>
+                    <div className='cardAppointmentsSuperAdmin'>
+                        <VerticalScroll appointments={filteredAppointments} setSortOrder={setSortOrder} />
+                    </div>
                 </div>
             </div>
             <div className='staticPartAdministrationDesign'>

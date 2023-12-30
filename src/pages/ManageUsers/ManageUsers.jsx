@@ -220,7 +220,7 @@ export const ManageUsers = () => {
 
     return (
         <div className="superAdminManageUsersDesign">
-            <div className="titleManageUsers">Manage Users</div>
+            <div className="titleManageUsers">Manage Clients</div>
             <div className="cardSaUsersDesign">
                 <div className="profileUserSelected">
                     <div className="dataUserSelected">
@@ -397,10 +397,10 @@ export const ManageUsers = () => {
                                     ) :
                                     (
                                         <>
-                                            <div className="cancelButton"
+                                            <div className="manageUserButton"
                                                 onClick={() => cancelEditData()}>Cancel</div>
                                             <div className="spaceBetweenButtons"></div>
-                                            <div className="sendButton"
+                                            <div className="manageUserButton"
                                                 onClick={() => updateUserData()}>Send</div>
                                             <div className='errorMsg'>{errorMsg}</div>
                                         </>
