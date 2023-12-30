@@ -5,7 +5,7 @@ import { userData } from '../userSlice';
 import { accountUser, appointmentsAdmin } from '../../services/apiCalls';
 import { useNavigate } from 'react-router';
 import Calendar from 'react-calendar';
-import {worker_face} from './src/images/Chema_face.png'
+import worker_face from './src/images/Chema_face.png'
 
 
 export const AccountAdmin = () => {

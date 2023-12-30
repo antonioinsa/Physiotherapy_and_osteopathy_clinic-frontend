@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Image from 'react-bootstrap/Image';
-import {logo_mini} from '../src/images/logo_mini.png'
+import mini_logo from "../src/images/logo_mini.png"
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -34,7 +34,7 @@ export const Header = () => {
             <div className="insideLogoDesign">
               <Image
                 className="logoImage"
-                src={logo_mini}
+                src={mini_logo}
                 alt="Pterion"
               />
             </div>
