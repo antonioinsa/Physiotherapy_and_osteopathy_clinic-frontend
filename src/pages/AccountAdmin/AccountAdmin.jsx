@@ -5,8 +5,7 @@ import { userData } from '../userSlice';
 import { accountUser, appointmentsAdmin } from '../../services/apiCalls';
 import { useNavigate } from 'react-router';
 import Calendar from 'react-calendar';
-import worker_face from './src/images/Chema_face.png'
-
+import workerImage from '../../images/Chema_face.png'
 
 export const AccountAdmin = () => {
 
@@ -100,7 +99,7 @@ export const AccountAdmin = () => {
             <div className='columnCardWorkerDesign'>
                 <div className='cardWorkerDesign'>
                     <div className='profilePicture'>
-                        <img src={worker_face} alt="face" style={{ width: '100%', height: '100%' }} />
+                        <img src={workerImage} alt="face" style={{ width: '100%', height: '100%' }} />
                     </div>
                     <div className='profile'>
                         <p>{worker.name}</p>

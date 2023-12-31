@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { updatePasswordUser, accountUser } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/useful";
-//import bcrypt from "bcryptjs";
 
 export const ChangePassword = () => {
   const userDataRdx = useSelector(userData)
@@ -31,7 +30,7 @@ export const ChangePassword = () => {
     navigate("/")
   }
 
-  const [newPassword, setNewPassword] = useState({
+  const [password, setPassword] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -43,9 +42,8 @@ export const ChangePassword = () => {
     confirmPasswordError: "",
   })
 
-
   const handlePassword = (e) => {
-    setNewPassword((prevState) => ({
+    setPassword((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }))
@@ -53,7 +51,7 @@ export const ChangePassword = () => {
 
   const errorCheck = (e) => {
     let error = "";
-    error = validator(e.target.name, e.target.value)
+    error = validator(e.target.name, e.target.value);
     setPasswordError((prevState) => ({
       ...prevState,
       [e.target.name + "Error"]: error,
@@ -67,65 +65,56 @@ export const ChangePassword = () => {
     }))
   }
 
-
-
   const checkCurrentPassword = async () => {
     try {
-      if (newPassword.currentPassword === "") {
-        return setErrorMsg("Current password is required")
+      if (password.currentPassword === "") {
+        setErrorMsg("Current password is mandatory")
+        return
       }
+  
       const response = await accountUser(token)
-      const password = response.data.data.password
-      console.log(password)
 
-      //console.log(newPassword.currentPassword);
-
-      //const decryptedPassword = bcrypt.hashSync(newPassword.currentPassword, 5);
-
-      //console.log(decryptedPassword);
-
-      if (password === newPassword.currentPassword) {
+      if (response.data.success === true) {
         setIsEnabled(false)
         setIsUpdateEnabled(true)
-      } else {
-        setIsEnabled(true)
-        setIsUpdateEnabled(false)
-      }
+        successfully("current password is correct")
+      } 
+      
     } catch (error) {
       setErrorMsg(error.response.data.message)
     }
   }
 
   const updatePassword = async () => {
-    if (
-      newPassword.newPassword === "" ||
-      newPassword.confirmPassword === ""
-    ) {
+    if (password.newPassword === "" || password.confirmPassword === "") {
       setErrorMsg("All fields are mandatory")
       return
     }
 
-    if (newPassword.newPassword !== newPassword.confirmPassword) {
-      setErrorMsg("New password and confirmation must match")
+    if (password.newPassword !== password.confirmPassword) {
+      setErrorMsg("New password and the confirmation must match")
       return
     }
-
     try {
-      const body = { password: newPassword.newPassword }
+      const body = { password:password.currentPassword, newPassword:password.newPassword }
 
       const updateResponse = await updatePasswordUser(token, body)
-      setNewPassword((prevState) => ({
+
+      setPassword((prevState) => ({
         ...prevState,
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
       }))
+
       if (updateResponse.data.success === true) {
-        setSuccessfully(response.data.message)
+        setSuccessfully(updateResponse.data.message)
         logOut()
+      } else {
+        setErrorMsg(updateResponse.data.message)
       }
     } catch (error) {
-      setErrorMsg(error.response.data.message)
+      setErrorMsg(error.response?.data?.message)
     }
   }
 
@@ -147,7 +136,7 @@ export const ChangePassword = () => {
           type={"password"}
           name={"currentPassword"}
           placeholder={"Current password"}
-          value={newPassword.currentPassword}
+          value={password.currentPassword}
           functionProp={handlePassword}
           functionBlur={errorCheck}
           functionFocus={clearError}
@@ -159,7 +148,7 @@ export const ChangePassword = () => {
           type={"password"}
           name={"newPassword"}
           placeholder={"New password"}
-          value={newPassword.newPassword}
+          value={password.newPassword}
           functionProp={handlePassword}
           functionBlur={errorCheck}
           functionFocus={clearError}
@@ -171,7 +160,7 @@ export const ChangePassword = () => {
           type={"password"}
           name={"confirmPassword"}
           placeholder={"Confirm password"}
-          value={newPassword.confirmPassword}
+          value={password.confirmPassword}
           functionProp={handlePassword}
           functionBlur={errorCheck}
           functionFocus={clearError}
@@ -202,5 +191,5 @@ export const ChangePassword = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}

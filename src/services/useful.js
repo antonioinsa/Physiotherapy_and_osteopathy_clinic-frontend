@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-export const validator = (type, value, confirmValue) => {
+export const validator = (type, value) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,20}$/
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,12}$/
     const dniRegex = /^[0-9]{8}[A-Za-z]$/
@@ -48,24 +48,24 @@ export const validator = (type, value, confirmValue) => {
 
             break
 
-        case 'confirmPassword':
-            if (!confirmValue) {
-                return 'Must confirm password'
-            }
+        // case 'confirmPassword':
+        //     if (!confirmValue) {
+        //         return 'Must confirm password'
+        //     }
 
-            if (typeof confirmValue !== 'string') {
-                return 'Incorrect password'
-            }
+        //     if (typeof confirmValue !== 'string') {
+        //         return 'Incorrect password'
+        //     }
 
-            if (confirmValue.length > 12) {
-                return 'Maximum 12 characters'
-            }
+        //     if (confirmValue.length > 12) {
+        //         return 'Maximum 12 characters'
+        //     }
 
-            if (value !== confirmValue) {
-                return 'Passwords must match'
-            }
+        //     if (value !== confirmValue) {
+        //         return 'Passwords must match'
+        //     }
 
-            break
+        //     break
 
         case 'documentId':
             if (!value) {
