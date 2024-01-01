@@ -1,4 +1,8 @@
 import "./About.css";
+import number1 from '../../images/number1.png'
+import number2 from '../../images/number2.png'
+import number3 from '../../images/number3.png'
+import number4 from '../../images/number4.png'
 
 export const About = () => {
     return (
@@ -21,7 +25,7 @@ export const About = () => {
                 <div className="total">
                     <div className="one">
                         <div className="title">
-                            <img src="../../src/images/number1.png" width="4%"></img> Evaluar
+                            <img src={number1} width="4%"></img> Evaluar
                         </div>
                         <div className="pointOne">
                             <div>
@@ -31,7 +35,7 @@ export const About = () => {
                             </div>
                         </div>
                         <div className="title">
-                            <img src="../../src/images/number3.png" width="4%"></img> Derivar
+                            <img src={number3} width="4%"></img> Derivar
                         </div>
                         <div className="pointOne">
                             <div>
@@ -45,7 +49,7 @@ export const About = () => {
                     <div className="two">
                         <div className="space"></div>
                         <div className="title">
-                            <img src="../../src/images/number2.png" width="4%"></img> Proponer
+                            <img src={number2} width="4%"></img> Proponer
                         </div>
                         <div className="pointTwo">
                             <div>
@@ -55,7 +59,7 @@ export const About = () => {
                             </div>
                         </div>
                         <div className="title">
-                            <img src="../../src/images/number4.png" width="4%"></img> Reevaluar
+                            <img src={number4} width="4%"></img> Reevaluar
                         </div>
                         <div className="pointTwo">
                             <div>
